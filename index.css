@@ -1,0 +1,133 @@
+.buttonItem {
+    width: 40px;
+    text-align: center;
+    padding: 7px 0;
+    font-size: x-large !important;
+    font-weight: 900;
+}
+.buttonItem:hover {
+    background-color: #1eda6f;
+    cursor: pointer;
+}
+.plus:hover {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.minus:hover {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.quickListContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 50px;
+    width: 150px;
+    border: 1px solid #1a703f;
+    border-radius: 15px;
+    background-color: #1ec767;
+    color: #1a703f;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+.buttonItem.percent {
+    width: 70px;
+    border-right: 1px solid #1a703f;
+    border-left: 1px solid #1a703f;
+}
+
+
+.notification.info.visible {
+	display: none;
+}
+
+
+.playerRow {
+	height: 140px;
+}
+
+.TransferSell .playerRow.shadow {
+	margin: 0px;
+}
+
+.playerInfo {
+	margin-top: 5px !important;
+}
+
+.NavigationTabs .playerImage {
+	height: 100% !important;
+}
+
+.NavigationTabs .playerImage > img {
+	height: 100% !important;
+	margin: 0 !important;
+}
+
+.playerName > div {
+	font-size: 2.3rem !important;
+	line-height: 2.3rem !important;
+}
+
+.playerPoints > span > strong {
+	font-size: 1.5rem !important;
+}
+
+.playerPoints {
+	margin-top: 0px !important;
+}
+
+.playerOffer {
+	height: 50px !important;
+	padding: 0px !important;
+	margin: -11px 23px 8px !important;
+}
+
+div.time {
+	margin-right: 100px !important;
+	height: 25px !important;
+	width: 25px !important;
+}
+.btnOfferAccept {
+	height: 20px !important;
+	width: 20px !important;
+}
+.btnOfferDecline {
+	height: 20px !important;
+	width: 20px !important;
+}
+.playerOffer > .playerImage > img {
+	width: 25px;
+	margin-left: 25px !important;
+}
+.price{
+	font-size: 1.5rem !important;
+}
+.price > .title {
+	height: 55px;
+	margin-right: 100px;
+}
+.offerWidget > .offerInput{
+	font-size: 1.75rem !important;
+	height: 35px !important;
+}
+.offerWidget > .cancelButton{
+	height: 35px !important;
+	width: 35px !important;
+}
+.infoBox {
+	width: 100px !important;
+}
+
+.infoBox > div > .ownerImage {
+	width: 50px !important;
+	float: right;
+}
+
+.TransferBuy .customDropdown {
+	display: none !important;
+}
+
+div.statusBar{
+	height: 50px !important;
+	padding-top: 5px !important;
+}
