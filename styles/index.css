@@ -1,39 +1,12 @@
-.buttonItem {
-    width: 40px;
-    text-align: center;
-    padding: 7px 0;
-    font-size: x-large !important;
-    font-weight: 900;
-}
-.buttonItem:hover {
-    background-color: #1eda6f;
-    cursor: pointer;
-}
-.plus:hover {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-.minus:hover {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-.quickListContainer {
+.reListButton {
     display: flex;
     flex-wrap: nowrap;
-    height: 50px;
-    width: 150px;
-    border: 1px solid #1a703f;
-    border-radius: 15px;
-    background-color: #1ec767;
-    color: #1a703f;
-    position: fixed;
+    position: fixed  !important;
     right: 10px;
     bottom: 10px;
-}
-.buttonItem.percent {
-    width: 70px;
-    border-right: 1px solid #1a703f;
-    border-left: 1px solid #1a703f;
+	background-color: #11c38b;
+	border-radius: 3px;
+	padding: 4px;
 }
 
 

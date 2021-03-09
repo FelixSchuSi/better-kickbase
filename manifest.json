@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "better-kickbase",
+  "version": "1.0",
+  "description": "Make kickbase.com less annying.",
+  "icons": {
+    "32": "favicon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://play.kickbase.com/*"
+      ],
+      "js": [
+        "scripts/re-list.js"
+      ],
+      "css": [
+        "styles/index.css"
+      ]
+    }
+  ]
+}

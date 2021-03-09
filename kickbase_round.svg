@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 19.654762 19.654762"
+   height="19.654762mm"
+   width="19.654762mm">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-12.851194,-37.141369)"
+     id="layer1">
+    <circle
+       r="9.8273811"
+       cy="46.96875"
+       cx="22.678576"
+       id="path4509"
+       style="fill:#18191a;fill-opacity:1;stroke-width:0.26458332" />
+    <g
+       style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
+       transform="matrix(0.26458333,0,0,0.26458333,16.879369,41.008338)"
+       id="Symbols">
+      <g
+         style="fill:#ffffff"
+         id="Navigation/Top"
+         transform="translate(-31,-30)">
+        <g
+           id="Headerbar">
+          <g
+             id="Kickbase_Branding"
+             transform="translate(31,30)">
+            <path
+               d="m 31.144383,26.423559 c -0.177392,-0.550287 0.05843,-1.278391 0.521739,-1.619296 l 11.873739,-8.697269 c 0.463304,-0.339852 0.373565,-0.618678 -0.199305,-0.618678 h -9.48626 c -0.573913,0 -1.424348,0.278826 -1.887653,0.618678 l -8.682782,6.360391 c -0.464348,0.339852 -0.699131,0.168348 -0.521739,-0.381939 l 3.170087,-9.835722 c 0.177391,-0.550287 0.177391,-1.450947 0,-2.001234 L 22.762122,0.41276783 c -0.177392,-0.55028696 -0.467479,-0.55028696 -0.64487,0 L 9.2000348,40.49849 c -0.1773913,0.550287 0.057391,0.721791 0.5217391,0.381939 L 21.596556,32.182107 c 0.463305,-0.339852 1.224,-0.339852 1.688348,0 l 11.874783,8.698322 c 0.463304,0.339852 0.69913,0.168348 0.521739,-0.381939 z"
+               id="Fill-1" />
+            <path
+               d="m 12.727617,19.837161 1.401392,-4.348635 H 13.08553 4.0062261 0.49596522 c -0.57286957,0 -0.6626087,0.278826 -0.19930435,0.618678 L 6.3624,20.549483 l 4.963826,3.636313 0.322435,-1.000618 z"
+               id="Fill-3" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

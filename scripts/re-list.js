@@ -1,27 +1,10 @@
-const container = document.createElement('div');
-container.classList = 'quickListContainer';
+const reListButton = document.createElement('div');
+reListButton.classList = 'reListButton';
+reListButton.innerText = 're-list';
 
-const plus = document.createElement('div');
-plus.innerText = '+';
-plus.classList = 'plus modificator buttonItem';
+document.body.append(reListButton);
 
-const minus = document.createElement('div');
-minus.innerText = '-';
-minus.classList = 'minus modificator buttonItem';
-
-const percentButton = document.createElement('div');
-percentButton.classList = 'percent buttonItem';
-let percent = 0;
-percentButton.innerText = percent + ' %';
-
-container.appendChild(minus);
-container.appendChild(percentButton);
-container.appendChild(plus);
-
-
-document.body.append(container);
-
-function percentButtonClick() {
+function reListButtonClick() {
     p = document.querySelectorAll('.players>.playerGroup');
     function interpretPrice(str) {
         a = str.split('\n');
@@ -36,9 +19,9 @@ function percentButtonClick() {
             angebot = interpretPrice(e.querySelector('.playerOffer>.price').innerText);
             mw = interpretPrice(e.querySelector('.playerPoints>.price>strong').innerText);
             namez = e.querySelector('.playerName>.lastName').innerText
-            let grenze = mw * (1 + (percent / 100))
-            console.log('Grenze für ' + namez + ': ' + grenze + ' angebot: ' + angebot);
-            if (grenze > angebot) {
+        
+            console.log('Grenze für ' + namez + ': ' + mw + ' angebot: ' + angebot);
+            if (mw > angebot) {
                 console.log('name: ', namez, ' angebot: ', angebot, typeof angebot, ' mw: ', mw, typeof mw);
                 e.querySelector('.offerWidget>.cancelButton').click()
                 removedCount++;
@@ -65,15 +48,4 @@ function percentButtonClick() {
     }
 }
 
-function plusClick() {
-    percent = percent + 0.1;
-    percentButton.innerText =  percent + ' %';
-}
-function minusClick() {
-    if (percent > 0) percent = percent - 0.1;
-    percentButton.innerText = percent + ' %';
-}
-
-plus.onclick = () => plusClick();
-minus.onclick = () => minusClick();
-percentButton.onclick = () => percentButtonClick();
+reListButton.onclick = () => reListButtonClick();
