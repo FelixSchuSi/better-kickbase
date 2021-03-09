@@ -1,0 +1,24 @@
+{
+  "name": "better-kickbase",
+  "version": "1.0.0",
+  "description": "Make kickbase.com less annoying.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelixSchuSi/better-kickbase.git"
+  },
+  "author": "Felix Schulze Sindern",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelixSchuSi/better-kickbase/issues"
+  },
+  "homepage": "https://github.com/FelixSchuSi/better-kickbase#readme",
+  "devDependencies": {
+    "rollup": "^2.41.0",
+    "rollup-plugin-chrome-extension": "^3.5.4"
+  }
+}

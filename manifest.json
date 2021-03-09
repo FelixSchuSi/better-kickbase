@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "better-kickbase",
   "version": "1.0",
-  "description": "Make kickbase.com less annying.",
+  "description": "Make kickbase.com less annoying.",
   "icons": {
     "32": "favicon.png"
   },
