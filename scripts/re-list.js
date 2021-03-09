@@ -49,3 +49,52 @@ function reListButtonClick() {
 }
 
 reListButton.onclick = () => reListButtonClick();
+
+function interpretPrice(str) {
+    a = str.split('\n');
+    a = a[0]
+    a = a.split('.');
+    joined = Number(a.join('').replace('€ ', ''))
+    return joined
+}
+
+function toCsv(arr){
+    let result = 'sep=,\n';
+    // debugger;
+    for (const [name, value] of arr){
+        result += `${name},${value}\n`;
+    }
+    return result;
+}
+
+function extractPlayerData() {
+    const players = Array.from(document.querySelectorAll('.players>.playerGroup'));
+    const playerData = players.map((player) => {
+        console.log(player);
+        try {
+            debugger;
+            const offerElement = player.querySelector('.playerOffer>.price');
+            const offer = offerElement ? interpretPrice(offerElement.innerText):-1;
+            const mw = interpretPrice(player.querySelector('.playerPoints>.price>strong').innerText);
+            const name = player.querySelector('.playerName>.lastName').innerText
+            return offer > 0 ? [name, offer] : [name, mw];
+        }catch (e){}
+     });
+     const csv = toCsv(playerData);
+     console.log(csv);
+     a=document.createElement('a');
+     a.download="better-kb.csv";
+     a.href='data:text/csv;charset=utf-8,'+encodeURI(csv);
+     a.click();
+     console.log(csv);
+}
+
+
+console.log('v008');
+document.addEventListener("keydown", function(e) {
+  if ((window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)  && e.keyCode == 83) {
+    e.preventDefault();
+    console.log('export started');
+    extractPlayerData();
+  }
+}, false);
