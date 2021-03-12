@@ -6,13 +6,6 @@ document.body.append(reListButton);
 
 function reListButtonClick() {
     p = document.querySelectorAll('.players>.playerGroup');
-    function interpretPrice(str) {
-        a = str.split('\n');
-        a = a[0]
-        a = a.split('.');
-        joined = Number(a.join('').replace('€ ', ''))
-        return joined
-    }
     removedCount = 0;
     p.forEach((e) => {
         try {
@@ -98,5 +91,3 @@ document.addEventListener("keydown", function(e) {
     extractPlayerData();
   }
 }, false);
-
-console.log('####🐷🐷🐷🐷🐷🐷')

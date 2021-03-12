@@ -16,7 +16,7 @@
 
 
 .playerRow {
-	height: 140px;
+	height: 140px !important;
 }
 
 .TransferSell .playerRow.shadow {
