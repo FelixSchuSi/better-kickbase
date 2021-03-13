@@ -12,8 +12,7 @@
         "*://play.kickbase.com/*"
       ],
       "js": [
-        "scripts/re-list.js",
-        "scripts/route-observer.js"
+        "scripts/index.ts"
       ],
       "css": [
         "styles/index.css"
