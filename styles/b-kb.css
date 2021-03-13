@@ -1,0 +1,25 @@
+/* Styles for stuff added by this extension */
+.b-kb-root {
+  display: flex;
+  flex-direction: column-reverse;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.b-kb-btn {
+  background-color: #11c38b;
+  border-radius: 3px;
+  padding: 4px;
+  margin: 1px;
+  text-align: center;
+}
+
+.b-kb-btn:hover {
+  cursor: pointer;
+}
+
+/* Export Widget */
+.b-kb-export {
+  display: flex;
+}

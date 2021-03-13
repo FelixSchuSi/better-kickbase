@@ -15,7 +15,8 @@
         "scripts/index.ts"
       ],
       "css": [
-        "styles/index.css"
+        "styles/index.css",
+        "styles/b-kb.css"
       ]
     }
   ]
