@@ -12,7 +12,7 @@
         "*://play.kickbase.com/*"
       ],
       "js": [
-        "scripts/index.ts"
+        "scripts/root.widget.ts"
       ],
       "css": [
         "styles/index.css",

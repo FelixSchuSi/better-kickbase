@@ -1,13 +1,13 @@
-import { html, render, TemplateResult } from 'lit-html';
+import type { TemplateResult } from 'lit-html';
+import { html, render } from 'lit-html';
 import { exportWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
-
-const root = document.createElement('div');
+import { routerService } from './router.service';
+const root: HTMLDivElement = document.createElement('div');
 root.classList.add('b-kb-root');
 document.body.append(root);
 
-const rootTemplate: TemplateResult = html`
-  ${reListWidget} ${exportWidget}
-`;
+const rootTemplate: TemplateResult = html` ${reListWidget} ${exportWidget} `;
 
+routerService.subscribe((path: string) => console.log(path));
 render(rootTemplate, root);

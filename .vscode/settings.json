@@ -6,7 +6,7 @@
     },
     "**/*.js.map": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.formatOnSave": true,
   "lit-plugin.rules.no-unknown-tag-name": "off",
   "lit-plugin.rules.no-unknown-attribute": "warning",
