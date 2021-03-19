@@ -1,5 +1,5 @@
 /* Styles for stuff added by this extension */
-.b-kb-root {
+.bkb-root {
   display: flex;
   flex-direction: column-reverse;
   position: fixed;
@@ -7,7 +7,7 @@
   bottom: 10px;
 }
 
-.b-kb-btn {
+.bkb-btn {
   background-color: #11c38b;
   border-radius: 3px;
   padding: 4px;
@@ -15,11 +15,11 @@
   text-align: center;
 }
 
-.b-kb-btn:hover {
+.bkb-btn:hover {
   cursor: pointer;
 }
 
 /* Export Widget */
-.b-kb-export {
+.bkb-export {
   display: flex;
 }

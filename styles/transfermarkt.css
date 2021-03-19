@@ -1,0 +1,26 @@
+.TransferMarket {
+  padding-top: 25px !important;
+}
+
+.TransferMarket > .leftContainer {
+  margin: 0px var(--bkb-padding-margin-l) !important;
+  padding-top: var(--bkb-padding-margin-l);
+  min-width: 700px;
+  flex-grow: 2;
+}
+
+.TransferMarket > .rightContainer {
+  padding: var(--bkb-padding-margin-l) !important;
+  max-width: 450px;
+  min-width: 400px;
+  width: initial !important;
+  position: static !important;
+  flex-grow: 1;
+  padding-top: var(--bkb-header-height);
+  margin: 0px !important;
+}
+
+div.TransferMarket.inner {
+  display: flex;
+  flex-wrap: nowrap;
+}

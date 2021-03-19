@@ -1,0 +1,31 @@
+html:is(:root) {
+  font-size: 10px !important;
+}
+
+#sidebarWrapper {
+  width: var(--bkb-navbar-width) !important;
+}
+
+.Header.navbar-fixed-top {
+  height: var(--bkb-header-height) !important;
+  left: 0px !important;
+}
+
+.sidebarNav > li > div.activeImage,
+.sidebarNav > li > div.normalImage {
+  transform: scale(1.2);
+}
+
+div.skyBranding.pull-left {
+  left: 0px !important;
+  display: flex;
+  align-items: center;
+}
+
+.icon-sky {
+  height: 65% !important;
+}
+
+#pageWrapper {
+  padding-left: var(--bkb-navbar-width) !important;
+}

@@ -6,9 +6,9 @@ import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
 
 export const exportWidget: TemplateResult = html`
-  <div class="b-kb-export">
-    <div class="b-kb-export-file b-kb-btn" @click=${downloadAsCSV}>file</div>
-    <div class="b-kb-export-copy b-kb-btn" @click=${copy}>copy</div>
+  <div class="bkb-export">
+    <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>file</div>
+    <div class="bkb-export-copy bkb-btn" @click=${copy}>copy</div>
   </div>
 `;
 

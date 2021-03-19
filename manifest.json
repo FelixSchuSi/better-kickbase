@@ -15,8 +15,19 @@
         "scripts/root.widget.ts"
       ],
       "css": [
-        "styles/index.css",
-        "styles/b-kb.css"
+        "styles/bkb.css",
+        "styles/bundesliga.css",
+        "styles/ligaboard.css",
+        "styles/livematchday.css",
+        "styles/tabelle.css",
+        "styles/transfermarkt.css",
+        "styles/transfermarkt-kader.css",
+        "styles/transfermarkt-kaufen.css",
+        "styles/transfermarkt-scouting.css",
+        "styles/transfermarkt-verkaufen.css",
+        "styles/_player-row.css",
+        "styles/_frame.css",
+        "styles/_vars.css"
       ]
     }
   ]

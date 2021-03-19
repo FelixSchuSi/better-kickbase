@@ -4,7 +4,7 @@ import { exportWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from './router.service';
 const root: HTMLDivElement = document.createElement('div');
-root.classList.add('b-kb-root');
+root.classList.add('bkb-root');
 document.body.append(root);
 
 const rootTemplate: TemplateResult = html` ${reListWidget} ${exportWidget} `;
