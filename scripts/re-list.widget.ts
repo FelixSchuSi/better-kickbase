@@ -5,6 +5,7 @@ import { selectAll } from './helpers/select-all';
 import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
 import { waitForSelector } from './helpers/wait-for-selector';
+import { sleep } from './helpers/sleep';
 
 export const reListWidget: TemplateResult = html`
   <div class="b-kb-re-list b-kb-btn" @click=${reListButtonClick}>re-list</div>
@@ -46,7 +47,12 @@ function removePlayerForRelist(player: HTMLElement, x: { removedCount: number })
 async function listAllPlayers() {
   const addPlayersButton: HTMLElement | null = select(Selectors.ADD_PLAYERS);
   addPlayersButton?.click();
+
   await waitForSelector(Selectors.SET_LISTING_PRICE);
+  // A SET_LISTING_PRICE button of ONE player was found
+  // Not all Buttons for all players are rendered at the same time.
+  // We wait another 100ms so all buttons are rendered
+  await sleep(100);
 
   const setPriceFields: NodeListOf<HTMLElement> = selectAll(Selectors.SET_LISTING_PRICE);
   setPriceFields.forEach((setPriceField: HTMLElement) => {

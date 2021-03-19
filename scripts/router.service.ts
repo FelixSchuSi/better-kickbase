@@ -29,15 +29,15 @@ export class RouterService {
     return this.withoutRootPath(location.pathname);
   }
 
-  public getAllQueryParameters(): QueryParameter {
-    const params: URLSearchParams = new URLSearchParams(location.search);
-    const paramObj: QueryParameter = {};
-    for (const value of params.keys()) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      paramObj[value] = params.get(value)!;
-    }
-    return paramObj;
-  }
+  // public getAllQueryParameters(): QueryParameter {
+  //   const params: URLSearchParams = new URLSearchParams(location.search);
+  //   const paramObj: QueryParameter = {};
+  //   for (const value of params.keys()) {
+  //     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //     paramObj[value] = params.get(value)!;
+  //   }
+  //   return paramObj;
+  // }
 
   public getQueryParameter(key: string): string {
     const queryString: string = location.search.substr(1); // Remove ? from search
