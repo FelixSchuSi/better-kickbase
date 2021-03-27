@@ -5,17 +5,16 @@
 .TransferMarket > .leftContainer {
   margin: 0px var(--bkb-padding-margin-l) !important;
   padding-top: var(--bkb-padding-margin-l);
-  min-width: 700px;
-  flex-grow: 2;
+  flex-grow: 1;
 }
 
 .TransferMarket > .rightContainer {
   padding: var(--bkb-padding-margin-l) !important;
-  max-width: 450px;
+  /* max-width: 500px; */
   min-width: 400px;
   width: initial !important;
   position: static !important;
-  flex-grow: 1;
+  flex-grow: 2;
   padding-top: var(--bkb-header-height);
   margin: 0px !important;
 }
@@ -23,4 +22,123 @@
 div.TransferMarket.inner {
   display: flex;
   flex-wrap: nowrap;
+}
+
+.playerInfo {
+  margin: 0px !important;
+}
+
+.playerImage,
+.playerImage > img {
+  height: 100% !important;
+  margin: 0px !important;
+}
+
+.playerImage > img {
+  transform: scale(1.15);
+}
+
+.playerImage {
+  width: fit-content !important;
+}
+
+.playerRow > .offerWidget,
+.playerRow > .infoBox {
+  height: 100% !important;
+  width: fit-content !important;
+  justify-self: end;
+}
+
+.offerWidget > .price {
+  display: none;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBox > .time {
+  margin: 0px !important;
+  height: 40% !important;
+}
+
+.infoBox > div {
+  height: 60% !important;
+  width: auto !important;
+}
+
+.playerRow .infoBox .ownerImage > img {
+  object-fit: cover;
+  height: 100% !important;
+  width: auto !important;
+}
+
+.playerInfo {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: var(--bkb-padding-margin-s);
+  padding-bottom: var(--bkb-padding-margin-s);
+}
+
+@media only screen and (min-width: 1400px) {
+  .playerInfo {
+    display: grid !important;
+    justify-content: space-around;
+    grid-template-columns: auto auto;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+      'playerBadges playerPoints'
+      'playerName playerPoints';
+
+    padding-top: var(--bkb-padding-margin-s);
+    padding-bottom: var(--bkb-padding-margin-s);
+  }
+
+  .playerBadges {
+    align-self: end;
+    grid-area: playerBadges;
+  }
+  .playerName {
+    grid-area: playerName;
+  }
+  .playerPoints {
+    align-self: center;
+    justify-self: end;
+    grid-area: playerPoints;
+  }
+}
+
+.playerInfo > .playerPoints {
+  margin: 0px !important;
+}
+
+.playerName > .firstName {
+  font-size: 16px !important;
+  line-height: 16px !important;
+}
+
+.playerName > .lastName {
+  font-size: 24px !important;
+  line-height: 24px !important;
+}
+
+.playerRow .playerPoints span strong {
+  font-size: 18px !important;
+  line-height: 18px !important;
+}
+
+.playerRow > .offerWidget {
+  width: 185px !important;
+  display: flex;
+  flex-direction: row;
+}
+
+.offerWidget > .offerInput.disabled {
+  width: 100% !important;
+}
+
+.offerWidget > .offerInput {
+  width: 80% !important;
 }

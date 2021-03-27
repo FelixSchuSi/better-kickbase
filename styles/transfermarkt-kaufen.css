@@ -1,0 +1,27 @@
+.playerGroup > .playerRow {
+  padding-right: var(--bkb-padding-margin-s);
+  display: grid !important;
+  justify-content: stretch;
+  grid-template-columns: 180px auto 185px;
+  grid-template-rows: 50% 50%;
+  grid-template-areas:
+    'picture playerInfo infoBox'
+    'picture playerInfo offerWidget';
+}
+
+.playerRow > .playerImage {
+  grid-area: picture;
+}
+
+.playerRow > .playerInfo {
+  grid-area: playerInfo;
+}
+
+.playerRow > .infoBox {
+  padding-top: var(--bkb-padding-margin-s);
+  grid-area: infoBox;
+}
+
+.playerRow > .offerWidget {
+  grid-area: offerWidget;
+}

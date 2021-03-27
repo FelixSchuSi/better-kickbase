@@ -1,0 +1,14 @@
+:root {
+  --bkb-player-row-height: 128px;
+}
+
+.playerRow {
+  height: var(--bkb-player-row-height) !important;
+  display: flex !important;
+}
+
+.playerRow > .infoBox,
+.infoBox > .userName,
+.playerRow > .offerWidget {
+  position: static !important;
+}
