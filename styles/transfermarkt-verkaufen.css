@@ -1,0 +1,58 @@
+.playerOffer {
+  padding: var(--bkb-padding-margin-s) !important;
+  height: 64px !important;
+  margin-top: -8px !important;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 15% 15% 50% 20%;
+  grid-template-rows: 100%;
+  grid-template-areas: 'playerImage playerInfo price buttons';
+  position: static !important;
+  align-items: center;
+}
+
+.playerOffer > .playerImage {
+  grid-area: playerImage;
+  padding: 0px !important;
+  height: 100% !important;
+}
+
+.playerOffer > .playerInfo {
+  grid-area: playerInfo;
+  position: static !important;
+  height: fit-content !important;
+}
+
+.playerOffer > .buttons {
+  grid-area: buttons;
+  position: static !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.playerOffer > .buttons > button {
+  position: static !important;
+  display: block !important;
+}
+
+.playerOffer > .buttons > .btnOfferDecline {
+  margin-left: var(--bkb-padding-margin-s);
+}
+
+.playerOffer > .price {
+  grid-area: price;
+  position: static !important;
+  display: block !important;
+  height: fit-content !important;
+}
+
+.playerOffer > .price > span {
+  position: static !important;
+  display: block !important;
+  height: 16px !important;
+  line-height: 16px !important;
+}
+
+.playerOffer > .price > .title {
+  position: static !important;
+}

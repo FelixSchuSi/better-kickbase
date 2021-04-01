@@ -24,21 +24,21 @@ div.TransferMarket.inner {
   flex-wrap: nowrap;
 }
 
-.playerInfo {
+.playerRow > .playerInfo {
   margin: 0px !important;
 }
 
-.playerImage,
-.playerImage > img {
+.playerRow > .playerImage,
+.playerRow > .playerImage > img {
   height: 100% !important;
   margin: 0px !important;
 }
 
-.playerImage > img {
+.playerRow > .playerImage > img {
   transform: scale(1.15);
 }
 
-.playerImage {
+.playerRow > .playerImage {
   width: fit-content !important;
 }
 
@@ -74,7 +74,7 @@ div.TransferMarket.inner {
   width: auto !important;
 }
 
-.playerInfo {
+.playerRow > .playerInfo {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
@@ -83,9 +83,9 @@ div.TransferMarket.inner {
 }
 
 @media only screen and (min-width: 1400px) {
-  .playerInfo {
+  .playerRow > .playerInfo {
     display: grid !important;
-    justify-content: space-around;
+    justify-content: space-between;
     grid-template-columns: auto auto;
     grid-template-rows: 50% 50%;
     grid-template-areas:
@@ -104,6 +104,7 @@ div.TransferMarket.inner {
     grid-area: playerName;
   }
   .playerPoints {
+    width: 263px;
     align-self: center;
     justify-self: end;
     grid-area: playerPoints;
