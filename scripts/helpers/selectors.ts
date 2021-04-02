@@ -10,5 +10,6 @@ export enum Selectors {
   LIST_PLAYERS = '.buttonContainer > .btn.highlighted',
   LASTNAME = '.playerName>.lastName',
   FIRSTNAME = '.playerName>.firstName',
-  BALANCE = '.active > .leagueBudget > .content'
+  BALANCE = '.active > .leagueBudget > .content',
+  LIVE_MATCHDAY_IMG = '.LiveMatchDay .playerImage img'
 }

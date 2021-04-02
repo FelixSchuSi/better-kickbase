@@ -1,0 +1,20 @@
+.LiveMatchDay {
+  height: initial !important;
+}
+
+.live .playerRow .playerBadges {
+  top: 0px !important;
+}
+
+.live .playerRow .playerImage img {
+  transform: scale(0.6);
+  margin-top: -15% !important;
+}
+
+.live .playerInfo {
+  margin-top: 50px !important;
+}
+
+.live .playerRow .playerPoints {
+  line-height: var(--bkb-player-row-height) !important;
+}

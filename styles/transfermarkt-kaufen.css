@@ -9,11 +9,11 @@
     'picture playerInfo offerWidget';
 }
 
-.playerRow > .playerImage {
+.playerGroup .playerRow > .playerImage {
   grid-area: picture;
 }
 
-.playerRow > .playerInfo {
+.playerGroup .playerRow > .playerInfo {
   grid-area: playerInfo;
 }
 

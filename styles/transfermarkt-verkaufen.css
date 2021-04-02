@@ -11,13 +11,13 @@
   align-items: center;
 }
 
-.playerOffer > .playerImage {
+.playerGroup .playerOffer > .playerImage {
   grid-area: playerImage;
   padding: 0px !important;
   height: 100% !important;
 }
 
-.playerOffer > .playerInfo {
+.playerGroup .playerOffer > .playerInfo {
   grid-area: playerInfo;
   position: static !important;
   height: fit-content !important;

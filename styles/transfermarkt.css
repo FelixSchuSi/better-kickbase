@@ -24,21 +24,21 @@ div.TransferMarket.inner {
   flex-wrap: nowrap;
 }
 
-.playerRow > .playerInfo {
+.playerGroup .playerRow > .playerInfo {
   margin: 0px !important;
 }
 
-.playerRow > .playerImage,
-.playerRow > .playerImage > img {
+.playerGroup .playerRow > .playerImage,
+.playerGroup .playerRow > .playerImage > img {
   height: 100% !important;
   margin: 0px !important;
 }
 
-.playerRow > .playerImage > img {
+.playerGroup .playerRow > .playerImage > img {
   transform: scale(1.15);
 }
 
-.playerRow > .playerImage {
+.playerGroup .playerRow > .playerImage {
   width: fit-content !important;
 }
 
@@ -68,13 +68,13 @@ div.TransferMarket.inner {
   width: auto !important;
 }
 
-.playerRow .infoBox .ownerImage > img {
+.playerGroup .playerRow .infoBox .ownerImage > img {
   object-fit: cover;
   height: 100% !important;
   width: auto !important;
 }
 
-.playerRow > .playerInfo {
+.playerGroup .playerRow > .playerInfo {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
@@ -83,7 +83,7 @@ div.TransferMarket.inner {
 }
 
 @media only screen and (min-width: 1400px) {
-  .playerRow > .playerInfo {
+  .playerGroup .playerRow > .playerInfo {
     display: grid !important;
     justify-content: space-between;
     grid-template-columns: auto auto;
@@ -111,7 +111,7 @@ div.TransferMarket.inner {
   }
 }
 
-.playerInfo > .playerPoints {
+.playerGroup .playerInfo > .playerPoints {
   margin: 0px !important;
 }
 

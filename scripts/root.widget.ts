@@ -3,6 +3,8 @@ import { html, render } from 'lit-html';
 import { exportWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from './router.service';
+import './live-matchday-img-replace';
+
 const root: HTMLDivElement = document.createElement('div');
 root.classList.add('bkb-root');
 document.body.append(root);
