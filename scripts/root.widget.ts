@@ -1,15 +1,44 @@
 import type { TemplateResult } from 'lit-html';
 import { html, render } from 'lit-html';
-import { exportWidget } from './export.widget';
+import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from './router.service';
 import './live-matchday-img-replace';
+import type { Setting } from './settings.service';
+import { settingsService } from './settings.service';
 
 const root: HTMLDivElement = document.createElement('div');
 root.classList.add('bkb-root');
 document.body.append(root);
+let settings: Setting[];
+let renderReList: boolean = false;
+let renderCsvExport: boolean = false;
+let renderCopyExport: boolean = false;
 
-const rootTemplate: TemplateResult = html` ${reListWidget} ${exportWidget} `;
+function renderTemplate(path: string) {
+  let template: TemplateResult = html``;
+  switch (path) {
+    case 'transfermarkt/verkaufen':
+      template = html`
+        ${renderReList ? reListWidget : ''} ${renderCsvExport ? exportCsvWidget : ''}
+        ${renderCopyExport ? exportCopyWidget : ''}
+      `;
+      break;
+    default:
+      break;
+  }
+  render(template, root);
+}
 
-routerService.subscribe((path: string) => console.log(path));
-render(rootTemplate, root);
+settingsService
+  .get()
+  .then((s: Setting[]) => (settings = s))
+  .then(() => {
+    for (const setting of settings) {
+      if (setting.id === 're-list') renderReList = setting.enabled;
+      if (setting.id === 'csv-export') renderCsvExport = setting.enabled;
+      if (setting.id === 'copy-export') renderCopyExport = setting.enabled;
+    }
+    renderTemplate(routerService.getPath());
+    routerService.subscribe(renderTemplate);
+  });

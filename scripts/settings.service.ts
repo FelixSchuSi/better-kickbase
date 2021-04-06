@@ -35,7 +35,6 @@ class SettingsService {
     const cache: { [s: string]: Setting[] } = await browser.storage.sync.get('settings');
 
     if (cache && cache.settings) {
-      // this.settings = result.settings;
       const cachedSettings: Setting[] = cache.settings;
       return SettingsService.defaultSettings.map((setting: Setting) => {
         const match: Setting | undefined = cachedSettings.find(

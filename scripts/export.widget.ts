@@ -5,9 +5,14 @@ import { selectAll } from './helpers/select-all';
 import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
 
-export const exportWidget: TemplateResult = html`
+export const exportCsvWidget: TemplateResult = html`
   <div class="bkb-export">
     <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>file</div>
+  </div>
+`;
+
+export const exportCopyWidget: TemplateResult = html`
+  <div class="bkb-export">
     <div class="bkb-export-copy bkb-btn" @click=${copy}>copy</div>
   </div>
 `;
