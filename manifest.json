@@ -27,7 +27,8 @@
         "styles/transfermarkt-verkaufen.css",
         "styles/_player-row.css",
         "styles/_frame.css",
-        "styles/_vars.css"
+        "styles/_vars.css",
+        "styles/_fonts.css"
       ]
     }
   ],

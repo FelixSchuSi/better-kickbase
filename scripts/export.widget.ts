@@ -6,14 +6,16 @@ import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
 
 export const exportCsvWidget: TemplateResult = html`
-  <div class="bkb-export">
-    <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>file</div>
+  <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
+    <div class="material-icons">file_download</div>
+    <div>.csv</div>
   </div>
 `;
 
 export const exportCopyWidget: TemplateResult = html`
-  <div class="bkb-export">
-    <div class="bkb-export-copy bkb-btn" @click=${copy}>copy</div>
+  <div class="bkb-export-copy bkb-btn" @click=${copy}>
+    <div class="material-icons">content_copy</div>
+    <div>in .xslx einfügen</div>
   </div>
 `;
 
@@ -38,7 +40,7 @@ function downloadAsCSV(): void {
 function extractBalance(): [string, string, number] {
   const balanceElement: HTMLSpanElement | null = select(Selectors.BALANCE);
   const value: number = balanceElement ? interpretPrice(balanceElement.innerText) : 0;
-  return ['your', 'balance', value];
+  return ['Account', 'Balance', value];
 }
 
 function extractPlayerData(player: HTMLElement): [string, string, number] {
@@ -52,15 +54,23 @@ function extractPlayerData(player: HTMLElement): [string, string, number] {
 
   const firstName: string = (<HTMLElement | null>player.querySelector(Selectors.FIRSTNAME))?.innerText || '';
   const lastName: string = (<HTMLElement | null>player.querySelector(Selectors.LASTNAME))?.innerText || '';
-  return offer > 0 ? [lastName, firstName, offer] : [lastName, firstName, value];
+  return offer > 0
+    ? [capitalizeFirstLetter(lastName ?? ''), capitalizeFirstLetter(firstName ?? ''), offer]
+    : [lastName, firstName, value];
+}
+
+function capitalizeFirstLetter(string: string): string {
+  if (string === '') return string;
+  const result: string = string.toLowerCase();
+  return result[0].toUpperCase() + result.slice(1);
 }
 
 function toCsv(
   arr: [string, string, number][],
-  { sep, includeHeader }: { sep?: string; includeHeader?: boolean } = { sep: '\n', includeHeader: false }
+  { sep, includeHeader }: { sep?: string; includeHeader?: boolean } = { sep: ';', includeHeader: false }
 ): string {
   let result: string = '';
-  if (includeHeader) result += `sep=,${sep}`;
+  if (includeHeader) result += `sep=${sep}`;
   for (const row of arr) {
     result += row.join(sep) + '\n';
   }

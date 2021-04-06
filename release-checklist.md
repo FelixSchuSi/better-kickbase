@@ -1,7 +1,11 @@
-- [ ] Settings page
-- [ ] Only render buttons on selling page
-- [ ] Make export as csv an opt-out in settings
-- [ ] Make copy an opt-in in settings
-- [ ] Make re-list an opt-in in settings
-- [ ] Make blocking of notifications an opt-in in settings
+- [x] Settings page
+- [x] Only render buttons on selling page
+- [x] Make export as csv an opt-out in settings
+- [x] Make copy an opt-in in settings
+- [x] Make re-list an opt-in in settings
+- [x] Make blocking of notifications an opt-out in settings
 - [ ] Find a good layout for player rows
+- [ ] Find better labels for buttons
+- [ ] Implement tooltips for buttons with more elaborate explanations
+- [ ] Center user image
+- [ ] (switch to preact)

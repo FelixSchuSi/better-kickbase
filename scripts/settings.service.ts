@@ -27,7 +27,7 @@ class SettingsService {
     {
       id: 'block-notifications',
       label: 'Benachrichtigungen blockieren',
-      enabled: false
+      enabled: true
     }
   ];
 

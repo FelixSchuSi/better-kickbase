@@ -34,11 +34,24 @@ settingsService
   .get()
   .then((s: Setting[]) => (settings = s))
   .then(() => {
+    let blockNotifications: boolean = false;
     for (const setting of settings) {
       if (setting.id === 're-list') renderReList = setting.enabled;
       if (setting.id === 'csv-export') renderCsvExport = setting.enabled;
       if (setting.id === 'copy-export') renderCopyExport = setting.enabled;
+      if (setting.id === 'block-notifications') blockNotifications = setting.enabled;
     }
+
     renderTemplate(routerService.getPath());
     routerService.subscribe(renderTemplate);
+
+    if (blockNotifications) {
+      const style: HTMLStyleElement = document.createElement('style');
+      style.innerText = `
+        .notification {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
   });

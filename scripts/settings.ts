@@ -10,6 +10,12 @@ import 'weightless/snackbar';
 import 'weightless/checkbox';
 import 'weightless/button';
 
+const l: HTMLLinkElement = document.createElement('link');
+l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+l.rel = 'stylesheet';
+
+document.head.appendChild(l);
+
 class SettingsPage extends LitElement {
   @internalProperty()
   private settings: Setting[] = [];

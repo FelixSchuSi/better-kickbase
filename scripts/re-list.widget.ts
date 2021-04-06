@@ -8,7 +8,9 @@ import { waitForSelector } from './helpers/wait-for-selector';
 import { sleep } from './helpers/sleep';
 
 export const reListWidget: TemplateResult = html`
-  <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>re-list</div>
+  <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
+    <span class="material-icons"> sync </span>Angebote unter MW ablehnen
+  </div>
 `;
 
 function reListButtonClick() {
