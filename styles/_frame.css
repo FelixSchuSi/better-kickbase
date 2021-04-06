@@ -11,6 +11,10 @@ html:is(:root) {
   left: 0px !important;
 }
 
+.sidebarNav {
+  margin-top: var(--bkb-header-height) !important;
+}
+
 .sidebarNav > li > div.activeImage,
 .sidebarNav > li > div.normalImage {
   transform: scale(1.2);
@@ -28,4 +32,22 @@ div.skyBranding.pull-left {
 
 #pageWrapper {
   padding-left: var(--bkb-navbar-width) !important;
+}
+
+.rightSide.leagueList > .userInfo,
+.userInfo > .image,
+.image > .imageContainer {
+  height: 44px !important;
+}
+
+.image > .imageContainer {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.image > .imageContainer > img {
+  width: 44px !important;
+  height: 44px !important;
+  margin: 0px !important;
+  object-fit: cover !important;
 }

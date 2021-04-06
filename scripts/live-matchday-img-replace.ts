@@ -1,10 +1,10 @@
 import { selectAll } from './helpers/select-all';
 import { Selectors } from './helpers/selectors';
 
-const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[], me: MutationObserver) => {
+const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
   mutations.some((record: MutationRecord) => {
-    record.addedNodes.forEach((e: HTMLElement) => {
-      if (e.classList?.contains('live')) {
+    record.addedNodes.forEach((e: Node) => {
+      if (e instanceof HTMLElement && e.classList?.contains('live')) {
         console.log(e);
         const playerImages: HTMLImageElement[] = <HTMLImageElement[]>(
           Array.from(selectAll(Selectors.LIVE_MATCHDAY_IMG, e))

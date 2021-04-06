@@ -1,5 +1,5 @@
 .playerGroup > .playerRow {
-  padding-right: var(--bkb-padding-margin-s);
+  padding-right: var(--bkb-padding-margin-m);
   display: grid !important;
   justify-content: stretch;
   grid-template-columns: 180px auto 185px;
@@ -24,4 +24,14 @@
 
 .playerRow > .offerWidget {
   grid-area: offerWidget;
+}
+
+.statusBar > .balance {
+  display: flex !important;
+  position: static !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: flex-end;
+  height: 100% !important;
+  padding-right: var(--bkb-padding-margin-l);
 }

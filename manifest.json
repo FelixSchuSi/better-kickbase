@@ -30,5 +30,17 @@
         "styles/_vars.css"
       ]
     }
-  ]
+  ],
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "better-kb@better-kb.de"
+    }
+  }
 }

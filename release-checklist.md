@@ -1,0 +1,7 @@
+- [ ] Settings page
+- [ ] Only render buttons on selling page
+- [ ] Make export as csv an opt-out in settings
+- [ ] Make copy an opt-in in settings
+- [ ] Make re-list an opt-in in settings
+- [ ] Make blocking of notifications an opt-in in settings
+- [ ] Find a good layout for player rows

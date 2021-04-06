@@ -55,11 +55,13 @@ div.TransferMarket.inner {
 
 .infoBox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  align-items: center;
 }
 
 .infoBox > .time {
   margin: 0px !important;
+  margin-right: var(--bkb-padding-margin-m) !important;
   height: 40% !important;
 }
 
@@ -78,8 +80,12 @@ div.TransferMarket.inner {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: var(--bkb-padding-margin-s);
-  padding-bottom: var(--bkb-padding-margin-s);
+  padding-top: var(--bkb-padding-margin-m);
+  padding-bottom: var(--bkb-padding-margin-m);
+}
+
+.playerInfo > .playerBadges > .badge {
+  margin: 0px !important;
 }
 
 @media only screen and (min-width: 1400px) {
@@ -92,14 +98,15 @@ div.TransferMarket.inner {
       'playerBadges playerPoints'
       'playerName playerPoints';
 
-    padding-top: var(--bkb-padding-margin-s);
-    padding-bottom: var(--bkb-padding-margin-s);
+    padding-top: var(--bkb-padding-margin-m);
+    padding-bottom: var(--bkb-padding-margin-m);
   }
 
   .playerBadges {
     align-self: end;
     grid-area: playerBadges;
   }
+
   .playerName {
     grid-area: playerName;
   }
