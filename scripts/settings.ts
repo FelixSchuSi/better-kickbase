@@ -4,47 +4,15 @@ import { internalProperty } from 'lit-element';
 import { css } from 'lit-element';
 import { html, LitElement } from 'lit-element';
 import type { Snackbar } from 'weightless/snackbar';
-import { browser } from 'webextension-polyfill-ts';
-
+import type { Setting } from './settings.service';
+import { settingsService } from './settings.service';
 import 'weightless/snackbar';
 import 'weightless/checkbox';
 import 'weightless/button';
-import 'weightless/label';
-
-console.log('Shit loaded');
-interface Setting {
-  id: string;
-  label: string;
-  enabled: boolean;
-}
-
-const defaultSettings: Setting[] = [
-  {
-    id: 'csv-export',
-    label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick als CSV Datei zu exportieren',
-    enabled: true
-  },
-  {
-    id: 'copy-export',
-    label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick zu kopieren',
-    enabled: false
-  },
-  {
-    id: 're-list',
-    label:
-      'Re-List Button anzeigen, um Angebote für ein Spieler unter seinem Marktwert abzulehnen und diesen Spieler neu zu listen',
-    enabled: false
-  },
-  {
-    id: 'block-notifications',
-    label: 'Benachrichtigungen blockieren',
-    enabled: false
-  }
-];
 
 class SettingsPage extends LitElement {
   @internalProperty()
-  private settings: Setting[] = defaultSettings;
+  private settings: Setting[] = [];
   @query('.settings-saved')
   private savedSnackbar!: Snackbar;
 
@@ -68,23 +36,8 @@ class SettingsPage extends LitElement {
     `;
   }
 
-  constructor() {
-    super();
-    browser.storage.sync.get('settings').then((result: any) => {
-      if (result && result.settings) {
-        // this.settings = result.settings;
-        const cachedSettings: Setting[] = result.settings;
-        this.settings = this.settings.map((setting: Setting) => {
-          const match: Setting | undefined = cachedSettings.find(
-            (cachedSetting: Setting) => cachedSetting.id === setting.id
-          );
-          if (match) {
-            setting.enabled = match.enabled;
-          }
-          return setting;
-        });
-      }
-    });
+  protected async firstUpdated(): Promise<void> {
+    this.settings = await settingsService.get();
   }
 
   protected render(): TemplateResult {
@@ -99,7 +52,7 @@ class SettingsPage extends LitElement {
                   <p>${setting.label}</p>
                   <wl-checkbox
                     id="${setting.id}"
-                    @change=${this.changeSetting}
+                    @change=${this.toggleSetting}
                     ?checked=${setting.enabled}
                   ></wl-checkbox>
                 </div>
@@ -114,7 +67,7 @@ class SettingsPage extends LitElement {
     `;
   }
 
-  protected changeSetting(e: CustomEvent) {
+  protected toggleSetting(e: CustomEvent) {
     const target: HTMLElement = <HTMLElement>e.currentTarget;
     const id: string = target.id;
     this.settings = this.settings.map((setting: Setting) => {
@@ -126,13 +79,9 @@ class SettingsPage extends LitElement {
   }
 
   protected storeSettings() {
-    browser.storage.sync
-      .set({
-        settings: this.settings
-      })
-      .then(() => {
-        this.savedSnackbar.show();
-      });
+    settingsService.set(this.settings).then(() => {
+      this.savedSnackbar.show();
+    });
   }
 }
 customElements.define('bkb-settings', SettingsPage);
