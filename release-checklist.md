@@ -5,7 +5,9 @@
 - [x] Make re-list an opt-in in settings
 - [x] Make blocking of notifications an opt-out in settings
 - [x] Find a good layout for player rows
-- [ ] Find better labels for buttons
-- [ ] Implement tooltips for buttons with more elaborate explanations
+- [x] Find better labels for buttons
+- [x] Implement tooltips for buttons with more elaborate explanations
+- [ ] Use Icons in Settings
+- [ ] Introduce Settings to block the differnt types of notifications
 - [ ] Center user image
 - [ ] (switch to preact)

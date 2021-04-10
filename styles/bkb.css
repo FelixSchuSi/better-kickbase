@@ -78,31 +78,23 @@ span.badge {
 
 /* .bkb-inside-tooltip {
   opacity: 0;
-  /* width: 0px; */
+  
   transform: scaleX(0);
-  /* background-color: black; */
-  /* color: #fff; */
+  
   text-align: center;
   border-radius: 6px;
   padding: 5px;
   white-space: nowrap;
-  /* Position the tooltip */
-  /* position: absolute;
-  z-index: 1;
-  top: 0px;
-  height: 100%;
-  right: 105%; */
+  
+  
   transition: transform 2s, opacity 0.5s;
-  /* transition-property: display width; */
-  /* transition-duration: -500ms; */
-  /* transition-delay: 500ms 500ms;
-  transition-duration: 500ms 500ms; */
+  
 }
 
 .bkb-btn:hover .bkb-inside-tooltip {
-  /* display: inline; */
+  
   opacity: 1;
   transform: scaleX(1);
-  /* width: 100px; */
-  /* transform: scaleX(2); */
-} */
+  
+} 
+*/
