@@ -29,31 +29,6 @@ export class RouterService {
     return this.withoutRootPath(location.pathname);
   }
 
-  // public getAllQueryParameters(): QueryParameter {
-  //   const params: URLSearchParams = new URLSearchParams(location.search);
-  //   const paramObj: QueryParameter = {};
-  //   for (const value of params.keys()) {
-  //     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  //     paramObj[value] = params.get(value)!;
-  //   }
-  //   return paramObj;
-  // }
-
-  public getQueryParameter(key: string): string {
-    const queryString: string = location.search.substr(1); // Remove ? from search
-    return this.parseQueryParameter(queryString)[key];
-  }
-
-  private parseQueryParameter(searchStr: string): QueryParameter {
-    const tmap: QueryParameter = {};
-
-    searchStr.split('&').forEach((e: string): void => {
-      const pair: string[] = e.split('=');
-      tmap[pair[0]] = pair[1];
-    });
-    return tmap;
-  }
-
   private notifyListeners(): void {
     setTimeout(() => {
       const path: string = this.getPath();

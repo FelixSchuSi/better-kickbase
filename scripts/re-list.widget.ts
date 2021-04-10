@@ -9,7 +9,8 @@ import { sleep } from './helpers/sleep';
 
 export const reListWidget: TemplateResult = html`
   <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
-    <span class="material-icons"> sync </span>Angebote unter MW ablehnen
+    <span class="material-icons"> sync </span>
+    <span class="bkb-tooltip">Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt</span>
   </div>
 `;
 
@@ -32,13 +33,13 @@ function removePlayerForRelist(player: HTMLElement, x: { removedCount: number })
 
   const [angebot, mw]: number[] = selectors.map((selector: string) => {
     const element: HTMLElement | null = player.querySelector(selector);
-    const value: number = element ? interpretPrice(element.innerText) : 0;
+    const value: number = element ? interpretPrice(element.innerText) : -1;
     return value;
   });
 
   const isOfferExpired: boolean = !!player.querySelector(Selectors.EXPIRED);
 
-  if (isOfferExpired || mw > angebot) {
+  if (isOfferExpired || (angebot !== -1 && mw > angebot)) {
     // Take a player off the market
     const removePlayerButton: HTMLElement | null = player.querySelector(Selectors.REMOVE_PLAYER);
     removePlayerButton?.click();
