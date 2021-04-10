@@ -4,7 +4,7 @@
 - [x] Make copy an opt-in in settings
 - [x] Make re-list an opt-in in settings
 - [x] Make blocking of notifications an opt-out in settings
-- [ ] Find a good layout for player rows
+- [x] Find a good layout for player rows
 - [ ] Find better labels for buttons
 - [ ] Implement tooltips for buttons with more elaborate explanations
 - [ ] Center user image

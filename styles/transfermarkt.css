@@ -92,11 +92,11 @@ div.TransferMarket.inner {
   .playerGroup .playerRow > .playerInfo {
     display: grid !important;
     justify-content: space-between;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-template-rows: 50% 50%;
     grid-template-areas:
-      'playerBadges playerPoints'
-      'playerName playerPoints';
+      'playerBadges playerPoints .'
+      'playerName playerPoints .';
 
     padding-top: var(--bkb-padding-margin-m);
     padding-bottom: var(--bkb-padding-margin-m);
@@ -109,12 +109,22 @@ div.TransferMarket.inner {
 
   .playerName {
     grid-area: playerName;
+    width: 155px !important;
   }
-  .playerPoints {
+
+  html .playerGroup .playerInfo > .playerPoints {
     width: 263px;
     align-self: center;
     justify-self: end;
     grid-area: playerPoints;
+  }
+
+  .playerPoints > .price {
+    padding-right: 0px !important;
+  }
+
+  .playerPoints > .points {
+    width: 61px !important;
   }
 }
 
@@ -149,4 +159,8 @@ div.TransferMarket.inner {
 
 .offerWidget > .offerInput {
   width: 80% !important;
+}
+
+html .TransferMarket .lineup .lineupContainer .player .playerContainer .name {
+  letter-spacing: 0.04rem;
 }
