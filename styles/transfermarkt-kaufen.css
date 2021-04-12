@@ -2,7 +2,7 @@
   padding-right: var(--bkb-padding-margin-m);
   display: grid !important;
   justify-content: stretch;
-  grid-template-columns: 180px auto 185px;
+  grid-template-columns: 128px auto 185px;
   grid-template-rows: 50% 50%;
   grid-template-areas:
     'picture playerInfo infoBox'

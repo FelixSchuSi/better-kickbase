@@ -35,11 +35,11 @@ div.TransferMarket.inner {
 }
 
 .playerGroup .playerRow > .playerImage > img {
-  transform: scale(1.15);
+  transform: scale(1.15) translateX(-30px);
 }
 
 .playerGroup .playerRow > .playerImage {
-  width: fit-content !important;
+  width: 100% !important;
 }
 
 .playerRow > .offerWidget,
