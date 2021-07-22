@@ -36,8 +36,40 @@ class SettingsPage extends LitElement {
       .container {
         max-width: 800px;
       }
+      .icon-label-container{
+        display: flex;
+      }
+      wl-checkbox {
+        flex-shrink: 0;
+      }
       wl-snackbar > span {
         font-size: 14px;
+      }
+      @font-face {
+        font-family: 'Material Icons Outlined';
+        font-style: normal;
+        font-weight: 400;
+        src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v54/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2)
+          format('woff2');
+      }
+      .material-icons {
+        font-family: 'Material Icons Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        margin-right: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     `;
   }
@@ -52,10 +84,13 @@ class SettingsPage extends LitElement {
         <h1>Einstellungen better-kickbase</h1>
         <div class="settings-list">
           ${this.settings.map(
-            (setting: Setting) =>
-              html`
+      (setting: Setting) =>
+        html`
                 <div class="settings-item ${setting.id}">
-                  <p>${setting.label}</p>
+                  <div class="icon-label-container">
+                    ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
+                    <p>${setting.label}</p>
+                  </div>
                   <wl-checkbox
                     id="${setting.id}"
                     @change=${this.toggleSetting}
@@ -63,7 +98,7 @@ class SettingsPage extends LitElement {
                   ></wl-checkbox>
                 </div>
               `
-          )}
+    )}
         </div>
         <wl-snackbar class="settings-saved" fixed hideDelay=${3000}>
           <span>Einstellungen gespeichert!</span>

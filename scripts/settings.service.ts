@@ -4,6 +4,7 @@ export interface Setting {
   id: string;
   label: string;
   enabled: boolean;
+  icon: string
 }
 
 class SettingsService {
@@ -11,23 +12,27 @@ class SettingsService {
     {
       id: 'csv-export',
       label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick als CSV Datei zu exportieren',
-      enabled: true
+      enabled: true,
+      icon: 'file_download'
     },
     {
       id: 'copy-export',
       label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick zu kopieren',
-      enabled: false
+      enabled: false,
+      icon: 'content_copy'
     },
     {
       id: 're-list',
       label:
         'Re-List Button anzeigen, um Angebote für ein Spieler unter seinem Marktwert abzulehnen und diesen Spieler neu zu listen',
-      enabled: false
+      enabled: false,
+      icon: 'sync'
     },
     {
       id: 'block-notifications',
       label: 'Benachrichtigungen blockieren',
-      enabled: true
+      enabled: true,
+      icon: 'highlight_off'
     }
   ];
 
