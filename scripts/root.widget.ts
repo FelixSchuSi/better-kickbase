@@ -1,5 +1,5 @@
-import type { TemplateResult } from 'lit-html';
-import { html, render } from 'lit-html';
+import type { TemplateResult } from 'lit';
+import { html, render } from 'lit';
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from './router.service';

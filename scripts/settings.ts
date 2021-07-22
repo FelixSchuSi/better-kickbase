@@ -1,8 +1,7 @@
-import type { TemplateResult } from 'lit-element';
-import { query } from 'lit-element';
-import { internalProperty } from 'lit-element';
-import { css } from 'lit-element';
-import { html, LitElement } from 'lit-element';
+import type { TemplateResult } from 'lit';
+import { css } from 'lit';
+import { html, LitElement } from 'lit';
+import { query, state } from 'lit/decorators.js';
 import type { Snackbar } from 'weightless/snackbar';
 import type { Setting } from './settings.service';
 import { settingsService } from './settings.service';
@@ -17,7 +16,7 @@ l.rel = 'stylesheet';
 document.head.appendChild(l);
 
 class SettingsPage extends LitElement {
-  @internalProperty()
+  @state()
   private settings: Setting[] = [];
   @query('.settings-saved')
   private savedSnackbar!: Snackbar;
@@ -64,7 +63,6 @@ class SettingsPage extends LitElement {
         white-space: nowrap;
         word-wrap: normal;
         direction: ltr;
-        -webkit-font-feature-settings: 'liga';
         -webkit-font-smoothing: antialiased;
         margin-right: 1em;
         display: flex;

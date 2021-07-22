@@ -1,5 +1,5 @@
-import type { TemplateResult } from 'lit-html';
-import { html } from 'lit-html';
+import type { TemplateResult } from 'lit';
+import { html } from 'lit';
 import { interpretPrice } from './helpers/interpret-price';
 import { selectAll } from './helpers/select-all';
 import { select } from './helpers/select';
