@@ -8,15 +8,14 @@ import { Selectors } from './helpers/selectors';
 export const exportCsvWidget: TemplateResult = html`
   <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
     <div class="material-icons">file_download</div>
-    <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote der Spieler herunter</span>
+    <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter</span>
   </div>
 `;
 
 export const exportCopyWidget: TemplateResult = html`
   <div class="bkb-export-copy bkb-btn" @click=${copy}>
-    <!-- <span class="bkb-inside-tooltip">Inside Tooltip text asdf asdf asdf </span> -->
     <div class="material-icons">content_copy</div>
-    <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote der Spieler in die Zwischenablage</span>
+    <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage</span>
   </div>
 `;
 

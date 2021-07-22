@@ -44,10 +44,3 @@ div.skyBranding.pull-left {
   width: 44px !important;
   height: 44px !important;
 }
-
-.image > .imageContainer > img {
-  width: 44px !important;
-  height: 44px !important;
-  margin: 0px !important;
-  object-fit: cover !important;
-}

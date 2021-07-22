@@ -9,5 +9,5 @@
 - [x] Implement tooltips for buttons with more elaborate explanations
 - [ ] Use Icons in Settings
 - [ ] Introduce Settings to block the differnt types of notifications
-- [ ] Center user image
+- [x] Center user image
 - [ ] (switch to preact)

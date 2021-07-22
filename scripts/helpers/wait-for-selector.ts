@@ -14,7 +14,6 @@ export function waitForSelector<E extends Element>(
       result = element.querySelector(selector);
       if (result) {
         const t1: number = Date.now();
-        console.log(`Element nach ${t1 - t0} ms gefunden `, result);
         me.disconnect();
         resolve(result);
       }
@@ -33,7 +32,6 @@ export function waitForSelector<E extends Element>(
 
     result = element.querySelector(selector);
     if (result) {
-      console.log('Element direkt gefunden! ', result);
       resolve(result);
     }
   });
