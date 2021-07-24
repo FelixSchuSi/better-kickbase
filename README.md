@@ -36,3 +36,12 @@ In Kürze wird die Erweiterung im Chrome Web Store verfügbar sein, bis dahin ka
 | Opera   | ✅            |
 | Firefox | ❌(in Kürze!) |
 | Safari  | ❌            |
+
+# Build the extension
+Node >= v14.12.0 and npm >= 6.14.8 is needed to build this extension.
+You can build this extension yourself in just a few steps:
+
+1. Clone this repo: `git clone https://github.com/FelixSchuSi/better-kickbase.git`
+2. Install dependencies from npm: `npm i`
+3. Build: `npm run build`
+4. The newely created `dist` directory contains all the files you need to manually install the extension!
