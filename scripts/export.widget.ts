@@ -24,6 +24,8 @@ function copy(): void {
   const playerData: [string, string, number, number][] = players.map(extractPlayerData);
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
+  const labels = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
+  playerData.unshift(<any>labels);
   const csv: string = toCsv(playerData, { sep: '\t', includeHeader: false });
   copyToClipboard(csv);
 }
