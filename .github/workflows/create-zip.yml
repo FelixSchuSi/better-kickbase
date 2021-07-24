@@ -30,7 +30,9 @@ jobs:
       - name: Monkey patch for firefox compatibility # see: https://github.com/extend-chrome/rollup-plugin-chrome-extension/issues/56#issuecomment-852182897
         run: |
           cd dist/assets/
-          sudo ../../firefox-compat-monkey-patch.sh
+          pwd
+          chmod +x ../../firefox-compat-monkey-patch.sh
+          ../../firefox-compat-monkey-patch.sh
 
       - name: Install ZIP
         run: |
