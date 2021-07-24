@@ -27,6 +27,7 @@ function renderTemplate(path: string) {
 
 settingsService.get().then((settings: Setting[]) => {
   let blockNotifications: boolean = false;
+
   for (const setting of settings) {
     if (!setting.enabled) break;
     if (setting.id === 're-list') templates.push(reListWidget);

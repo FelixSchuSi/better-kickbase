@@ -39,12 +39,12 @@
     "page": "settings.html",
     "open_in_tab": true
   },
+  "browser_action": {
+    "default_popup": "settings.html",
+    "default_icon": "favicon/favicon-32.png",
+    "default_title": "better-kickbase"
+  },
   "permissions": [
     "storage"
-  ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "better-kb@better-kb.de"
-    }
-  }
+  ]
 }

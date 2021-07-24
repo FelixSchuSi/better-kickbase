@@ -11,26 +11,25 @@ class SettingsService {
   public static defaultSettings: Setting[] = [
     {
       id: 'csv-export',
-      label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick als CSV Datei zu exportieren',
+      label: 'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick als CSV Datei heruntergeladen werden kann',
       enabled: true,
       icon: 'file_download'
     },
     {
       id: 'copy-export',
-      label: 'Export Button anzeigen, um Spieler und Angebote per Mausplick zu kopieren',
-      enabled: false,
+      label: 'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick kopiert werden kann',
+      enabled: true,
       icon: 'content_copy'
     },
     {
       id: 're-list',
-      label:
-        'Re-List Button anzeigen, um Angebote für ein Spieler unter seinem Marktwert abzulehnen und diesen Spieler neu zu listen',
-      enabled: false,
+      label: 'Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können',
+      enabled: true,
       icon: 'sync'
     },
     {
       id: 'block-notifications',
-      label: 'Benachrichtigungen blockieren',
+      label: 'Alle Kickbase-Benachrichtigungen blockieren',
       enabled: true,
       icon: 'highlight_off'
     }
@@ -38,7 +37,6 @@ class SettingsService {
 
   public async get(): Promise<Setting[]> {
     const cache: { [s: string]: Setting[] } = await browser.storage.sync.get('settings');
-    debugger;
     if (cache && cache.settings) {
       const cachedSettings: Setting[] = cache.settings;
       return SettingsService.defaultSettings.map((setting: Setting) => {
