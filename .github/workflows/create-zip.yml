@@ -32,7 +32,7 @@ jobs:
           cd dist/assets/
           pwd
           chmod +x ../../firefox-compat-monkey-patch.sh
-          ../../firefox-compat-monkey-patch.sh
+          ../../firefox-compat-monkey-patch.sh || :
 
       - name: Install ZIP
         run: |
