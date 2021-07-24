@@ -13,7 +13,7 @@ export default {
     format: "esm",
   },
   plugins: [
-    chromeExtension(),
+    chromeExtension({ browserPolyfill: true }),
     simpleReloader(),
     resolve(),
     commonjs(),

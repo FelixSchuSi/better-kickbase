@@ -24,6 +24,9 @@ class SettingsPage extends LitElement {
 
   static get styles() {
     return css`
+      h1, p, div {
+        color: rgba(0,0,0,0.87);
+      }
       .settings-list {
         display: flex;
         flex-direction: column;
@@ -32,6 +35,7 @@ class SettingsPage extends LitElement {
       .settings-item {
         display: flex;
         justify-content: space-between;
+        align-items: center;
       }
       .container {
         max-width: 800px;

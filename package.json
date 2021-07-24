@@ -1,7 +1,7 @@
 {
   "name": "better-kickbase",
   "version": "1.0.0",
-  "description": "Make kickbase.com less annoying.",
+  "description": "Sei ein effizienterer Manager mit 'better-kickbase'",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
