@@ -38,7 +38,7 @@ class SettingsService {
 
   public async get(): Promise<Setting[]> {
     const cache: { [s: string]: Setting[] } = await browser.storage.sync.get('settings');
-
+    debugger;
     if (cache && cache.settings) {
       const cachedSettings: Setting[] = cache.settings;
       return SettingsService.defaultSettings.map((setting: Setting) => {
