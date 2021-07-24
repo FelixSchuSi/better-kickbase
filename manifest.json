@@ -8,6 +8,7 @@
     "32": "favicon/favicon-32.png",
     "48": "favicon/favicon-48.png",
     "64": "favicon/favicon-64.png",
+    "96": "favicon/favicon-96.png",
     "128": "favicon/favicon-128.png"
   },
   "content_scripts": [
