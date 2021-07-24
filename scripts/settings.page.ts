@@ -8,6 +8,7 @@ import { settingsService } from './settings.service';
 import 'weightless/snackbar';
 import 'weightless/checkbox';
 import 'weightless/button';
+import { browser, Tabs } from 'webextension-polyfill-ts';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -37,6 +38,9 @@ class SettingsPage extends LitElement {
       }
       .icon-label-container{
         display: flex;
+      }
+      .snackbar-placeholder{
+        height: 60px
       }
       wl-checkbox {
         flex-shrink: 0;
@@ -100,10 +104,21 @@ class SettingsPage extends LitElement {
         </div>
         <wl-snackbar class="settings-saved" fixed hideDelay=${3000}>
           <span>Einstellungen gespeichert!</span>
-          <wl-button slot="action" flat inverted @click=${() => this.savedSnackbar.hide()}>OK</wl-button>
+          <wl-button slot="action" flat inverted @click=${this.onSnackbarClick}>
+            Reload
+          </wl-button>
         </wl-snackbar>
+        <div class="snackbar-placeholder"></div>
       </div>
     `;
+  }
+
+  protected async onSnackbarClick() {
+    const kickbaseTabs: Tabs.Tab[] = await browser.tabs.query({ url: "*://play.kickbase.com/*" });
+    kickbaseTabs.forEach(tab => {
+      browser.tabs.reload(tab.id!)
+    });
+    this.savedSnackbar.hide()
   }
 
   protected toggleSetting(e: CustomEvent) {
@@ -113,7 +128,6 @@ class SettingsPage extends LitElement {
       if (setting.id === id) return { ...setting, enabled: !setting.enabled };
       return setting;
     });
-    console.log(this.settings);
     this.storeSettings();
   }
 

@@ -7,7 +7,6 @@
 - [x] Find a good layout for player rows
 - [x] Find better labels for buttons
 - [x] Implement tooltips for buttons with more elaborate explanations
-- [ ] Use Icons in Settings
+- [x] Use Icons in Settings
 - [ ] Introduce Settings to block the differnt types of notifications
 - [x] Center user image
-- [ ] (switch to preact)

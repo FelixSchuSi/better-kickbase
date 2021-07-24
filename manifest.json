@@ -45,6 +45,7 @@
     "default_title": "better-kickbase"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ]
 }
