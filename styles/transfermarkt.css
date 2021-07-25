@@ -102,6 +102,14 @@ div.TransferMarket.inner {
     padding-bottom: var(--bkb-padding-margin-m);
   }
 
+  .playerName > .status > img {
+    position: absolute;
+    width: 24px;
+    height: auto;
+    top: -14px;
+    left: 210px;
+  }
+
   .playerBadges {
     align-self: end;
     grid-area: playerBadges;
