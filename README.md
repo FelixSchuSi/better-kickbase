@@ -21,8 +21,9 @@ Schlechte Angebote nerven! Hole mit einem Klick neue Angebote für alle Spieler 
 
 |   |   |
 |-|-|
-| <b>Kompakteres Layout</b> <br/> Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | <img src="screenshots/compact-layout-larger.png" width="33%" > |
-| <b>Export Funktionen</b> <br/> Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. Alternativ kannst du  | <img  src="screenshots/export-csv-larger.png" width="33%" > |
+| <b>Kompakteres Layout</b> <br/> Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | <img src="screenshots/compact-layout-larger.png"  > |
+| <b>Export Funktionen</b> <br/> Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. Alternativ kannst du  | <img  src="screenshots/export-csv-larger.png"> |
+| <b>Kickbase Benachrichtigung blockieren</b> <br/> Schluss mit dem Benachrichtigungs-Dschungel! Mit `better-kickbase` kannst du Benachrichtigungen ausblenden.  | <img  src="screenshots/diable-notifications-larger.png"  > |
 
 ## Installation
 |Firefox|Chrome| Edge    |Brave   |Opera   |Safari  |
