@@ -30,4 +30,4 @@ In Kürze wird die Erweiterung im Chrome Web Store verfügbar sein, bis dahin ka
 ### Installation im Entwicklermodus
 1. Zur Erweiterungsseite ([chrome://extensions](chrome://extensions), [brave://extensions](brave://extensions), etc.) navigieren und den Entwicklermodus aktivieren
 2. `better-kb.zip` [hier](https://github.com/FelixSchuSi/better-kickbase/releases) aus dem letzten Release herunterladen
-3. Per drag-and-drop die Zip Datei als Erweiterung installieren
+3. Per drag-and-drop die Zip Datei in das Fenster der Erweiterungsseite ziehen und damit die Erweiterung installieren
