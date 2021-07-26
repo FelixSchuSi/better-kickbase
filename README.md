@@ -8,6 +8,9 @@
 
 ### Kompakteres Layout
 Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick!
+![Kompakteres Layout](screenshots/compact-layout-larger.png | width=100)
+<!-- <img align="right" src="screenshots/compact-layout-larger.png"> -->
+
 ### Export Funktionen
 Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter.
 Alternativ kannst du 
@@ -16,6 +19,10 @@ Schluss mit dem Benachrichtigungs-Dschungel! Mit `better-kickbase` kannst du Ben
 ### Re-List
 Schlechte Angebote nerven! Hole mit einem Klick neue Angebote für alle Spieler ein, bei denen das Angebot des Transfermarkts unter dem Marktwert liegt.
 
+|   |   |
+|-|-|
+| <b>Kompakteres Layout</b> <br/> Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | <img src="screenshots/compact-layout-larger.png" width="33%" > |
+| <b>Export Funktionen</b> <br/> Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. Alternativ kannst du  | <img  src="screenshots/export-csv-larger.png" width="33%" > |
 
 ## Installation
 |Firefox|Chrome| Edge    |Brave   |Opera   |Safari  |
