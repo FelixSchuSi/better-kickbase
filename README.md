@@ -5,10 +5,19 @@
 #### Manage dein Team effizienter mit der Browser Erweiterung better-kickbase!
 
 ## Funktionen
-
-| <img src="screenshots/compact-layout-larger.png"  >  |  <img  src="screenshots/export-csv-larger.png"> | <img  src="screenshots/diable-notifications-larger.png"  > |
-| - | - | - | 
-| Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. | Mit `better-kickbase` kannst du Benachrichtigungen ausblenden. |
+<table>
+  <tr>
+    <td>
+       <img src="screenshots/compact-layout-larger.png"  >
+    </td>
+    <td>
+       <img  src="screenshots/export-csv-larger.png">
+    </td>
+    <td>
+       <img  src="screenshots/diable-notifications-larger.png"  >
+    </td>
+  </tr>
+</table>
 
 ## Installation
 |Firefox|Chrome| Edge    |Brave   |Opera   |Safari  |
