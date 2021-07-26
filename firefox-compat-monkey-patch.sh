@@ -10,4 +10,4 @@ replacement='chrome.runtime.getURL("..\/scripts\/root.widget.js");'
 # echo "To: "
 # echo $replacement
 
-find . -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/$existing/$replacement/g"
+find dist/assets/ -type f -name "*.js" -print0 | xargs -0 sed -i '' -e "s/$existing/$replacement/g"

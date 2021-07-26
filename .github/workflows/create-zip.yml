@@ -1,6 +1,5 @@
 name: Create ZIP
 
-# Controls when the workflow will run
 on:
   push:
     branches: [main]
@@ -29,21 +28,16 @@ jobs:
 
       - name: Monkey patch for firefox compatibility # see: https://github.com/extend-chrome/rollup-plugin-chrome-extension/issues/56#issuecomment-852182897
         run: |
-          cd dist/assets/
-          pwd
-          chmod +x ../../firefox-compat-monkey-patch.sh
-          ../../firefox-compat-monkey-patch.sh || :
+          chmod +x ./firefox-compat-monkey-patch.sh
+          ./firefox-compat-monkey-patch.sh || :
 
       - name: Install ZIP
         run: |
-          pwd
-          ls
           sudo apt install zip unzip
 
       - name: Create ZIP
         run: |
           cd dist && zip -r better-kb.zip *
-          ls
 
       - name: Get current date
         id: date
