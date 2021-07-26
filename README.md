@@ -6,11 +6,9 @@
 
 ## Funktionen
 
-|   |   |
-|-|-|
-| <b>Kompakteres Layout</b> <br/> Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | <img src="screenshots/compact-layout-larger.png"  > |
-| <b>Export Funktionen</b> <br/> Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. Alternativ kannst du  | <img  src="screenshots/export-csv-larger.png"> |
-| <b>Kickbase Benachrichtigung blockieren</b> <br/> Schluss mit dem Benachrichtigungs-Dschungel! Mit `better-kickbase` kannst du Benachrichtigungen ausblenden.  | <img  src="screenshots/diable-notifications-larger.png"  > |
+| <img src="screenshots/compact-layout-larger.png"  >  |  <img  src="screenshots/export-csv-larger.png"> | <img  src="screenshots/diable-notifications-larger.png"  > |
+| - | - | - | 
+| Durch das kompaktere Layout siehst du mehr Informationen auf einen Blick! | Lade eine Liste deiner Spieler, deren Marktwerten und vorliegenden Angeboten als `.csv`-Datei herunter. | Mit `better-kickbase` kannst du Benachrichtigungen ausblenden. |
 
 ## Installation
 |Firefox|Chrome| Edge    |Brave   |Opera   |Safari  |
