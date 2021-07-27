@@ -25,6 +25,9 @@ class SettingsPage extends LitElement {
 
   static get styles() {
     return css`
+      * {
+        font-family: 'Open Sans', sans-serif;
+      }
       h1,
       p,
       div {
@@ -54,13 +57,6 @@ class SettingsPage extends LitElement {
       }
       wl-snackbar > span {
         font-size: 14px;
-      }
-      @font-face {
-        font-family: 'Material Icons Outlined';
-        font-style: normal;
-        font-weight: 400;
-        src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v54/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2)
-          format('woff2');
       }
       .material-icons {
         font-family: 'Material Icons Outlined';
