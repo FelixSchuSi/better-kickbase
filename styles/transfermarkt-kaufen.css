@@ -35,7 +35,7 @@
   padding-right: var(--bkb-padding-margin-l);
 }
 
-.playerRow > .infoBox > div > .userName {
+.TransferBuy .playerRow > .infoBox > div > .userName {
   top: auto !important;
   right: auto !important;
   left: auto !important;
@@ -46,4 +46,8 @@
 }
 .playerRow > .infoBox > div:hover > .userName {
   visibility: visible !important;
+}
+
+.TransferBuy .playerGroup .playerRow .infoBox .ownerImage {
+  transform: translateY(-25%);
 }

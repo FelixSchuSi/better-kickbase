@@ -80,7 +80,6 @@ div.TransferMarket.inner {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transform: translateY(-25%);
 }
 
 .playerGroup .playerRow .infoBox .ownerImage > img {
