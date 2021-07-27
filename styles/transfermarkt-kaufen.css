@@ -18,7 +18,6 @@
 }
 
 .playerRow > .infoBox {
-  padding-top: var(--bkb-padding-margin-s);
   grid-area: infoBox;
 }
 
@@ -34,4 +33,17 @@
   align-items: flex-end;
   height: 100% !important;
   padding-right: var(--bkb-padding-margin-l);
+}
+
+.playerRow > .infoBox > div > .userName {
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  display: block;
+  position: relative;
+  visibility: hidden;
+  transform: translateY(-50%);
+}
+.playerRow > .infoBox > div:hover > .userName {
+  visibility: visible !important;
 }

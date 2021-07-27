@@ -66,14 +66,27 @@ div.TransferMarket.inner {
 }
 
 .infoBox > div {
-  height: 60% !important;
+  height: 100% !important;
   width: auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 32px !important;
+}
+
+.playerGroup .playerRow .infoBox .ownerImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translateY(-25%);
 }
 
 .playerGroup .playerRow .infoBox .ownerImage > img {
-  object-fit: cover;
   height: 32px !important;
-  width: auto !important;
+  width: 32px !important;
+  border-radius: 50%;
 }
 
 .playerGroup .playerRow > .playerInfo {

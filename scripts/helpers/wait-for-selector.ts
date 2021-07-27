@@ -7,13 +7,11 @@ export function waitForSelector<E extends Element>(
 ): Promise<E | null> {
   // eslint-disable-next-line @typescript-eslint/typedef
   return new Promise((resolve, reject) => {
-    const t0: number = Date.now();
     let result: E | null;
 
     const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[], me: MutationObserver) => {
       result = element.querySelector(selector);
       if (result) {
-        const t1: number = Date.now();
         me.disconnect();
         resolve(result);
       }
