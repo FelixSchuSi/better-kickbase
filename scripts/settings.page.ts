@@ -8,7 +8,8 @@ import { settingsService } from './settings.service';
 import 'weightless/snackbar';
 import 'weightless/checkbox';
 import 'weightless/button';
-import { browser, Tabs } from 'webextension-polyfill-ts';
+import type { Tabs } from 'webextension-polyfill-ts';
+import { browser } from 'webextension-polyfill-ts';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -24,8 +25,10 @@ class SettingsPage extends LitElement {
 
   static get styles() {
     return css`
-      h1, p, div {
-        color: rgba(0,0,0,0.87);
+      h1,
+      p,
+      div {
+        color: rgba(0, 0, 0, 0.87);
       }
       .settings-list {
         display: flex;
@@ -40,11 +43,11 @@ class SettingsPage extends LitElement {
       .container {
         max-width: 800px;
       }
-      .icon-label-container{
+      .icon-label-container {
         display: flex;
       }
-      .snackbar-placeholder{
-        height: 60px
+      .snackbar-placeholder {
+        height: 60px;
       }
       wl-checkbox {
         flex-shrink: 0;
@@ -90,8 +93,8 @@ class SettingsPage extends LitElement {
         <h1>Einstellungen better-kickbase</h1>
         <div class="settings-list">
           ${this.settings.map(
-      (setting: Setting) =>
-        html`
+            (setting: Setting) =>
+              html`
                 <div class="settings-item ${setting.id}">
                   <div class="icon-label-container">
                     ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
@@ -104,13 +107,11 @@ class SettingsPage extends LitElement {
                   ></wl-checkbox>
                 </div>
               `
-    )}
+          )}
         </div>
         <wl-snackbar class="settings-saved" fixed hideDelay=${3000}>
           <span>Einstellungen gespeichert!</span>
-          <wl-button slot="action" flat inverted @click=${this.onSnackbarClick}>
-            Reload
-          </wl-button>
+          <wl-button slot="action" flat inverted @click=${this.onSnackbarClick}> Reload </wl-button>
         </wl-snackbar>
         <div class="snackbar-placeholder"></div>
       </div>
@@ -118,11 +119,11 @@ class SettingsPage extends LitElement {
   }
 
   protected async onSnackbarClick() {
-    const kickbaseTabs: Tabs.Tab[] = await browser.tabs.query({ url: "*://play.kickbase.com/*" });
-    kickbaseTabs.forEach(tab => {
-      browser.tabs.reload(tab.id!)
+    const kickbaseTabs: Tabs.Tab[] = await browser.tabs.query({ url: '*://play.kickbase.com/*' });
+    kickbaseTabs.forEach((tab: Tabs.Tab) => {
+      browser.tabs.reload(tab.id);
     });
-    this.savedSnackbar.hide()
+    this.savedSnackbar.hide();
   }
 
   protected toggleSetting(e: CustomEvent) {

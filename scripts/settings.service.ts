@@ -4,26 +4,29 @@ export interface Setting {
   id: string;
   label: string;
   enabled: boolean;
-  icon: string
+  icon: string;
 }
 
 class SettingsService {
   public static defaultSettings: Setting[] = [
     {
       id: 'csv-export',
-      label: 'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick als CSV Datei heruntergeladen werden kann',
+      label:
+        'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick als CSV Datei heruntergeladen werden kann',
       enabled: true,
       icon: 'file_download'
     },
     {
       id: 'copy-export',
-      label: 'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick kopiert werden kann',
+      label:
+        'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick kopiert werden kann',
       enabled: true,
       icon: 'content_copy'
     },
     {
       id: 're-list',
-      label: 'Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können',
+      label:
+        'Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können',
       enabled: true,
       icon: 'sync'
     },

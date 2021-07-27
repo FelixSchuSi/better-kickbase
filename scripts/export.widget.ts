@@ -24,8 +24,8 @@ function copy(): void {
   const playerData: [string, string, number, number][] = players.map(extractPlayerData);
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
-  const labels = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
-  playerData.unshift(<any>labels);
+  const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
+  playerData.unshift(<never>labels);
   const csv: string = toCsv(playerData, { sep: '\t', includeHeader: false });
   copyToClipboard(csv);
 }
@@ -35,8 +35,8 @@ function downloadAsCSV(): void {
   const playerData: [string, string, number, number][] = players.map(extractPlayerData);
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
-  const labels = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
-  playerData.unshift(<any>labels);
+  const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
+  playerData.unshift(<never>labels);
   const csv: string = toCsv(playerData);
   createCsvDownload(csv);
 }
@@ -58,8 +58,7 @@ function extractPlayerData(player: HTMLElement): [string, string, number, number
 
   const firstName: string = (<HTMLElement | null>player.querySelector(Selectors.FIRSTNAME))?.innerText || '';
   const lastName: string = (<HTMLElement | null>player.querySelector(Selectors.LASTNAME))?.innerText || '';
-  return [capitalizeFirstLetter(lastName ?? ''), capitalizeFirstLetter(firstName ?? ''), value, offer]
-
+  return [capitalizeFirstLetter(lastName ?? ''), capitalizeFirstLetter(firstName ?? ''), value, offer];
 }
 
 function capitalizeFirstLetter(string: string): string {
@@ -73,7 +72,7 @@ function toCsv(
   { sep, includeHeader }: { sep?: string; includeHeader?: boolean } = { sep: ';', includeHeader: false }
 ): string {
   // BOM tells excel that encoding is utf8
-  const BOM = String.fromCharCode(0xFEFF);
+  const BOM: string = String.fromCharCode(0xfeff);
   let result: string = BOM;
   if (includeHeader) result += `sep=${sep}`;
   for (const row of arr) {
@@ -86,11 +85,12 @@ function createCsvDownload(csvContent: string): void {
   const a: HTMLAnchorElement = document.createElement('a');
 
   a.download = 'better-kb.csv';
-  var blob = new Blob([csvContent], { type: "text/csv;charset=UTF-8" });
+
+  const blob: Blob = new Blob([csvContent], { type: 'text/csv;charset=UTF-8' });
   a.href = window.URL.createObjectURL(blob);
   document.body.append(a);
   a.click();
-  a.parentNode!.removeChild(a);
+  document.body.removeChild(a);
 }
 
 function copyToClipboard(value: string): void {
