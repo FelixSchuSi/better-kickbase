@@ -9,12 +9,8 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://play.kickbase.com/*"
-      ],
-      "js": [
-        "scripts/root.widget.ts"
-      ],
+      "matches": ["*://play.kickbase.com/*"],
+      "js": ["scripts/root.widget.ts"],
       "css": [
         "styles/bkb.css",
         "styles/bundesliga.css",
@@ -42,10 +38,7 @@
     "default_icon": "favicon/favicon-32.png",
     "default_title": "better-kickbase"
   },
-  "permissions": [
-    "storage",
-    "tabs"
-  ],
+  "permissions": ["storage", "tabs", "https://*/"],
   "browser_specific_settings": {
     "gecko": {
       "id": "98felixss@gmail.com",
