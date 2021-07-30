@@ -21,17 +21,16 @@ jobs:
           cd scraper
           npm ci
 
-      - name: Generate price-trends.json
+      - name: Generate price-trends.json.
         run: |
-          pwd
-          ls
+          cd scraper
           npm start
 
-      - name: LS.
-        run: ls
+      - name: change branch.
+        run: git checkout price-trends-data
 
-      - name: echo LS.
-        run: echo ls
+      - name: check current branch.
+        run: git status
 
       - name: cat.
         run: cat README.md
