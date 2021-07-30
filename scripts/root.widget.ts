@@ -6,14 +6,12 @@ import { routerService } from './router.service';
 import type { Setting } from './settings.service';
 import { settingsService } from './settings.service';
 import './live-matchday-img-replace';
-import { priceTrendService } from './price-trend.service';
-
-priceTrendService.getFromLigainsider();
+import { registerPriceTrendsObserver } from './price-trends-observer';
 
 const root: HTMLDivElement = document.createElement('div');
 root.classList.add('bkb-root');
 document.body.append(root);
-
+registerPriceTrendsObserver();
 const templates: TemplateResult[] = [];
 
 function renderTemplate(path: string) {

@@ -22,7 +22,6 @@ class SettingsPage extends LitElement {
   private settings: Setting[] = [];
   @query('.settings-saved')
   private savedSnackbar!: Snackbar;
-
   static get styles() {
     return css`
       * {
@@ -78,11 +77,9 @@ class SettingsPage extends LitElement {
       }
     `;
   }
-
   protected async firstUpdated(): Promise<void> {
     this.settings = await settingsService.get();
   }
-
   protected render(): TemplateResult {
     return html`
       <div class="container">
@@ -113,7 +110,6 @@ class SettingsPage extends LitElement {
       </div>
     `;
   }
-
   protected async onSnackbarClick() {
     const kickbaseTabs: Tabs.Tab[] = await browser.tabs.query({ url: '*://play.kickbase.com/*' });
     kickbaseTabs.forEach((tab: Tabs.Tab) => {
@@ -121,7 +117,6 @@ class SettingsPage extends LitElement {
     });
     this.savedSnackbar.hide();
   }
-
   protected toggleSetting(e: CustomEvent) {
     const target: HTMLElement = <HTMLElement>e.currentTarget;
     const id: string = target.id;
@@ -131,7 +126,6 @@ class SettingsPage extends LitElement {
     });
     this.storeSettings();
   }
-
   protected storeSettings() {
     settingsService.set(this.settings).then(() => {
       this.savedSnackbar.show();

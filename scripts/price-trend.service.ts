@@ -1,3 +1,5 @@
+import { browser } from 'webextension-polyfill-ts';
+
 interface PriceTrends {
   date: string;
   players: PriceTrend[];
@@ -6,60 +8,49 @@ interface PriceTrends {
 interface PriceTrend {
   lastName: string;
   delta: number;
+  detailPageLink: string;
+  kickbaseId: string;
 }
 
 class PriceTrendService {
-  //   public async getFromCache(): Promise<PriceTrends> {
-  //     // await browser.storage.sync.get('settings');
-  //   }
+  private priceTrends: Map<string, PriceTrend> = new Map();
 
-  //   public async setCache(trends: PriceTrends): Promise<void> {
-  //     // await browser.storage.sync.set({ settings: settings });
-  //   }
+  private async getFromCache(): Promise<PriceTrend[]> {
+    const playerDataFromCache: PriceTrend[] = <PriceTrend[]>await browser.storage.sync.get('price-trends');
+    return playerDataFromCache;
+  }
 
-  public async getFromLigainsider(): Promise<any> {
-    // const x: Response = await fetch('https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/main/manifest.json');
-    // // const [winner, loser]: string[] = await Promise.all([
-    // //   this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/gewinner/').then((res: Response) =>
-    // //     res.text()
-    // //   ),
-    // //   this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/verlierer/').then((res: Response) =>
-    // //     res.text()
-    // //   )
-    // // ]);
-    // // const asdf: PriceTrend[] = [
-    // //   ...this.ligainsiderHtmlToPriceTrend(winner),
-    // //   ...this.ligainsiderHtmlToPriceTrend(loser)
-    // // ];
-    // console.log(await x.json());
+  private async setCache(trends: PriceTrend[]): Promise<void> {
+    await browser.storage.sync.set({ 'price-trends': trends });
+  }
+
+  private async getLatestPriceTrends(): Promise<PriceTrends> {
+    const res: Response = await fetch(
+      'https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/price-trends-data/price-trends.json'
+    );
+    const priceTrends: PriceTrends = await res.json();
+    return priceTrends;
+  }
+
+  public async init(): Promise<void> {
     // debugger;
-  }
+    // const date: string = new Date().toISOString().split('T')[0];
+    // const priceTrends: PriceTrend[] = await this.getFromCache();
+    // if (!(priceTrends.date === date)) {
+    //   // Data is outdated
+    const priceTrends: PriceTrends = await this.getLatestPriceTrends();
+    // await this.setCache(priceTrends.players);
+    // }
 
-  private fetch(url: string): Promise<any> {
-    return new Promise((res: (value: any) => void) => {
-      const xhr: XMLHttpRequest = new XMLHttpRequest();
-      xhr.open('GET', url, true);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-          res(xhr.responseText);
-        }
-      };
-      xhr.send();
+    priceTrends.players.forEach((trend: PriceTrend) => {
+      this.priceTrends.set(`p${trend.kickbaseId}`, trend);
     });
+    // this.isReady = Promise.resolve();
   }
-
-  private ligainsiderHtmlToPriceTrend(html: string): PriceTrend[] {
-    const parser: DOMParser = new DOMParser();
-    const parsedHmtl: Document = parser.parseFromString(html, 'text/html');
-    const rows: HTMLElement[] = Array.from(parsedHmtl.querySelectorAll('tbody > tr'));
-    return rows.map((element: HTMLElement) => {
-      const lastName: string = (<HTMLAnchorElement>element.querySelector('td > strong > a')).innerText;
-      const unparsedDelta: string = (<HTMLAnchorElement>element.querySelector('td:nth-child(9)')).innerText;
-      const delta: number = Number(unparsedDelta.replace(/(€|\.)/, ''));
-      return { lastName, delta };
-    });
+  public getTrend(id: string): number | undefined {
+    return this.priceTrends.get(id)?.delta;
   }
-  //   public getTrend(lastName: string): number {}
 }
 
 export const priceTrendService: PriceTrendService = new PriceTrendService();
+// priceTrendService.init();

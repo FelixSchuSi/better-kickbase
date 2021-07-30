@@ -45,7 +45,7 @@ div.TransferMarket.inner {
 .playerRow > .offerWidget,
 .playerRow > .infoBox {
   height: 100% !important;
-  width: fit-content !important;
+  width: 100% !important;
   justify-self: end;
 }
 

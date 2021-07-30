@@ -58,3 +58,28 @@
 .bkb-btn:hover .bkb-tooltip {
   visibility: visible;
 }
+
+#bkb-price-trend {
+  width: auto !important;
+}
+
+.bkb-price-trend-positive {
+  color: #11c38b;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bkb-price-trend-negative {
+  color: #f35f40;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bkb-price-trend-neutral {
+  color: rgb(78, 82, 86);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
