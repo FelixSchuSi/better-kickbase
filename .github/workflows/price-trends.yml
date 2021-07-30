@@ -21,10 +21,15 @@ jobs:
           cd scraper
           npm ci
 
-      # - name: Generate price-trends.json.
-      #   run: |
-      #     cd scraper
-      #     npm start
+      - name: Generate price-trends.json.
+        run: |
+          cd scraper
+          npm start
+
+      - name: Copy price-trends.json.
+        run: |
+          cd scraper
+          cp scraper/price-trends.json /price-trends.json
 
       - name: change branch.
         run: |
