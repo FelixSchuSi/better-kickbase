@@ -1,0 +1,45 @@
+name: Price Trends
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js.
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+
+      - name: Install dependencies.
+        run: |
+          cd scraper
+          npm ci
+
+      - name: Generate price-trends.json
+        run: |
+          pwd
+          ls
+          npm start
+
+      - name: LS.
+        run: ls
+
+      - name: echo LS.
+        run: echo ls
+
+      - name: cat.
+        run: cat README.md
+      # - uses: EndBug/add-and-commit@v5 # You can change this to use a specific version
+      #   with:
+      #     # The message for the commit
+      #     # Default: 'Commit from GitHub Actions (name of the workflow)'
+      #     message: "🤖 Automatically generated README.md"
+      #   env:
+      #     # This is necessary in order to push a commit to the repo
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
