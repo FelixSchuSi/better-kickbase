@@ -33,6 +33,7 @@ jobs:
       - name: change branch.
         run: |
           git fetch --all
+          git checkout .
           git checkout price-trends-data
           cp /tmp/price-trends.json price-trends.json
 
