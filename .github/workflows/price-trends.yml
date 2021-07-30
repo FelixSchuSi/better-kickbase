@@ -44,7 +44,8 @@ jobs:
           # The message for the commit
           # Default: 'Commit from GitHub Actions (name of the workflow)'
           message: "🤖 Uploaded new price trends"
-          default_author: github_actions
+          author_name: Github Action
+          author_email: i-am-a@robot.com
           branch: price-trends-data
         env:
           # This is necessary in order to push a commit to the repo
