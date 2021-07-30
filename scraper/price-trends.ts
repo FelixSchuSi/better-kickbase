@@ -71,7 +71,6 @@ async function main() {
     date: new Date().toISOString().split('T')[0],
     players: priceTrends
   };
-
   writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
 }
 
