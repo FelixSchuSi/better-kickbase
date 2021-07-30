@@ -28,24 +28,21 @@ jobs:
 
       - name: Copy price-trends.json.
         run: |
-          cd scraper
-          cp scraper/price-trends.json /price-trends.json
+          cp scraper/price-trends.json /tmp/price-trends.json
 
       - name: change branch.
         run: |
           git fetch --all
           git checkout price-trends-data
+          cp /tmp/price-trends.json price-trends.json
 
-      - name: check current branch.
-        run: git status
-
-      - name: cat.
-        run: cat README.md
-      # - uses: EndBug/add-and-commit@v5 # You can change this to use a specific version
-      #   with:
-      #     # The message for the commit
-      #     # Default: 'Commit from GitHub Actions (name of the workflow)'
-      #     message: "🤖 Automatically generated README.md"
-      #   env:
-      #     # This is necessary in order to push a commit to the repo
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+      - uses: EndBug/add-and-commit@v5 # You can change this to use a specific version
+        with:
+          # The message for the commit
+          # Default: 'Commit from GitHub Actions (name of the workflow)'
+          message: "🤖 Uploaded new price trends"
+          default_author: github_actions
+          branch: price-trends-data
+        env:
+          # This is necessary in order to push a commit to the repo
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
