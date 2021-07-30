@@ -18,21 +18,21 @@ class PriceTrendService {
   //   }
 
   public async getFromLigainsider(): Promise<any> {
-    const init: RequestInit = { mode: 'no-cors' };
-    const [winner, loser]: string[] = await Promise.all([
-      this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/gewinner/').then((res: Response) =>
-        res.text()
-      ),
-      this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/verlierer/').then((res: Response) =>
-        res.text()
-      )
-    ]);
-    const asdf: PriceTrend[] = [
-      ...this.ligainsiderHtmlToPriceTrend(winner),
-      ...this.ligainsiderHtmlToPriceTrend(loser)
-    ];
-    console.log(asdf);
-    debugger;
+    // const x: Response = await fetch('https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/main/manifest.json');
+    // // const [winner, loser]: string[] = await Promise.all([
+    // //   this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/gewinner/').then((res: Response) =>
+    // //     res.text()
+    // //   ),
+    // //   this.fetch('https://www.ligainsider.de/stats/kickbase/marktwerte/tag/verlierer/').then((res: Response) =>
+    // //     res.text()
+    // //   )
+    // // ]);
+    // // const asdf: PriceTrend[] = [
+    // //   ...this.ligainsiderHtmlToPriceTrend(winner),
+    // //   ...this.ligainsiderHtmlToPriceTrend(loser)
+    // // ];
+    // console.log(await x.json());
+    // debugger;
   }
 
   private fetch(url: string): Promise<any> {

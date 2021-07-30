@@ -38,7 +38,7 @@
     "default_icon": "favicon/favicon-32.png",
     "default_title": "better-kickbase"
   },
-  "permissions": ["storage", "tabs", "https://*/"],
+  "permissions": ["storage", "tabs"],
   "browser_specific_settings": {
     "gecko": {
       "id": "98felixss@gmail.com",

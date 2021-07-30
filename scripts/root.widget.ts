@@ -8,7 +8,6 @@ import { settingsService } from './settings.service';
 import './live-matchday-img-replace';
 import { priceTrendService } from './price-trend.service';
 
-console.log('Moin');
 priceTrendService.getFromLigainsider();
 
 const root: HTMLDivElement = document.createElement('div');
