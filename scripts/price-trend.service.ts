@@ -33,7 +33,6 @@ class PriceTrendService {
   }
 
   public async init(): Promise<void> {
-    // debugger;
     // const date: string = new Date().toISOString().split('T')[0];
     // const priceTrends: PriceTrend[] = await this.getFromCache();
     // if (!(priceTrends.date === date)) {

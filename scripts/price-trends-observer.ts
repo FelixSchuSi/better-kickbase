@@ -1,6 +1,9 @@
 import { selectAll } from './helpers/select-all';
 import { Selectors } from './helpers/selectors';
+import { sleep } from './helpers/sleep';
+import { waitForSelector } from './helpers/wait-for-selector';
 import { priceTrendService } from './price-trend.service';
+import { routerService } from './router.service';
 
 const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -9,30 +12,10 @@ const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
 });
 
 export async function registerPriceTrendsObserver(): Promise<void> {
-  try {
-    await priceTrendService.init();
-  } catch (e) {
-    console.log(e);
-  }
-  const observer: MutationObserver = new MutationObserver(async (mutations: MutationRecord[]) => {
-    mutations.forEach((record: MutationRecord) => {
-      record.addedNodes.forEach((e: Node) => {
-        if (e instanceof HTMLElement) {
-          if (e.classList.contains(Selectors.PLAYERROW)) {
-            parsePlayerRow(<HTMLDivElement>e);
-          } else {
-            const playerRows: HTMLDivElement[] = <HTMLDivElement[]>Array.from(selectAll(Selectors.PLAYERROW, e));
-            playerRows.forEach(parsePlayerRow);
-          }
-        }
-      });
-    });
-  });
+  await priceTrendService.init();
 
-  observer.observe(document, {
-    childList: true,
-    subtree: true
-  });
+  routeListener(routerService.getPath());
+  routerService.subscribe(routeListener);
 }
 
 function parsePlayerRow(row: HTMLDivElement): void {
@@ -42,15 +25,36 @@ function parsePlayerRow(row: HTMLDivElement): void {
   const div: HTMLDivElement = document.createElement('div');
   div.id = 'bkb-price-trend';
   let deltaString: string = currencyFormatter.format(delta ?? 0);
+
+  const is500k: boolean = (<HTMLDivElement>row.querySelector('.price > strong')!).innerText === '€ 500.000';
   if (delta && delta > 0) {
     div.classList.add('bkb-price-trend-positive');
     deltaString = `+${deltaString}`;
   } else if (delta && delta < 0) {
     div.classList.add('bkb-price-trend-negative');
+  } else if (!is500k) {
+    div.classList.add('bkb-price-trend-neutral');
+    deltaString = `+/-??? €`;
   } else {
     div.classList.add('bkb-price-trend-neutral');
     deltaString = `+/-${deltaString}`;
   }
   div.innerText = deltaString;
   row.querySelector('.infoBox')!.appendChild(div);
+}
+
+async function routeListener(path: string) {
+  switch (path) {
+    case 'transfermarkt/verkaufen':
+    case 'transfermarkt/kaufen':
+    case 'transfermarkt/kader': {
+      await waitForSelector(Selectors.PLAYERROW);
+      await sleep(100);
+      const rows: HTMLDivElement[] = <HTMLDivElement[]>Array.from(selectAll(Selectors.PLAYERROW));
+      rows.forEach(parsePlayerRow);
+      break;
+    }
+    default:
+      break;
+  }
 }

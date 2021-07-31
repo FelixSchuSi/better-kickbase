@@ -1,7 +1,6 @@
 export type QueryParameter = Record<string, string>;
 export type RouteListener = (relUrl: string) => void;
 export type Unsubscribe = () => void;
-
 export class RouterService {
   private listeners: RouteListener[] = [];
 

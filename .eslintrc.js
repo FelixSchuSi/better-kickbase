@@ -19,6 +19,7 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-inferrable-types': 0,
-    '@typescript-eslint/consistent-type-imports': 'warn'
+    '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   }
 };
