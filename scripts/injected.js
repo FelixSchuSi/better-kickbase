@@ -4,9 +4,7 @@ const open = XHR.open;
 const send = XHR.send;
 const setRequestHeader = XHR.setRequestHeader;
 
-const editorExtensionId = 'lkjgfahbhdghgfhjidandcbbmnfeeccn';
-
-console.log('injected script loaded!');
+const extensionId = document.querySelector('#bkb-extension-id').innerHTML;
 
 XHR.open = function () {
   this._requestHeaders = {};
@@ -22,16 +20,11 @@ XHR.setRequestHeader = function (header, value) {
 XHR.send = function () {
   this.addEventListener('load', function () {
     const url = this.responseURL;
-    const responseHeaders = this.getAllResponseHeaders();
     try {
       if (url.endsWith('market')) {
         const data = this.response;
-        console.log('Countdown');
         setTimeout(() => {
-          chrome.runtime.sendMessage(editorExtensionId, { data }, function (response) {
-            // if (!response.success) console.log('error in sendMessaeg: ', response);
-            console.log('Sending msg from main thread');
-          });
+          chrome.runtime.sendMessage(extensionId, { data });
         }, 5000);
       }
     } catch (err) {

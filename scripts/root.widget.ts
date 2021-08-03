@@ -52,11 +52,13 @@ settingsService.get().then((settings: Setting[]) => {
   routerService.subscribe(renderTemplate);
 });
 
-console.log({ id: browser.runtime.id, isMatch: browser.runtime.id === 'lkjgfahbhdghgfhjidandcbbmnfeeccn' });
+const p: HTMLParagraphElement = document.createElement('p');
+p.id = 'bkb-extension-id';
+p.innerHTML = browser.runtime.id;
+document.head.appendChild(p);
 
-browser.runtime.onMessage.addListener(async ({ data }: { data?: string }) => {
+browser.runtime.onMessage.addListener(({ data }: { data?: string }) => {
   // if (!sender.url?.startsWith('https://api.kickbase.com/')) return; // Only allow Messages from kickbase
-  console.log('from content Script: ');
   if (data) {
     kickbaseAjaxFilesSerivce.setFile('market.json', data);
   }

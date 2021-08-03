@@ -14,7 +14,7 @@ export class KickbaseAjaxFilesSerivce {
     const cachePath: string = 'kickbaseAjaxFiles/' + fileName;
     const cacheEntry: { [s: string]: string } = {};
     cacheEntry[cachePath] = jsonString;
-    await browser.storage.sync.set(cacheEntry);
+    await browser.storage.local.set(cacheEntry);
   }
 
   public async getFile(fileName: string): Promise<string | undefined> {
@@ -22,7 +22,7 @@ export class KickbaseAjaxFilesSerivce {
       return this.map.get(fileName);
     } else {
       const cachePath: string = 'kickbaseAjaxFiles/' + fileName;
-      const cache: { [s: string]: string } = await browser.storage.sync.get(cachePath);
+      const cache: { [s: string]: string } = await browser.storage.local.get(cachePath);
       return cache[cachePath];
     }
   }

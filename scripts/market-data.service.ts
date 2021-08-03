@@ -32,14 +32,12 @@ class MarketDataService {
       const result: MarketPlayer = player;
       for (const key of Object.keys(player)) {
         if (!MARKET_PLAYER_KEYS.includes(key)) {
-          // @ts-ignore
-          delete result[key];
+          delete result[<keyof MarketPlayer>key];
         }
         if (key === 'offers') {
           for (const key of Object.keys(player.offers)) {
             if (!MARKET_PLAYER_OFFER_KEYS.includes(key)) {
-              // @ts-ignore
-              delete result[key];
+              delete result[<keyof MarketPlayer>key];
             }
           }
         }

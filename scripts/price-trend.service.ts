@@ -16,12 +16,12 @@ class PriceTrendService {
   private priceTrends: Map<string, PriceTrend> = new Map();
 
   private async getFromCache(): Promise<PriceTrend[]> {
-    const playerDataFromCache: PriceTrend[] = <PriceTrend[]>await browser.storage.sync.get('price-trends');
+    const playerDataFromCache: PriceTrend[] = <PriceTrend[]>await browser.storage.local.get('price-trends');
     return playerDataFromCache;
   }
 
   private async setCache(trends: PriceTrend[]): Promise<void> {
-    await browser.storage.sync.set({ 'price-trends': trends });
+    await browser.storage.local.set({ 'price-trends': trends });
   }
 
   private async getLatestPriceTrends(): Promise<PriceTrends> {

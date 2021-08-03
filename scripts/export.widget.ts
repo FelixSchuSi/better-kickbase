@@ -51,7 +51,6 @@ async function getData(): Promise<[string, string, number, number][] | undefined
   const playerData: [string, string, number, number][] = players.map((p: MarketPlayer) => {
     return [p.lastName, p.firstName, p.marketValue, p.price];
   });
-  debugger;
   return playerData;
 }
 

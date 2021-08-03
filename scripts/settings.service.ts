@@ -39,7 +39,7 @@ class SettingsService {
   ];
 
   public async get(): Promise<Setting[]> {
-    const cache: { [s: string]: Setting[] } = await browser.storage.sync.get('settings');
+    const cache: { [s: string]: Setting[] } = await browser.storage.local.get('settings');
     if (cache && cache.settings) {
       const cachedSettings: Setting[] = cache.settings;
       return SettingsService.defaultSettings.map((setting: Setting) => {
@@ -56,7 +56,7 @@ class SettingsService {
   }
 
   public async set(settings: Setting[]): Promise<void> {
-    await browser.storage.sync.set({ settings: settings });
+    await browser.storage.local.set({ settings: settings });
   }
 }
 
