@@ -59,8 +59,10 @@
   visibility: visible;
 }
 
-#bkb-price-trend {
+#bkb-player-row {
   width: auto !important;
+  display: flex;
+  flex-direction: row;
 }
 
 .bkb-price-trend-positive {
@@ -82,4 +84,19 @@
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 500;
+}
+
+.bkb-betting-players-popover {
+  visibility: hidden;
+}
+
+.bkb-betting-players:hover > .bkb-betting-players-popover {
+  visibility: visible;
+}
+
+.bkb-betting-players-popover {
+  position: absolute;
+}
+.bkb-no-popup {
+  display: none;
 }

@@ -44,10 +44,7 @@ async function downloadAsCSV(): Promise<void> {
 }
 
 async function getData(): Promise<[string, string, number, number][] | undefined> {
-  const file: string | undefined = await kickbaseAjaxFilesSerivce.getFile('market.json');
-  if (!file) return;
-  marketDataService.marketData = JSON.parse(file).players;
-  const players: MarketPlayer[] = marketDataService.ownPlayerData;
+  const players: MarketPlayer[] = await marketDataService.getOwnPlayerData();
   const playerData: [string, string, number, number][] = players.map((p: MarketPlayer) => {
     return [p.lastName, p.firstName, p.marketValue, p.price];
   });

@@ -9,6 +9,7 @@ import './live-matchday-img-replace';
 import { registerPriceTrendsObserver } from './price-trends-observer';
 import { browser } from 'webextension-polyfill-ts';
 import { kickbaseAjaxFilesSerivce } from './kickbase-ajax-files.service';
+import { marketDataService } from './market-data.service';
 
 const root: HTMLDivElement = document.createElement('div');
 root.classList.add('bkb-root');
@@ -57,10 +58,11 @@ p.id = 'bkb-extension-id';
 p.innerHTML = browser.runtime.id;
 document.head.appendChild(p);
 
-browser.runtime.onMessage.addListener(({ data }: { data?: string }) => {
+browser.runtime.onMessage.addListener(async ({ data }: { data?: string }) => {
   // if (!sender.url?.startsWith('https://api.kickbase.com/')) return; // Only allow Messages from kickbase
   if (data) {
     kickbaseAjaxFilesSerivce.setFile('market.json', data);
+    marketDataService.processRawData(JSON.parse(data).players);
   }
 });
 

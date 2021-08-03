@@ -1,3 +1,5 @@
+import { browser } from 'webextension-polyfill-ts';
+
 class _MarketPlayer {
   id: string = '';
   userId: string = '';
@@ -23,11 +25,7 @@ class MarketDataService {
   private _ownPlayerData: MarketPlayer[] = []; // items only contain entries listed in MarketPlayer
   private _transfermarketPlayerData: MarketPlayer[] = []; // items only contain entries listed in MarketPlayer
 
-  public get ownPlayerData(): MarketPlayer[] {
-    return this._ownPlayerData;
-  }
-
-  public set marketData(rawData: MarketPlayer[]) {
+  public async processRawData(rawData: MarketPlayer[]) {
     this._data = rawData.map((player: MarketPlayer) => {
       const result: MarketPlayer = player;
       for (const key of Object.keys(player)) {
@@ -47,6 +45,36 @@ class MarketDataService {
     const id: string = this.getMyId();
     this._ownPlayerData = this._data.filter((player: MarketPlayer) => player.userId === id);
     this._transfermarketPlayerData = this._data.filter((player: MarketPlayer) => !player.userId);
+
+    await this.set('ownPlayerData', this._ownPlayerData);
+    await this.set('transfermarketPlayerData', this._transfermarketPlayerData);
+  }
+
+  public async getOwnPlayerData(): Promise<MarketPlayer[]> {
+    if (this._ownPlayerData.length > 0) {
+      return this._ownPlayerData;
+    }
+    return await this.get('ownPlayerData');
+  }
+
+  public async getTransfermarketPlayerData(): Promise<MarketPlayer[]> {
+    if (this._transfermarketPlayerData.length > 0) {
+      return this._transfermarketPlayerData;
+    }
+    return await this.get('transfermarketPlayerData');
+  }
+
+  private async set(key: string, value: MarketPlayer[]) {
+    const path: string = 'market-data/' + key;
+    const cacheEntry: { [s: string]: MarketPlayer[] } = {};
+    cacheEntry[path] = value;
+    await browser.storage.local.set(cacheEntry);
+  }
+
+  private async get(key: string): Promise<MarketPlayer[]> {
+    const path: string = 'market-data/' + key;
+    const cache: { [s: string]: MarketPlayer[] } = await browser.storage.local.get(path);
+    return cache[path];
   }
 
   private getMyId(): string {
