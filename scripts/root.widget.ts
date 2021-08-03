@@ -7,6 +7,8 @@ import type { Setting } from './settings.service';
 import { settingsService } from './settings.service';
 import './live-matchday-img-replace';
 import { registerPriceTrendsObserver } from './price-trends-observer';
+import { browser } from 'webextension-polyfill-ts';
+import { kickbaseAjaxFilesSerivce } from './kickbase-ajax-files.service';
 
 const root: HTMLDivElement = document.createElement('div');
 root.classList.add('bkb-root');
@@ -49,3 +51,18 @@ settingsService.get().then((settings: Setting[]) => {
   renderTemplate(routerService.getPath());
   routerService.subscribe(renderTemplate);
 });
+
+console.log({ id: browser.runtime.id, isMatch: browser.runtime.id === 'lkjgfahbhdghgfhjidandcbbmnfeeccn' });
+
+browser.runtime.onMessage.addListener(async ({ data }: { data?: string }) => {
+  // if (!sender.url?.startsWith('https://api.kickbase.com/')) return; // Only allow Messages from kickbase
+  console.log('from content Script: ');
+  if (data) {
+    kickbaseAjaxFilesSerivce.setFile('market.json', data);
+  }
+});
+
+// Handle injected script for fetching requests of kickbase
+const s: HTMLScriptElement = document.createElement('script');
+s.src = browser.extension.getURL('scripts/injected.js');
+document.head.appendChild(s);

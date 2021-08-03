@@ -1,9 +1,11 @@
 import type { TemplateResult } from 'lit';
 import { html } from 'lit';
 import { interpretPrice } from './helpers/interpret-price';
-import { selectAll } from './helpers/select-all';
 import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
+import type { MarketPlayer } from './market-data.service';
+import { marketDataService } from './market-data.service';
+import { kickbaseAjaxFilesSerivce } from './kickbase-ajax-files.service';
 
 export const exportCsvWidget: TemplateResult = html`
   <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
@@ -19,9 +21,9 @@ export const exportCopyWidget: TemplateResult = html`
   </div>
 `;
 
-function copy(): void {
-  const players: HTMLElement[] = Array.from(selectAll(Selectors.ALL_PLAYERS));
-  const playerData: [string, string, number, number][] = players.map(extractPlayerData);
+async function copy(): Promise<void> {
+  const playerData: [string, string, number, number][] | undefined = await getData();
+  if (!playerData) return;
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
   const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
@@ -30,9 +32,9 @@ function copy(): void {
   copyToClipboard(csv);
 }
 
-function downloadAsCSV(): void {
-  const players: HTMLElement[] = Array.from(selectAll(Selectors.ALL_PLAYERS));
-  const playerData: [string, string, number, number][] = players.map(extractPlayerData);
+async function downloadAsCSV(): Promise<void> {
+  const playerData: [string, string, number, number][] | undefined = await getData();
+  if (!playerData) return;
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
   const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
@@ -41,30 +43,22 @@ function downloadAsCSV(): void {
   createCsvDownload(csv);
 }
 
+async function getData(): Promise<[string, string, number, number][] | undefined> {
+  const file: string | undefined = await kickbaseAjaxFilesSerivce.getFile('market.json');
+  if (!file) return;
+  marketDataService.marketData = JSON.parse(file).players;
+  const players: MarketPlayer[] = marketDataService.ownPlayerData;
+  const playerData: [string, string, number, number][] = players.map((p: MarketPlayer) => {
+    return [p.lastName, p.firstName, p.marketValue, p.price];
+  });
+  debugger;
+  return playerData;
+}
+
 function extractBalance(): [string, string, number, number] {
   const balanceElement: HTMLSpanElement | null = select(Selectors.BALANCE);
   const value: number = balanceElement ? interpretPrice(balanceElement.innerText) : 0;
   return ['Dein', 'Kontostand', value, 0];
-}
-
-function extractPlayerData(player: HTMLElement): [string, string, number, number] {
-  const selectors: string[] = [Selectors.OFFER, Selectors.MARKET_VALUE];
-
-  const [offer, value]: number[] = selectors.map((selector: string) => {
-    const element: HTMLElement | null = player.querySelector(selector);
-    const value: number = element ? interpretPrice(element.innerText) : 0;
-    return value;
-  });
-
-  const firstName: string = (<HTMLElement | null>player.querySelector(Selectors.FIRSTNAME))?.innerText || '';
-  const lastName: string = (<HTMLElement | null>player.querySelector(Selectors.LASTNAME))?.innerText || '';
-  return [capitalizeFirstLetter(lastName ?? ''), capitalizeFirstLetter(firstName ?? ''), value, offer];
-}
-
-function capitalizeFirstLetter(string: string): string {
-  if (string === '') return string;
-  const result: string = string.toLowerCase();
-  return result[0].toUpperCase() + result.slice(1);
 }
 
 function toCsv(

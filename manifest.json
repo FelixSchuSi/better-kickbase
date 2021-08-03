@@ -10,6 +10,7 @@
   "content_scripts": [
     {
       "matches": ["*://play.kickbase.com/*"],
+      "run_at": "document_start",
       "js": ["scripts/root.widget.ts"],
       "css": [
         "styles/bkb.css",
@@ -29,6 +30,11 @@
       ]
     }
   ],
+  "background": {
+    "scripts": ["scripts/background.ts"],
+    "persistent": false
+  },
+  "web_accessible_resources": ["scripts/injected.js"],
   "options_ui": {
     "page": "settings.html",
     "open_in_tab": true
@@ -38,7 +44,10 @@
     "default_icon": "favicon/favicon-32.png",
     "default_title": "better-kickbase"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "tabs", "*://play.kickbase.com/*"],
+  "externally_connectable": {
+    "matches": ["*://play.kickbase.com/*"]
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "98felixss@gmail.com",
