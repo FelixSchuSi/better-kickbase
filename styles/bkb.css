@@ -93,6 +93,17 @@
 
 .bkb-betting-players-popover {
   visibility: hidden;
+  background: #212324;
+  color: #fff;
+  /* text-transform: uppercase; */
+  font-family: Roboto Condensed, sans-serif;
+  padding-left: var(--bkb-padding-margin-s);
+  padding-right: var(--bkb-padding-margin-s);
+  padding-top: 1px;
+  padding-bottom: 1px;
+  display: flex;
+  flex-direction: column;
+  top: 0;
 }
 
 .bkb-betting-players:hover > .bkb-betting-players-popover {

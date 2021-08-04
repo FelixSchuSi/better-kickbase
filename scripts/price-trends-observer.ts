@@ -16,6 +16,7 @@ const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
   minimumFractionDigits: 0
 });
 const marketPlayerData: Map<string, MarketPlayer> = new Map();
+let route: string = '';
 
 export async function registerPriceTrendsObserver(): Promise<void> {
   await priceTrendService.init();
@@ -41,13 +42,15 @@ function parsePlayerRow(row: HTMLDivElement): void {
   row.querySelector('.infoBox')!.appendChild(div);
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
-  const bettingPlayers: TemplateResult = getBettingPlayersTemplate(marketPlayer);
+  const bettingPlayers: TemplateResult =
+    route === 'transfermarkt/kaufen' ? getBettingPlayersTemplate(marketPlayer) : html``;
   const priceTrend: TemplateResult = getPriceTrendTemplate(id, is500k);
 
   render(html`${priceTrend} ${bettingPlayers}`, div);
 }
 
 async function routeListener(path: string) {
+  route = path;
   switch (path) {
     case 'transfermarkt/verkaufen':
     case 'transfermarkt/kaufen': {
