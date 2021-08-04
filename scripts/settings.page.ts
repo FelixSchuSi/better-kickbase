@@ -85,22 +85,18 @@ class SettingsPage extends LitElement {
       <div class="container">
         <h1>Einstellungen better-kickbase</h1>
         <div class="settings-list">
-          ${this.settings.map(
-            (setting: Setting) =>
-              html`
-                <div class="settings-item ${setting.id}">
-                  <div class="icon-label-container">
-                    ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
-                    <p>${setting.label}</p>
-                  </div>
-                  <wl-checkbox
-                    id="${setting.id}"
-                    @change=${this.toggleSetting}
-                    ?checked=${setting.enabled}
-                  ></wl-checkbox>
+          ${this.settings.map((setting: Setting) => {
+            if (setting.id === '_' && !setting.enabled) return html``;
+            return html`
+              <div class="settings-item ${setting.id}">
+                <div class="icon-label-container">
+                  ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
+                  <p>${setting.label}</p>
                 </div>
-              `
-          )}
+                <wl-checkbox id="${setting.id}" @change=${this.toggleSetting} ?checked=${setting.enabled}></wl-checkbox>
+              </div>
+            `;
+          })}
         </div>
         <wl-snackbar class="settings-saved" fixed hideDelay=${3000}>
           <span>Einstellungen gespeichert!</span>

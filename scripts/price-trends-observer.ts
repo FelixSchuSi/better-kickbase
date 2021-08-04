@@ -9,6 +9,7 @@ import type { MarketPlayer, MarketPlayerOffer } from './market-data.service';
 import { marketDataService } from './market-data.service';
 import { priceTrendService } from './price-trend.service';
 import { routerService } from './router.service';
+import { settingsService } from './settings.service';
 
 const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -17,9 +18,11 @@ const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
 });
 const marketPlayerData: Map<string, MarketPlayer> = new Map();
 let route: string = '';
+let _: boolean = false;
 
 export async function registerPriceTrendsObserver(): Promise<void> {
   await priceTrendService.init();
+  _ = !!(await settingsService.get()).find(e => e.id === '_')?.enabled;
   const data: MarketPlayer[] = await marketDataService.getTransfermarketPlayerData();
   prepareMarketPlayerDate(data);
   routeListener(routerService.getPath());
@@ -43,7 +46,7 @@ function parsePlayerRow(row: HTMLDivElement): void {
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
   const bettingPlayers: TemplateResult =
-    route === 'transfermarkt/kaufen' ? getBettingPlayersTemplate(marketPlayer) : html``;
+    route === 'transfermarkt/kaufen' && _ ? getBettingPlayersTemplate(marketPlayer) : html``;
   const priceTrend: TemplateResult = getPriceTrendTemplate(id, is500k);
 
   render(html`${priceTrend} ${bettingPlayers}`, div);

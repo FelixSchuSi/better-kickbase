@@ -35,6 +35,12 @@ class SettingsService {
       label: 'Alle Kickbase-Benachrichtigungen blockieren',
       enabled: true,
       icon: 'highlight_off'
+    },
+    {
+      id: '_',
+      label: '',
+      enabled: false,
+      icon: 'help'
     }
   ];
 
@@ -56,7 +62,7 @@ class SettingsService {
   }
 
   public async set(settings: Setting[]): Promise<void> {
-    await browser.storage.local.set({ settings: settings });
+    await browser.storage.local.set({ settings });
   }
 }
 

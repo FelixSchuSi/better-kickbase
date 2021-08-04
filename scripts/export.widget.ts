@@ -5,7 +5,6 @@ import { select } from './helpers/select';
 import { Selectors } from './helpers/selectors';
 import type { MarketPlayer } from './market-data.service';
 import { marketDataService } from './market-data.service';
-import { kickbaseAjaxFilesSerivce } from './kickbase-ajax-files.service';
 
 export const exportCsvWidget: TemplateResult = html`
   <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
