@@ -86,6 +86,11 @@
   font-weight: 500;
 }
 
+.bkb-price-trend {
+  padding-left: var(--bkb-padding-margin-s) !important;
+  padding-right: var(--bkb-padding-margin-s) !important;
+}
+
 .bkb-betting-players-popover {
   visibility: hidden;
 }
@@ -99,4 +104,17 @@
 }
 .bkb-no-popup {
   display: none;
+}
+
+.bkb-betting-players-number > div {
+  text-align: right;
+  margin-bottom: -8px;
+}
+.bkb-betting-players-number {
+  color: rgb(78, 82, 86);
+}
+
+.bkb-betting-players {
+  padding-left: var(--bkb-padding-margin-s) !important;
+  padding-right: var(--bkb-padding-margin-s) !important;
 }

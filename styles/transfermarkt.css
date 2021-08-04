@@ -61,7 +61,8 @@ div.TransferMarket.inner {
 
 .infoBox > .time {
   margin: 0px !important;
-  margin-right: var(--bkb-padding-margin-m) !important;
+  padding-left: var(--bkb-padding-margin-s) !important;
+  padding-right: var(--bkb-padding-margin-m) !important;
   height: 40% !important;
 }
 
@@ -72,14 +73,16 @@ div.TransferMarket.inner {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.infoBox > div:nth-child(1) {
   width: 32px !important;
 }
-
 .playerGroup .playerRow .infoBox .ownerImage {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: auto !important;
 }
 
 .playerGroup .playerRow .infoBox .ownerImage > img {

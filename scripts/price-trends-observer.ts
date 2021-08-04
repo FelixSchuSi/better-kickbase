@@ -63,9 +63,6 @@ async function routeListener(path: string) {
 }
 
 function getBettingPlayersTemplate(p: MarketPlayer | undefined) {
-  // if (!p || !p.offers) return html`<div class="bkb-betting-players"></div>`;
-  // const offers: MarketPlayerOffer[] = p.offers;
-
   let length: string = '?';
   if (p && !p.offers) length = '0';
   if (p?.offers) length = String(p.offers.length);
@@ -77,7 +74,10 @@ function getBettingPlayersTemplate(p: MarketPlayer | undefined) {
           (o: MarketPlayerOffer) => html` <div class="bkb-betting-players-popover-item">${o.userName}</div> `
         )}
       </div>
-      <div class="bkb-betting-players-number">${length}</div>
+      <div class="bkb-betting-players-number">
+        <div>${length}</div>
+        <div class="material-icons bkb-betting-players-icon">people</div>
+      </div>
     </div>
   `;
 }
@@ -98,5 +98,5 @@ function getPriceTrendTemplate(id: string, is500k: boolean) {
     deltaString = `+/-${deltaString}`;
   }
 
-  return html` <div class="bkb-price-trend-${trend}">${deltaString}</div> `;
+  return html` <div class="bkb-price-trend-${trend} bkb-price-trend">${deltaString}</div> `;
 }
