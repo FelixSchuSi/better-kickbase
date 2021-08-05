@@ -9,6 +9,7 @@ import type { MarketPlayer, MarketPlayerOffer } from './market-data.service';
 import { marketDataService } from './market-data.service';
 import { priceTrendService } from './price-trend.service';
 import { routerService } from './router.service';
+import type { Setting } from './settings.service';
 import { settingsService } from './settings.service';
 
 const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
@@ -22,7 +23,7 @@ let _: boolean = false;
 
 export async function registerPriceTrendsObserver(): Promise<void> {
   await priceTrendService.init();
-  _ = !!(await settingsService.get()).find(e => e.id === '_')?.enabled;
+  _ = !!(await settingsService.get()).find((e: Setting) => e.id === '_')?.enabled;
   const data: MarketPlayer[] = await marketDataService.getTransfermarketPlayerData();
   prepareMarketPlayerDate(data);
   routeListener(routerService.getPath());
