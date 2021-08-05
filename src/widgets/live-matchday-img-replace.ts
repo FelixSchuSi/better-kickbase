@@ -1,6 +1,6 @@
-import { selectAll } from './helpers/select-all';
-import { Selectors } from './helpers/selectors';
-import { routerService } from './router.service';
+import { selectAll } from '../helpers/select-all';
+import { Selectors } from '../helpers/selectors';
+import { routerService } from '../services/router.service';
 
 let runObserver: boolean = false;
 

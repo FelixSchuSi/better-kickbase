@@ -2,18 +2,18 @@ import type { TemplateResult } from 'lit';
 import { html, render } from 'lit';
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
-import { routerService } from './router.service';
-import type { Setting } from './settings.service';
-import { settingsService } from './settings.service';
+import { routerService } from '../services/router.service';
+import type { Setting } from '../services/settings.service';
+import { settingsService } from '../services/settings.service';
 import './live-matchday-img-replace';
 import { registerPriceTrendsObserver } from './price-trends-observer';
-import { browser } from 'webextension-polyfill-ts';
-import { kickbaseAjaxFilesSerivce } from './kickbase-ajax-files.service';
-import { marketDataService } from './market-data.service';
+// import { browser } from 'webextension-polyfill-ts';
+// import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.service';
+// import { marketDataService } from '../services/market-data.service';
 
-const root: HTMLDivElement = document.createElement('div');
-root.classList.add('bkb-root');
-document.body.append(root);
+// TODO: refector to web component
+// include styles of class '.bkb-root' in styles
+
 registerPriceTrendsObserver();
 const templates: TemplateResult[] = [];
 
@@ -26,7 +26,7 @@ function renderTemplate(path: string) {
     default:
       break;
   }
-  render(template, root);
+  render(template, <HTMLDivElement>document.querySelector('.bkb-root')!);
 }
 
 settingsService.get().then((settings: Setting[]) => {
@@ -52,21 +52,3 @@ settingsService.get().then((settings: Setting[]) => {
   renderTemplate(routerService.getPath());
   routerService.subscribe(renderTemplate);
 });
-
-const p: HTMLParagraphElement = document.createElement('p');
-p.id = 'bkb-extension-id';
-p.innerHTML = browser.runtime.id;
-document.head.appendChild(p);
-
-browser.runtime.onMessage.addListener(async ({ data }: { data?: string }) => {
-  // if (!sender.url?.startsWith('https://api.kickbase.com/')) return; // Only allow Messages from kickbase
-  if (data) {
-    kickbaseAjaxFilesSerivce.setFile('market.json', data);
-    marketDataService.processRawData(JSON.parse(data).players);
-  }
-});
-
-// Handle injected script for fetching requests of kickbase
-const s: HTMLScriptElement = document.createElement('script');
-s.src = browser.extension.getURL('scripts/injected.js');
-document.head.appendChild(s);

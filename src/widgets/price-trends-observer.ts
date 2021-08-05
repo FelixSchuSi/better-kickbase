@@ -1,16 +1,16 @@
 import type { TemplateResult } from 'lit';
 import { render } from 'lit';
 import { html } from 'lit';
-import { selectAll } from './helpers/select-all';
-import { Selectors } from './helpers/selectors';
-import { sleep } from './helpers/sleep';
-import { waitForSelector } from './helpers/wait-for-selector';
-import type { MarketPlayer, MarketPlayerOffer } from './market-data.service';
-import { marketDataService } from './market-data.service';
-import { priceTrendService } from './price-trend.service';
-import { routerService } from './router.service';
-import type { Setting } from './settings.service';
-import { settingsService } from './settings.service';
+import { selectAll } from '../helpers/select-all';
+import { Selectors } from '../helpers/selectors';
+import { sleep } from '../helpers/sleep';
+import { waitForSelector } from '../helpers/wait-for-selector';
+import type { MarketPlayer, MarketPlayerOffer } from '../services/market-data.service';
+import { marketDataService } from '../services/market-data.service';
+import { priceTrendService } from '../services/price-trend.service';
+import { routerService } from '../services/router.service';
+import type { Setting } from '../services/settings.service';
+import { settingsService } from '../services/settings.service';
 
 const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
   style: 'currency',

@@ -11,36 +11,36 @@
     {
       "matches": ["*://play.kickbase.com/*"],
       "run_at": "document_start",
-      "js": ["scripts/root.widget.ts"],
+      "js": ["src/content_script.ts"],
       "css": [
-        "styles/bkb.css",
-        "styles/bundesliga.css",
-        "styles/ligaboard.css",
-        "styles/livematchday.css",
-        "styles/tabelle.css",
-        "styles/transfermarkt.css",
-        "styles/transfermarkt-kader.css",
-        "styles/transfermarkt-kaufen.css",
-        "styles/transfermarkt-scouting.css",
-        "styles/transfermarkt-verkaufen.css",
-        "styles/_player-row.css",
-        "styles/_frame.css",
-        "styles/_vars.css",
-        "styles/_fonts.css"
+        "src/styles/bkb.css",
+        "src/styles/bundesliga.css",
+        "src/styles/ligaboard.css",
+        "src/styles/livematchday.css",
+        "src/styles/tabelle.css",
+        "src/styles/transfermarkt.css",
+        "src/styles/transfermarkt-kader.css",
+        "src/styles/transfermarkt-kaufen.css",
+        "src/styles/transfermarkt-scouting.css",
+        "src/styles/transfermarkt-verkaufen.css",
+        "src/styles/_player-row.css",
+        "src/styles/_frame.css",
+        "src/styles/_vars.css",
+        "src/styles/_fonts.css"
       ]
     }
   ],
   "background": {
-    "scripts": ["scripts/background.ts"],
+    "scripts": ["src/background-script.ts"],
     "persistent": false
   },
-  "web_accessible_resources": ["scripts/injected.js"],
+  "web_accessible_resources": ["src/web_accessible_resource.js"],
   "options_ui": {
-    "page": "settings.html",
+    "page": "src/options_ui/settings.html",
     "open_in_tab": true
   },
   "browser_action": {
-    "default_popup": "settings.html",
+    "default_popup": "src/options_ui/settings.html",
     "default_icon": "favicon/favicon-32.png",
     "default_title": "better-kickbase"
   },

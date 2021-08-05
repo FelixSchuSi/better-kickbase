@@ -1,11 +1,11 @@
 import type { TemplateResult } from 'lit';
 import { html } from 'lit';
-import { interpretPrice } from './helpers/interpret-price';
-import { selectAll } from './helpers/select-all';
-import { select } from './helpers/select';
-import { Selectors } from './helpers/selectors';
-import { waitForSelector } from './helpers/wait-for-selector';
-import { sleep } from './helpers/sleep';
+import { interpretPrice } from '../helpers/interpret-price';
+import { selectAll } from '../helpers/select-all';
+import { select } from '../helpers/select';
+import { Selectors } from '../helpers/selectors';
+import { waitForSelector } from '../helpers/wait-for-selector';
+import { sleep } from '../helpers/sleep';
 
 export const reListWidget: TemplateResult = html`
   <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>

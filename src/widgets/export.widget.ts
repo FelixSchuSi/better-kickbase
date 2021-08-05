@@ -1,10 +1,10 @@
 import type { TemplateResult } from 'lit';
 import { html } from 'lit';
-import { interpretPrice } from './helpers/interpret-price';
-import { select } from './helpers/select';
-import { Selectors } from './helpers/selectors';
-import type { MarketPlayer } from './market-data.service';
-import { marketDataService } from './market-data.service';
+import { interpretPrice } from '../helpers/interpret-price';
+import { select } from '../helpers/select';
+import { Selectors } from '../helpers/selectors';
+import type { MarketPlayer } from '../services/market-data.service';
+import { marketDataService } from '../services/market-data.service';
 
 export const exportCsvWidget: TemplateResult = html`
   <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
