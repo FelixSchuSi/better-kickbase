@@ -1,5 +1,5 @@
-import type { TemplateResult } from 'lit';
-import { html } from 'lit';
+import { html } from 'htm/preact/standalone';
+import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { selectAll } from '../helpers/select-all';
 import { select } from '../helpers/select';
@@ -7,7 +7,7 @@ import { Selectors } from '../helpers/selectors';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
 
-export const reListWidget: TemplateResult = html`
+export const reListWidget: VNode = html`
   <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
     <span class="material-icons"> sync </span>
     <span class="bkb-tooltip">Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt</span>

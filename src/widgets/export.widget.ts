@@ -1,20 +1,20 @@
-import type { TemplateResult } from 'lit';
-import { html } from 'lit';
+import { html } from 'htm/preact/standalone';
+import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
 import type { MarketPlayer } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
 
-export const exportCsvWidget: TemplateResult = html`
-  <div class="bkb-export-file bkb-btn" @click=${downloadAsCSV}>
+export const exportCsvWidget: VNode = html`
+  <div class="bkb-export-file bkb-btn" onClick=${downloadAsCSV}>
     <div class="material-icons">file_download</div>
     <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter</span>
   </div>
 `;
 
-export const exportCopyWidget: TemplateResult = html`
-  <div class="bkb-export-copy bkb-btn" @click=${copy}>
+export const exportCopyWidget: VNode = html`
+  <div class="bkb-export-copy bkb-btn" onClick=${copy}>
     <div class="material-icons">content_copy</div>
     <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage</span>
   </div>

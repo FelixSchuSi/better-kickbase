@@ -2,9 +2,6 @@ import { browser } from 'webextension-polyfill-ts';
 import { kickbaseAjaxFilesSerivce } from './services/kickbase-ajax-files.service';
 import { marketDataService } from './services/market-data.service';
 
-const root: HTMLElement = document.createElement('div');
-root.classList.add('bkb-root');
-document.body.append(root);
 import './widgets/root.widget';
 
 const p: HTMLParagraphElement = document.createElement('p');

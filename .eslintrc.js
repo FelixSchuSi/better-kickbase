@@ -8,7 +8,6 @@ module.exports = {
     '@typescript-eslint/typedef': [
       'warn',
       {
-        arrayDestructuring: true,
         arrowParameter: true,
         memberVariableDeclaration: true,
         objectDestructuring: true,
