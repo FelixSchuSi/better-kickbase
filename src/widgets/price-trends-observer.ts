@@ -1,6 +1,5 @@
-import type { TemplateResult } from 'lit';
-import { render } from 'lit';
-import { html } from 'lit';
+import type { VNode } from 'preact';
+import { html, render } from 'htm/preact/standalone';
 import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
 import { sleep } from '../helpers/sleep';
@@ -46,9 +45,9 @@ function parsePlayerRow(row: HTMLDivElement): void {
   row.querySelector('.infoBox')!.appendChild(div);
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
-  const bettingPlayers: TemplateResult =
+  const bettingPlayers: VNode =
     route === 'transfermarkt/kaufen' && _ ? getBettingPlayersTemplate(marketPlayer) : html``;
-  const priceTrend: TemplateResult = getPriceTrendTemplate(id, is500k);
+  const priceTrend: VNode = getPriceTrendTemplate(id, is500k);
 
   render(html`${priceTrend} ${bettingPlayers}`, div);
 }
