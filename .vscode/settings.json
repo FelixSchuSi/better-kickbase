@@ -24,11 +24,6 @@
   "eslint.alwaysShowStatus": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "lit-plugin.rules.no-unknown-tag-name": "off",
-  "lit-plugin.rules.no-unknown-attribute": "warning",
-  "lit-plugin.rules.no-unknown-property": "warning",
-  "lit-plugin.rules.no-unknown-event": "warning",
-  "lit-plugin.rules.no-unknown-slot": "warning",
-  "lit-plugin.rules.no-invalid-tag-name": "off",
+  "lit-plugin.disable": true,
   "prettier.configPath": ".prettierrc.js"
 }

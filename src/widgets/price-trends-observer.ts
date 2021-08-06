@@ -1,5 +1,6 @@
 import type { VNode } from 'preact';
-import { html, render } from 'htm/preact/standalone';
+import { render } from 'preact';
+import { html } from 'htm/preact';
 import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
 import { sleep } from '../helpers/sleep';

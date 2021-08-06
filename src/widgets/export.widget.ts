@@ -1,4 +1,4 @@
-import { html } from 'htm/preact/standalone';
+import { html } from 'htm/preact';
 import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { select } from '../helpers/select';

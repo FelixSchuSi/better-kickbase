@@ -1,5 +1,7 @@
 import type { VNode } from 'preact';
-import { html, render, useState, useEffect } from 'htm/preact/standalone';
+import { render } from 'preact';
+import { html } from 'htm/preact';
+import { useEffect, useState } from 'preact/hooks';
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from '../services/router.service';
@@ -7,6 +9,7 @@ import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import './live-matchday-img-replace';
 import { registerPriceTrendsObserver } from './price-trends-observer';
+import { BkbBorderWidget } from './bkb-border.widget';
 
 function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [] }) {
   const [route, setRoute] = useState('');
@@ -43,7 +46,11 @@ function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [
     });
   }, []);
 
-  return html` ${route === 'transfermarkt/verkaufen' ? templates : ''} `;
+  return html`
+    ${route === 'transfermarkt/verkaufen'
+      ? html`<${BkbBorderWidget} direction=column>${templates}</${BkbBorderWidget}>`
+      : ''}
+  `;
 }
 
 const root: HTMLElement = document.createElement('div');

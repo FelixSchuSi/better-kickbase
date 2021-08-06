@@ -19,11 +19,72 @@
         body {
             font-size: 75%;
         }
+
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1,
+        p,
+        div {
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+
+        .icon-label-container {
+            display: flex;
+        }
+
+        .snackbar-placeholder {
+            height: 60px;
+        }
+
+        wl-checkbox {
+            flex-shrink: 0;
+        }
+
+        wl-snackbar>span {
+            font-size: 14px;
+        }
+
+        .material-icons {
+            font-family: 'Material Icons Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+            margin-right: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
-    <bkb-settings></bkb-settings>
+    <div class="settings-root"></div>
     <script src="./settings.page.ts"></script>
 </body>
 
