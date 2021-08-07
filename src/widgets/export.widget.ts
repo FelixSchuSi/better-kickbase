@@ -3,7 +3,8 @@ import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
-import type { MarketPlayer } from '../services/market-data.service';
+import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.service';
+import type { MarketPlayer, Player } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
 import { ButtonWidget } from './button.widget';
 export const exportCsvWidget: VNode = html`
@@ -46,9 +47,16 @@ async function downloadAsCSV(): Promise<void> {
 }
 
 async function getData(): Promise<[string, string, number, number][] | undefined> {
-  const players: MarketPlayer[] = await marketDataService.getOwnPlayerData();
-  const playerData: [string, string, number, number][] = players.map((p: MarketPlayer) => {
-    return [p.lastName, p.firstName, p.marketValue, p.price];
+  const marketData: MarketPlayer[] = await marketDataService.getOwnPlayerData();
+  const allPlayersString: string | undefined = await kickbaseAjaxFilesSerivce.getFile('lineupex');
+  if (!allPlayersString) return;
+  const allPlayers: Player[] = JSON.parse(allPlayersString).players;
+  const playerData: [string, string, number, number][] = allPlayers.map((p: Player) => {
+    const listedPlayer: MarketPlayer | undefined = marketData.find(
+      (marketPlayer: MarketPlayer) => marketPlayer.id === p.id
+    );
+    const offer: number | undefined = listedPlayer?.offers[0].price;
+    return [p.lastName, p.firstName, p.marketValue, offer ?? 0];
   });
   return playerData;
 }

@@ -21,10 +21,11 @@ XHR.send = function () {
   this.addEventListener('load', function () {
     const url = this.responseURL;
     try {
-      if (url.endsWith('market')) {
+      if (url.endsWith('market') || url.endsWith('lineupex')) {
         const data = this.response;
+        const filename = url.split('/').pop();
         setTimeout(() => {
-          chrome.runtime.sendMessage(extensionId, { data });
+          chrome.runtime.sendMessage(extensionId, { data, filename });
         }, 5000);
       }
     } catch (err) {

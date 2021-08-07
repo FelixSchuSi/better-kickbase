@@ -1,11 +1,15 @@
 import { browser } from 'webextension-polyfill-ts';
 
-class _MarketPlayer {
+class _Player {
   id: string = '';
   userId: string = '';
   firstName: string = '';
   lastName: string = '';
   marketValue: number = -1;
+}
+export type Player = _Player;
+
+class _MarketPlayer extends _Player {
   price: number = -1;
   offers: MarketPlayerOffer[] = [];
 }

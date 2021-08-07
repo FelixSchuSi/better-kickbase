@@ -9,12 +9,14 @@ p.id = 'bkb-extension-id';
 p.innerHTML = browser.runtime.id;
 document.head.appendChild(p);
 
-browser.runtime.onMessage.addListener(async ({ data }: { data?: string }) => {
+browser.runtime.onMessage.addListener(async ({ data, filename }: { data?: string; filename?: string }) => {
   // TODO: find out where to include this filter
   // if (!sender.url?.startsWith('https://api.kickbase.com/')) return; // Only allow Messages from kickbase
-  if (data) {
-    kickbaseAjaxFilesSerivce.setFile('market.json', data);
-    marketDataService.processRawData(JSON.parse(data).players);
+  if (data && filename) {
+    kickbaseAjaxFilesSerivce.setFile(filename, data);
+    if (filename === 'market') {
+      marketDataService.processRawData(JSON.parse(data).players);
+    }
   }
 });
 
