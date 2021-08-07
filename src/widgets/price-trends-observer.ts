@@ -46,6 +46,7 @@ function parsePlayerRow(row: HTMLDivElement): void {
   row.querySelector('.infoBox')!.appendChild(div);
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
+  // const bettingPlayers: VNode = html``;
   const bettingPlayers: VNode =
     route === 'transfermarkt/kaufen' && _ ? getBettingPlayersTemplate(marketPlayer) : html``;
   const priceTrend: VNode = getPriceTrendTemplate(id, is500k);

@@ -5,7 +5,7 @@ import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
 import type { MarketPlayer } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
-
+import { ButtonWidget } from './button.widget';
 export const exportCsvWidget: VNode = html`
   <div class="bkb-export-file bkb-btn" onClick=${downloadAsCSV}>
     <div class="material-icons">file_download</div>
@@ -13,6 +13,9 @@ export const exportCsvWidget: VNode = html`
   </div>
 `;
 
+// export const exportCopyWidget: VNode = html`
+//   <${ButtonWidget} icon=content_copy></${ButtonWidget}>
+// `;
 export const exportCopyWidget: VNode = html`
   <div class="bkb-export-copy bkb-btn" onClick=${copy}>
     <div class="material-icons">content_copy</div>
