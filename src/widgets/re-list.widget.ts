@@ -6,13 +6,18 @@ import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
+import { ButtonWidget } from './button.widget';
 
 export const reListWidget: VNode = html`
-  <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
-    <span class="material-icons"> sync </span>
-    <span class="bkb-tooltip">Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt</span>
-  </div>
+  <${ButtonWidget} icon=sync onClick=${reListButtonClick}></${ButtonWidget}>
 `;
+
+// export const reListWidget: VNode = html`
+//   <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
+//     <span class="material-icons"> sync </span>
+//     <span class="bkb-tooltip">Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt</span>
+//   </div>
+// `;
 
 function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);

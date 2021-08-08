@@ -1,24 +1,13 @@
 import type { FunctionComponent, VNode } from 'preact';
 import { html } from 'htm/preact';
-import type * as CSS from 'csstype';
+import css from './button.widget.css';
 
-type Style = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties };
-
-export type ButtonProps = { children: VNode[]; icon: string };
+export type ButtonProps = { children: VNode[]; icon: string; onClick: () => void };
 
 export const ButtonWidget: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
-  const styles: Style = {
-    display: 'flex',
-    padding: '4px'
-    // '&:hover': {
-    //   color: 'red'
-    // }
-  };
-  console.log(props);
-
   return html`
-    <div style="${styles}">
-      ${props.children} ${props.icon ? html`<div class="material-icons">${props.icon}</div>` : ''}
+    <div class=${css.button} onClick=${props.onClick}>
+      ${props.children} ${props.icon ? html`<div class="material-icons ${css.icon}">${props.icon}</div>` : ''}
     </div>
   `;
 };

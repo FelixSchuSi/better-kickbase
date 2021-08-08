@@ -47,7 +47,7 @@ function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [
   }, []);
 
   return html`
-    ${route === 'transfermarkt/verkaufen' ? html`<${BorderWidget} direction=column>${templates}</${BorderWidget}>` : ''}
+    ${route.startsWith('transfermarkt') ? html`<${BorderWidget} direction=column>${templates}</${BorderWidget}>` : ''}
   `;
 }
 

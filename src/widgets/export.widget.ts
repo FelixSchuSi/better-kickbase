@@ -7,22 +7,27 @@ import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.servic
 import type { MarketPlayer, Player } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
 import { ButtonWidget } from './button.widget';
+
 export const exportCsvWidget: VNode = html`
-  <div class="bkb-export-file bkb-btn" onClick=${downloadAsCSV}>
-    <div class="material-icons">file_download</div>
-    <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter</span>
-  </div>
+  <${ButtonWidget} icon=file_download onClick=${downloadAsCSV}></${ButtonWidget}>
 `;
 
-// export const exportCopyWidget: VNode = html`
-//   <${ButtonWidget} icon=content_copy></${ButtonWidget}>
+// export const exportCsvWidget: VNode = html`
+//   <div class="bkb-export-file bkb-btn" onClick=${downloadAsCSV}>
+//     <div class="material-icons">file_download</div>
+//     <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter</span>
+//   </div>
 // `;
+
 export const exportCopyWidget: VNode = html`
-  <div class="bkb-export-copy bkb-btn" onClick=${copy}>
-    <div class="material-icons">content_copy</div>
-    <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage</span>
-  </div>
+  <${ButtonWidget} icon=content_copy onClick=${copy}></${ButtonWidget}>
 `;
+// export const exportCopyWidget: VNode = html`
+//   <div class="bkb-export-copy bkb-btn" onClick=${copy}>
+//     <div class="material-icons">content_copy</div>
+//     <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage</span>
+//   </div>
+// `;
 
 async function copy(): Promise<void> {
   const playerData: [string, string, number, number][] | undefined = await getData();
@@ -36,6 +41,7 @@ async function copy(): Promise<void> {
 }
 
 async function downloadAsCSV(): Promise<void> {
+  debugger;
   const playerData: [string, string, number, number][] | undefined = await getData();
   if (!playerData) return;
   const balance: [string, string, number, number] = extractBalance();
