@@ -41,7 +41,6 @@ async function copy(): Promise<void> {
 }
 
 async function downloadAsCSV(): Promise<void> {
-  debugger;
   const playerData: [string, string, number, number][] | undefined = await getData();
   if (!playerData) return;
   const balance: [string, string, number, number] = extractBalance();

@@ -9,7 +9,6 @@ import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import './live-matchday-img-replace';
 import { registerPriceTrendsObserver } from './price-trends-observer';
-import { BorderWidget } from './border.widget';
 
 function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [] }) {
   const [route, setRoute] = useState('');
@@ -46,9 +45,7 @@ function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [
     });
   }, []);
 
-  return html`
-    ${route.startsWith('transfermarkt') ? html`<${BorderWidget} direction=column>${templates}</${BorderWidget}>` : ''}
-  `;
+  return html` ${route.startsWith('transfermarkt') ? html`${templates}` : ''} `;
 }
 
 const root: HTMLElement = document.createElement('div');
