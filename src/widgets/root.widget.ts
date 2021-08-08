@@ -8,14 +8,15 @@ import { routerService } from '../services/router.service';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import './live-matchday-img-replace';
-import { registerPriceTrendsObserver } from './price-trends-observer';
+import { registerPlayerRowObserver } from './player-row-observer';
+import css from './root.widget.css';
 
 function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [] }) {
-  const [route, setRoute] = useState('');
+  const [route, setRoute] = useState(routerService.getPath());
   const [templates, setTemplates] = useState(props.initialTemplates);
 
   useEffect(() => {
-    registerPriceTrendsObserver();
+    registerPlayerRowObserver();
     settingsService.get().then((settings: Setting[]) => {
       let blockNotifications: boolean = false;
 
@@ -40,16 +41,15 @@ function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [
 
       setTemplates(_templates);
 
-      setRoute(routerService.getPath());
       routerService.subscribe((route: string) => setRoute(route));
     });
   }, []);
 
-  return html` ${route.startsWith('transfermarkt') ? html`${templates}` : ''} `;
+  return html` ${route === 'transfermarkt/verkaufen' ? html`${templates}` : ''} `;
 }
 
 const root: HTMLElement = document.createElement('div');
-root.classList.add('bkb-root');
+root.classList.add(css.root);
 document.body.append(root);
 
 render(html`<${RootWidget} />`, root);

@@ -9,25 +9,12 @@ import { marketDataService } from '../services/market-data.service';
 import { ButtonWidget } from './button.widget';
 
 export const exportCsvWidget: VNode = html`
-  <${ButtonWidget} icon=file_download onClick=${downloadAsCSV}></${ButtonWidget}>
+  <${ButtonWidget} icon=file_download tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter" onClick=${downloadAsCSV}></${ButtonWidget}>
 `;
-
-// export const exportCsvWidget: VNode = html`
-//   <div class="bkb-export-file bkb-btn" onClick=${downloadAsCSV}>
-//     <div class="material-icons">file_download</div>
-//     <span class="bkb-tooltip">Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter</span>
-//   </div>
-// `;
 
 export const exportCopyWidget: VNode = html`
-  <${ButtonWidget} icon=content_copy onClick=${copy}></${ButtonWidget}>
+  <${ButtonWidget} icon=content_copy tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage" onClick=${copy}></${ButtonWidget}>
 `;
-// export const exportCopyWidget: VNode = html`
-//   <div class="bkb-export-copy bkb-btn" onClick=${copy}>
-//     <div class="material-icons">content_copy</div>
-//     <span class="bkb-tooltip">Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage</span>
-//   </div>
-// `;
 
 async function copy(): Promise<void> {
   const playerData: [string, string, number, number][] | undefined = await getData();

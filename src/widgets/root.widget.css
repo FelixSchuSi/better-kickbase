@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+@media only screen and (max-width: 1180px) {
+  .root {
+    display: none;
+  }
+}

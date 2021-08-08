@@ -9,15 +9,8 @@ import { sleep } from '../helpers/sleep';
 import { ButtonWidget } from './button.widget';
 
 export const reListWidget: VNode = html`
-  <${ButtonWidget} icon=sync onClick=${reListButtonClick}></${ButtonWidget}>
+  <${ButtonWidget} icon=sync onClick=${reListButtonClick} tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"></${ButtonWidget}>
 `;
-
-// export const reListWidget: VNode = html`
-//   <div class="bkb-re-list bkb-btn" @click=${reListButtonClick}>
-//     <span class="material-icons"> sync </span>
-//     <span class="bkb-tooltip">Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt</span>
-//   </div>
-// `;
 
 function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);

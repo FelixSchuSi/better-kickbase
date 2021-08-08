@@ -7,6 +7,10 @@ let runObserver: boolean = false;
 routeListener(routerService.getPath());
 routerService.subscribe(routeListener);
 
+/**
+ * On the livematchday page old player images are used.
+ * This observer rewrites the image urls to current player images.
+ */
 const observer: MutationObserver = new MutationObserver((mutations: MutationRecord[]) => {
   if (!runObserver) return;
   mutations.forEach((record: MutationRecord) => {

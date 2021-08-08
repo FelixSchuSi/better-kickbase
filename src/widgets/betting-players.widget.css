@@ -1,0 +1,38 @@
+.bkbBettingPlayersPopover {
+  visibility: hidden;
+  background: #212324;
+  color: #fff;
+  font-family: Roboto Condensed, sans-serif;
+  padding-left: var(--bkb-padding-margin-s);
+  padding-right: var(--bkb-padding-margin-s);
+  padding-top: 1px;
+  padding-bottom: 1px;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+}
+
+.bkbBettingPlayers:hover > .bkbBettingPlayersPopover {
+  visibility: visible;
+}
+
+.bkbBettingPlayersPopover {
+  position: absolute;
+}
+
+.bkbBettingPlayersNoPopup {
+  display: none;
+}
+
+.bkbBettingPlayersNumber > div {
+  text-align: right;
+  margin-bottom: -8px;
+}
+.bkbBettingPlayersNumber {
+  color: rgb(78, 82, 86);
+}
+
+.bkbBettingPlayers {
+  padding-left: var(--bkb-padding-margin-s) !important;
+  padding-right: var(--bkb-padding-margin-s) !important;
+}
