@@ -1,5 +1,5 @@
-import type { RefObject } from 'preact';
-import { html, render } from 'htm/preact';
+import type { FunctionComponent, RefObject } from 'preact';
+import { render } from 'preact';
 import { useEffect, useState, useRef } from 'preact/hooks';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
@@ -15,9 +15,11 @@ l.rel = 'stylesheet';
 
 document.head.appendChild(l);
 
-function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings: [] }) {
+const initialSettings: Setting[] = [];
+
+const SettingsPage: FunctionComponent = () => {
   const toast: RefObject<{ show: () => void }> = useRef(null);
-  const [settings, setSettings] = useState(props.initialSettings);
+  const [settings, setSettings] = useState(initialSettings);
 
   useEffect(() => {
     settingsService.get().then((newSettings: Setting[]) => setSettings(newSettings));
@@ -48,30 +50,30 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
     });
   }
 
-  return html`
+  return (
     <div class="container">
       <h1>Einstellungen better-kickbase</h1>
       <div class="settings-list">
-        ${settings?.map((setting: Setting) => {
-          if (setting.id === '_' && !setting.enabled) return html``;
-          return html`
-            <div class="settings-item ${setting.id}">
+        {settings?.map((setting: Setting) => {
+          if (setting.id === '_' && !setting.enabled) return '';
+          return (
+            <div class="settings-item {setting.id}">
               <div class="icon-label-container">
-                ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
-                <p>${setting.label}</p>
+                {setting.icon ? <div class="material-icons">{setting.icon}</div> : ''}
+                <p>{setting.label}</p>
               </div>
-              <${CheckBox} id="${setting.id}" onChange=${toggleSetting} checked=${setting.enabled}></${CheckBox}>
+              <CheckBox id={setting.id} onChange={toggleSetting} checked={setting.enabled}></CheckBox>
             </div>
-          `;
+          );
         })}
       </div>
-      <${Toast} ref=${toast}>
+      <Toast ref={toast}>
         <span>Einstellungen gespeichert!</span>
-        <${Button} onClick=${onSnackbarClick}> Reload </${Button}>
-      </${Toast}>
+        <Button onClick={onSnackbarClick}> Reload </Button>
+      </Toast>
       <div class="snackbar-placeholder"></div>
     </div>
-  `;
-}
+  );
+};
 
-render(html`<${SettingsPage} />`, document.querySelector('.settings-root')!);
+render(<SettingsPage />, document.querySelector('.settings-root')!);

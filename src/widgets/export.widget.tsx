@@ -1,20 +1,27 @@
-import { html } from 'htm/preact';
 import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
 import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.service';
-import type { MarketPlayer, Player } from '../services/market-data.service';
+import type { MarketPlayer, MarketPlayerOffer, Player } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
 import { Button } from './button.widget';
 
-export const exportCsvWidget: VNode = html`
-  <${Button} icon=file_download tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter" onClick=${downloadAsCSV}></${Button}>
-`;
+export const exportCsvWidget: VNode = (
+  <Button
+    icon="file_download"
+    tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter"
+    onClick={downloadAsCSV}
+  ></Button>
+);
 
-export const exportCopyWidget: VNode = html`
-  <${Button} icon=content_copy tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage" onClick=${copy}></${Button}>
-`;
+export const exportCopyWidget: VNode = (
+  <Button
+    icon="content_copy"
+    tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage"
+    onClick={copy}
+  ></Button>
+);
 
 async function copy(): Promise<void> {
   const playerData: [string, string, number, number][] | undefined = await getData();
@@ -22,7 +29,7 @@ async function copy(): Promise<void> {
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
   const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
-  playerData.unshift(<never>labels);
+  playerData.unshift(labels as never);
   const csv: string = toCsv(playerData, { sep: '\t', includeHeader: false });
   copyToClipboard(csv);
 }
@@ -33,7 +40,7 @@ async function downloadAsCSV(): Promise<void> {
   const balance: [string, string, number, number] = extractBalance();
   playerData.unshift(balance);
   const labels: string[] = ['Nachname', 'Vorname', 'Marktwert', 'Angebot'];
-  playerData.unshift(<never>labels);
+  playerData.unshift(labels as never);
   const csv: string = toCsv(playerData);
   createCsvDownload(csv);
 }
@@ -47,8 +54,9 @@ async function getData(): Promise<[string, string, number, number][] | undefined
     const listedPlayer: MarketPlayer | undefined = marketData.find(
       (marketPlayer: MarketPlayer) => marketPlayer.id === p.id
     );
-    const offer: number | undefined = listedPlayer?.offers[0].price;
-    return [p.lastName, p.firstName, p.marketValue, offer ?? 0];
+    const offersAmount: number[] | undefined = listedPlayer?.offers?.map((o: MarketPlayerOffer) => o.price);
+    const maxOffer: number = offersAmount ? Math.max(...offersAmount) : 0;
+    return [p.lastName, p.firstName, p.marketValue, maxOffer];
   });
   return playerData;
 }

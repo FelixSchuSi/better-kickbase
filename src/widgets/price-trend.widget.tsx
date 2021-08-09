@@ -1,5 +1,4 @@
 import type { FunctionComponent } from 'preact';
-import { html } from 'htm/preact';
 import css from './price-trend.widget.css';
 import { priceTrendService } from '../services/price-trend.service';
 
@@ -27,9 +26,11 @@ export const PriceTrend: FunctionComponent<PriceTrendProps> = (props: PriceTrend
     deltaString = `+/-${deltaString}`;
   }
 
-  return html`
+  return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <span tooltip="Marktwertveränderung beim letzten Marktwertupdate">
-      <div class="${css[`bkbPriceTrend${trend}`]} ${css.bkbPriceTrend}">${deltaString}</div>
+      <div class={`${css[`bkbPriceTrend${trend}`]} ${css.bkbPriceTrend}`}>{deltaString}</div>
     </span>
-  `;
+  );
 };

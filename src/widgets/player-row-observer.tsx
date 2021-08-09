@@ -1,5 +1,4 @@
 import { render } from 'preact';
-import { html } from 'htm/preact';
 import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
 import { sleep } from '../helpers/sleep';
@@ -35,7 +34,7 @@ function prepareMarketPlayerData(data: MarketPlayer[]) {
 
 function parsePlayerRow(row: HTMLDivElement): void {
   const id: string = row.getAttribute('id')!;
-  const is500k: boolean = (<HTMLDivElement>row.querySelector('.price > strong')!).innerText === '€ 500.000';
+  const is500k: boolean = (row.querySelector('.price > strong') as HTMLDivElement).innerText === '€ 500.000';
 
   const div: HTMLDivElement = document.createElement('div');
   div.id = 'bkb-player-row';
@@ -43,14 +42,14 @@ function parsePlayerRow(row: HTMLDivElement): void {
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
   render(
-    html`
-    <${PriceTrend} is500k=${is500k} id=${id}></${PriceTrend}> 
-    ${
-      route === 'transfermarkt/kaufen' && showBettingPlayers
-        ? html`<${BettingPlayers} marketPlayer=${marketPlayer}></${BettingPlayers}>`
-        : ''
-    }
-  `,
+    <>
+      <PriceTrend is500k={is500k} id={id}></PriceTrend>
+      {route === 'transfermarkt/kaufen' && showBettingPlayers ? (
+        <BettingPlayers marketPlayer={marketPlayer}></BettingPlayers>
+      ) : (
+        ''
+      )}
+    </>,
     div
   );
 }
@@ -62,7 +61,7 @@ async function routeListener(path: string) {
     case 'transfermarkt/kaufen': {
       await waitForSelector(Selectors.PLAYERROW);
       await sleep(100);
-      const rows: HTMLDivElement[] = <HTMLDivElement[]>Array.from(selectAll(Selectors.PLAYERROW));
+      const rows: HTMLDivElement[] = Array.from(selectAll(Selectors.PLAYERROW));
       rows.forEach(parsePlayerRow);
       break;
     }

@@ -1,4 +1,3 @@
-import { html } from 'htm/preact';
 import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { selectAll } from '../helpers/select-all';
@@ -8,9 +7,13 @@ import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
 import { Button } from './button.widget';
 
-export const reListWidget: VNode = html`
-  <${Button} icon=sync onClick=${reListButtonClick} tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"></${Button}>
-`;
+export const reListWidget: VNode = (
+  <Button
+    icon="sync"
+    onClick={reListButtonClick}
+    tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"
+  ></Button>
+);
 
 function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);

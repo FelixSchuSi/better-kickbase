@@ -1,6 +1,5 @@
-import type { VNode } from 'preact';
+import type { FunctionComponent, VNode } from 'preact';
 import { render } from 'preact';
-import { html } from 'htm/preact';
 import { useEffect, useState } from 'preact/hooks';
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
@@ -11,15 +10,17 @@ import './live-matchday-img-replace';
 import { registerPlayerRowObserver } from './player-row-observer';
 import css from './root.widget.css';
 
-function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [] }) {
+const initialTemplates: VNode[] = [];
+
+const RootWidget: FunctionComponent = () => {
   const [route, setRoute] = useState(routerService.getPath());
-  const [templates, setTemplates] = useState(props.initialTemplates);
+  const [templates, setTemplates] = useState(initialTemplates);
 
   useEffect(() => {
     registerPlayerRowObserver();
+
     settingsService.get().then((settings: Setting[]) => {
       let blockNotifications: boolean = false;
-
       const _templates: VNode[] = [];
       for (const setting of settings) {
         if (!setting.enabled) continue;
@@ -45,11 +46,11 @@ function RootWidget(props: { initialTemplates: VNode[] } = { initialTemplates: [
     });
   }, []);
 
-  return html` ${route === 'transfermarkt/verkaufen' ? html`${templates}` : ''} `;
-}
+  return <>{route === 'transfermarkt/verkaufen' ? templates : ''} </>;
+};
 
 const root: HTMLElement = document.createElement('div');
 root.classList.add(css.root);
 document.body.append(root);
 
-render(html`<${RootWidget} />`, root);
+render(<RootWidget />, root);
