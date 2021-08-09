@@ -10,6 +10,7 @@ import 'weightless/checkbox';
 import 'weightless/button';
 import type { Tabs } from 'webextension-polyfill-ts';
 import { browser } from 'webextension-polyfill-ts';
+import { CheckBox } from '../widgets/checkbox.widget';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -33,13 +34,14 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
     savedSnackbar.current?.hide();
   }
 
-  function toggleSetting(e: CustomEvent) {
-    const target: HTMLElement = <HTMLElement>e.currentTarget;
-    const id: string = target.id;
+  function toggleSetting(id: string, enabled: boolean) {
     const newSettings: Setting[] = settings.map((setting: Setting) => {
-      if (setting.id === id) return { ...setting, enabled: !setting.enabled };
+      if (setting.id === id) {
+        return { ...setting, enabled };
+      }
       return setting;
     });
+
     storeSettings(newSettings);
     setSettings(newSettings);
   }
@@ -63,11 +65,12 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
                 <p>${setting.label}</p>
               </div>
               <wl-checkbox id="${setting.id}" onChange=${toggleSetting} checked=${setting.enabled}></wl-checkbox>
+              <${CheckBox} id="${setting.id}" onChange=${toggleSetting} checked=${setting.enabled}></${CheckBox}>
             </div>
           `;
         })}
       </div>
-      <wl-snackbar ref=${savedSnackbar} class="settings-saved" fixed hideDelay=${3000}>
+      <wl-snackbar ref=${savedSnackbar} class="settings-saved" fixed hideDelay=${9999999999999}>
         <span>Einstellungen gespeichert!</span>
         <wl-button slot="action" flat inverted onClick=${onSnackbarClick}> Reload </wl-button>
       </wl-snackbar>
