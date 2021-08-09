@@ -1,11 +1,28 @@
-import type { FunctionComponent, VNode } from 'preact';
-import { useState, useCallback } from 'preact/hooks';
+import type { VNode } from 'preact';
+import type { Ref } from 'preact/hooks';
+import { useState, useImperativeHandle } from 'preact/hooks';
+import { forwardRef } from 'preact/compat';
 import { html } from 'htm/preact';
 import css from './toast.widget.css';
+import { sleep } from '../helpers/sleep';
 
-export type ToastProps = { content: VNode; children: VNode[]; onClick: () => void };
+export type ToastProps = { children: VNode[]; hideDelay?: number };
+export const Toast: unknown = forwardRef((props: ToastProps, ref: Ref<typeof Toast>) => {
+  const [isShown, setIsShown] = useState(false);
+  const hideDelay: number = props.hideDelay ?? 3000;
+  const show = async () => {
+    setIsShown(true);
+    await sleep(hideDelay);
+    setIsShown(false);
+  };
 
-export const Toast: FunctionComponent<ToastProps> = (props: ToastProps) => {
-  const [label, action] = props.children;
-  return html` <div class=${css.root}>${label} ${action}</div> `;
-};
+  useImperativeHandle(ref, () => ({
+    show
+  }));
+
+  return html`
+    <div class=${css.fullpage}>
+      <div class="${css.container} ${isShown ? '' : css.hidden}">${props.children}</div>
+    </div>
+  `;
+});

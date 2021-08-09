@@ -1,16 +1,13 @@
 import type { RefObject } from 'preact';
-import { render } from 'preact';
-import { html } from 'htm/preact';
+import { html, render } from 'htm/preact';
 import { useEffect, useState, useRef } from 'preact/hooks';
-import type { Snackbar } from 'weightless/snackbar';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
-import 'weightless/snackbar';
-import 'weightless/checkbox';
-import 'weightless/button';
 import type { Tabs } from 'webextension-polyfill-ts';
 import { browser } from 'webextension-polyfill-ts';
 import { CheckBox } from '../widgets/checkbox.widget';
+import { Toast } from '../widgets/toast.widget';
+import { Button } from '../widgets/button.widget';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -19,7 +16,7 @@ l.rel = 'stylesheet';
 document.head.appendChild(l);
 
 function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings: [] }) {
-  const savedSnackbar: RefObject<Snackbar> = useRef(null);
+  const toast: RefObject<{ show: () => void }> = useRef(null);
   const [settings, setSettings] = useState(props.initialSettings);
 
   useEffect(() => {
@@ -31,7 +28,6 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
     kickbaseTabs.forEach((tab: Tabs.Tab) => {
       browser.tabs.reload(tab.id);
     });
-    savedSnackbar.current?.hide();
   }
 
   function toggleSetting(id: string, enabled: boolean) {
@@ -48,7 +44,7 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
 
   function storeSettings(newSettings: Setting[]) {
     settingsService.set(newSettings).then(() => {
-      savedSnackbar.current?.show();
+      toast.current?.show();
     });
   }
 
@@ -64,16 +60,15 @@ function SettingsPage(props: { initialSettings: Setting[] } = { initialSettings:
                 ${setting.icon ? html`<div class="material-icons">${setting.icon}</div>` : html``}
                 <p>${setting.label}</p>
               </div>
-              <wl-checkbox id="${setting.id}" onChange=${toggleSetting} checked=${setting.enabled}></wl-checkbox>
               <${CheckBox} id="${setting.id}" onChange=${toggleSetting} checked=${setting.enabled}></${CheckBox}>
             </div>
           `;
         })}
       </div>
-      <wl-snackbar ref=${savedSnackbar} class="settings-saved" fixed hideDelay=${9999999999999}>
+      <${Toast} ref=${toast}>
         <span>Einstellungen gespeichert!</span>
-        <wl-button slot="action" flat inverted onClick=${onSnackbarClick}> Reload </wl-button>
-      </wl-snackbar>
+        <${Button} onClick=${onSnackbarClick}> Reload </${Button}>
+      </${Toast}>
       <div class="snackbar-placeholder"></div>
     </div>
   `;

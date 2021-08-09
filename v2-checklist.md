@@ -2,8 +2,8 @@
 
 - [ ] Fix firefox compat
 - [ ] Move zipping from pipeline to rollup plugin
-- [ ] Uninstall weightless components to reduce bundle size
-  - [ ] Create toast component for settings page
+- [x] Uninstall weightless components to reduce bundle size
+  - [x] Create toast component for settings page
 - [ ] Switch from htm to tsx
 - [ ] Put price trends behind a feature switch
 - [ ] Check if services can be simplified

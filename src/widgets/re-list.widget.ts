@@ -6,10 +6,10 @@ import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
-import { ButtonWidget } from './button.widget';
+import { Button } from './button.widget';
 
 export const reListWidget: VNode = html`
-  <${ButtonWidget} icon=sync onClick=${reListButtonClick} tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"></${ButtonWidget}>
+  <${Button} icon=sync onClick=${reListButtonClick} tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"></${Button}>
 `;
 
 function reListButtonClick() {

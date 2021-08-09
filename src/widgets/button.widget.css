@@ -9,8 +9,10 @@
 
   background-color: rgba(255, 255, 255, 0.1);
   z-index: 700;
-  width: 42px;
-  height: 42px;
+
+  min-height: 42px;
+  color: white;
+  font-size: 14px;
 }
 
 .button:hover {
@@ -20,6 +22,11 @@
 
 .icon {
   color: rgba(255, 255, 255, 0.8);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tooltipText {

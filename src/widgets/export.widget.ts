@@ -6,14 +6,14 @@ import { Selectors } from '../helpers/selectors';
 import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.service';
 import type { MarketPlayer, Player } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
-import { ButtonWidget } from './button.widget';
+import { Button } from './button.widget';
 
 export const exportCsvWidget: VNode = html`
-  <${ButtonWidget} icon=file_download tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter" onClick=${downloadAsCSV}></${ButtonWidget}>
+  <${Button} icon=file_download tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter" onClick=${downloadAsCSV}></${Button}>
 `;
 
 export const exportCopyWidget: VNode = html`
-  <${ButtonWidget} icon=content_copy tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage" onClick=${copy}></${ButtonWidget}>
+  <${Button} icon=content_copy tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage" onClick=${copy}></${Button}>
 `;
 
 async function copy(): Promise<void> {

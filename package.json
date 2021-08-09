@@ -42,7 +42,6 @@
     "prettier": "^2.3.2",
     "rollup-plugin-postcss": "^4.0.0",
     "tslib": "^2.3.0",
-    "typescript": "^4.3.5",
-    "weightless": "0.0.37"
+    "typescript": "^4.3.5"
   }
 }
