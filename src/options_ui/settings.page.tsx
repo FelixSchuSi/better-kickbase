@@ -8,6 +8,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { CheckBox } from '../widgets/checkbox.widget';
 import { Toast } from '../widgets/toast.widget';
 import { Button } from '../widgets/button.widget';
+import { select } from '../helpers/select';
+import { Selectors } from '../helpers/selectors';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -76,4 +78,4 @@ const SettingsPage: FunctionComponent = () => {
   );
 };
 
-render(<SettingsPage />, document.querySelector('.settings-root')!);
+render(<SettingsPage />, select(Selectors.BKB_ROOT)!);

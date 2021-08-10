@@ -1,4 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
+import { select } from '../helpers/select';
+import { Selectors } from '../helpers/selectors';
 
 class _Player {
   id: string = '';
@@ -82,7 +84,7 @@ class MarketDataService {
   }
 
   private getMyId(): string {
-    const innerHTML: string = document.querySelector('body > script:nth-child(4)')!.innerHTML;
+    const innerHTML: string = select(Selectors.MY_USER_ID)!.innerHTML;
     return innerHTML.match(/"id":"(\d)+/)![0]!.replace('"id":"', '');
   }
 }

@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'preact';
-import { useState, useCallback } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import css from './checkbox.widget.css';
 
 export type CheckboxProps = { checked: boolean; id: string; onChange: (id: string, checked: boolean) => void };
