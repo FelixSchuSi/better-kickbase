@@ -14,5 +14,6 @@ export enum Selectors {
   LIVE_MATCHDAY_IMG = '.LiveMatchDay .playerImage img',
   PLAYERROW = '.playerGroup',
   BKB_ROOT = '.settings-root',
-  MY_USER_ID = 'body > script:nth-child(4)'
+  MY_USER_ID = 'body > script',
+  BODY = 'body'
 }

@@ -1,6 +1,6 @@
 # v2 checklist
 
-- [ ] Fix firefox compat
+- [x] Fix firefox compat
 - [ ] Move zipping from pipeline to rollup plugin
 - [x] Uninstall weightless components to reduce bundle size
   - [x] Create toast component for settings page

@@ -9,6 +9,8 @@ import { settingsService } from '../services/settings.service';
 import './live-matchday-img-replace';
 import { registerPlayerRowObserver } from './player-row-observer';
 import css from './root.widget.css';
+import { waitForSelector } from '../helpers/wait-for-selector';
+import { Selectors } from '../helpers/selectors';
 
 const initialTemplates: VNode[] = [];
 
@@ -51,6 +53,8 @@ const RootWidget: FunctionComponent = () => {
 
 const root: HTMLElement = document.createElement('div');
 root.classList.add(css.root);
-document.body.append(root);
 
-render(<RootWidget />, root);
+waitForSelector(Selectors.BODY).then((e: Element | null) => {
+  e!.append(root);
+  render(<RootWidget />, root);
+});

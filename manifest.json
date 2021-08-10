@@ -31,7 +31,7 @@
     }
   ],
   "background": {
-    "scripts": ["src/background-script.ts"],
+    "scripts": ["src/background_script.ts"],
     "persistent": false
   },
   "web_accessible_resources": ["src/web_accessible_resource.js"],
@@ -44,7 +44,12 @@
     "default_icon": "favicon/favicon-32.png",
     "default_title": "better-kickbase"
   },
-  "permissions": ["storage", "tabs", "*://play.kickbase.com/*"],
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://play.kickbase.com/*",
+    "https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/price-trends-data/*"
+  ],
   "externally_connectable": {
     "matches": ["*://play.kickbase.com/*"]
   },

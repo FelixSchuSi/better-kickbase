@@ -11,7 +11,7 @@ export default {
     format: 'esm'
   },
   plugins: [
-    chromeExtension({ browserPolyfill: true }),
+    chromeExtension(),
     simpleReloader(),
     postcss({
       modules: true

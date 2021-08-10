@@ -1,6 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
-import { select } from '../helpers/select';
+import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
+import { waitForSelector } from '../helpers/wait-for-selector';
 
 class _Player {
   id: string = '';
@@ -48,7 +49,7 @@ class MarketDataService {
       }
       return result;
     });
-    const id: string = this.getMyId();
+    const id: string = await this.getMyId();
     this._ownPlayerData = this._data.filter((player: MarketPlayer) => player.userId === id);
     this._transfermarketPlayerData = this._data.filter((player: MarketPlayer) => !player.userId);
 
@@ -83,9 +84,14 @@ class MarketDataService {
     return cache[path];
   }
 
-  private getMyId(): string {
-    const innerHTML: string = select(Selectors.MY_USER_ID)!.innerHTML;
-    return innerHTML.match(/"id":"(\d)+/)![0]!.replace('"id":"', '');
+  private async getMyId(): Promise<string> {
+    await waitForSelector(Selectors.MY_USER_ID);
+    const elems: HTMLScriptElement[] = Array.from(selectAll(Selectors.MY_USER_ID));
+    const elem: HTMLScriptElement | undefined = elems.find((e: HTMLScriptElement) =>
+      e.innerHTML.startsWith('window.App={')
+    );
+    if (!elem) return '-1';
+    return elem.innerHTML.match(/"id":"(\d)+/)![0]!.replace('"id":"', '');
   }
 }
 
