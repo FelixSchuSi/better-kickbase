@@ -25,7 +25,12 @@ export class RouterService {
   }
 
   public getPath(): string {
-    return this.withoutRootPath(location.pathname);
+    const relURL: string = location.pathname;
+    if (relURL.startsWith('/')) {
+      return relURL.substring('/'.length);
+    } else {
+      return relURL;
+    }
   }
 
   private notifyListeners(): void {
@@ -91,14 +96,6 @@ export class RouterService {
       return relURL;
     } else {
       return '/' + (relURL.startsWith('/') ? relURL.substring(1) : relURL);
-    }
-  }
-
-  private withoutRootPath(relURL: string): string {
-    if (relURL.startsWith('/')) {
-      return relURL.substring('/'.length);
-    } else {
-      return relURL;
     }
   }
 }

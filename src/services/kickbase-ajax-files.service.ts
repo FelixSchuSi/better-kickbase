@@ -3,8 +3,8 @@ import { browser } from 'webextension-polyfill-ts';
 export class KickbaseAjaxFilesSerivce {
   /**
    * A Map of `.json`-files that Kickbase loaded via AJAX.
-   * key - name of the file
-   * value - content of the file as string
+   * @key name of the file
+   * @value content of the file as string
    */
   private map: Map<string, string> = new Map();
 
