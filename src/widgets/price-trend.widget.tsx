@@ -2,7 +2,7 @@ import type { FunctionComponent } from 'preact';
 import css from './price-trend.widget.css';
 import { priceTrendService } from '../services/price-trend.service';
 
-export type PriceTrendProps = { id: string; is500k: boolean };
+export type PriceTrendProps = { id: string; is500k: boolean; hide: boolean };
 
 const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
   style: 'currency',
@@ -11,6 +11,7 @@ const currencyFormatter: Intl.NumberFormat = new Intl.NumberFormat('de-DE', {
 });
 
 export const PriceTrend: FunctionComponent<PriceTrendProps> = (props: PriceTrendProps) => {
+  if (props.hide) return <></>;
   const delta: number | undefined = priceTrendService.getTrend(props.id);
   let deltaString: string = currencyFormatter.format(delta ?? 0);
   let trend: string = 'Neutral';

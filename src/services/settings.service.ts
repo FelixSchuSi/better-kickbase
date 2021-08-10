@@ -20,21 +20,27 @@ class SettingsService {
       id: 'copy-export',
       label:
         'Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick kopiert werden kann',
-      enabled: true,
+      enabled: false,
       icon: 'content_copy'
     },
     {
       id: 're-list',
       label:
         'Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können',
-      enabled: true,
+      enabled: false,
       icon: 'sync'
     },
     {
       id: 'block-notifications',
       label: 'Alle Kickbase-Benachrichtigungen blockieren',
-      enabled: true,
+      enabled: false,
       icon: 'highlight_off'
+    },
+    {
+      id: 'price-trends',
+      label: 'Marktwertveränderungen der Spieler beim letzten Marktwertupdate anzeigen',
+      enabled: true,
+      icon: 'trending_up'
     },
     {
       id: '_',

@@ -15,10 +15,13 @@ import { BettingPlayers } from './betting-players.widget';
 const marketPlayerData: Map<string, MarketPlayer> = new Map();
 let route: string = '';
 let showBettingPlayers: boolean = false;
+let showPriceTrends: boolean = false;
 
 export async function registerPlayerRowObserver(): Promise<void> {
   await priceTrendService.init();
-  showBettingPlayers = !!(await settingsService.get()).find((e: Setting) => e.id === '_')?.enabled;
+  const settings: Setting[] = await settingsService.get();
+  showBettingPlayers = !!settings.find((e: Setting) => e.id === '_')?.enabled;
+  showPriceTrends = !!settings.find((e: Setting) => e.id === 'price-trends')?.enabled;
   const data: MarketPlayer[] = await marketDataService.getTransfermarketPlayerData();
   prepareMarketPlayerData(data);
   routeListener(routerService.getPath());
@@ -43,9 +46,9 @@ function parsePlayerRow(row: HTMLDivElement): void {
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
   render(
     <>
-      <PriceTrend is500k={is500k} id={id}></PriceTrend>
-      {route === 'transfermarkt/kaufen' && showBettingPlayers ? (
-        <BettingPlayers marketPlayer={marketPlayer}></BettingPlayers>
+      <PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>
+      {route === 'transfermarkt/kaufen' ? (
+        <BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>
       ) : (
         ''
       )}
