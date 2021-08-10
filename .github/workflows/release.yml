@@ -2,9 +2,8 @@ name: Release to chrome web store and mozilla addon store
 
 on:
   push:
-    branches: [main]
-    # tags:
-    #   - "*"
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -38,16 +37,16 @@ jobs:
         run: |
           cd dist && zip -r better-kb.zip *
 
-      # - name: Release on mozilla addon store
-      #   uses: trmcnvn/firefox-addon@v1
-      #   with:
-      #     # uuid is only necessary when updating an existing addon,
-      #     # omitting it will create a new addon
-      #     uuid: "98felixss@gmail.com"
-      #     xpi: dist/better-kb.zip
-      #     manifest: dist/manifest.json
-      #     api-key: ${{ secrets.MOZILLA_USER }}
-      #     api-secret: ${{ secrets.MOZILLA_SECRET }}
+      - name: Release on mozilla addon store
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          # uuid is only necessary when updating an existing addon,
+          # omitting it will create a new addon
+          uuid: "98felixss@gmail.com"
+          xpi: dist/better-kb.zip
+          manifest: dist/manifest.json
+          api-key: ${{ secrets.MOZILLA_USER }}
+          api-secret: ${{ secrets.MOZILLA_SECRET }}
 
       - name: Release on chrome web store
         uses: mnao305/chrome-extension-upload@1.1.1
