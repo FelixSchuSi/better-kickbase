@@ -1,0 +1,58 @@
+name: Create ZIP
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Monkey patch for firefox compatibility # see: https://github.com/extend-chrome/rollup-plugin-chrome-extension/issues/56#issuecomment-852182897
+        run: |
+          chmod +x ./firefox-compat-monkey-patch.sh
+          ./firefox-compat-monkey-patch.sh || :
+
+      - name: Install ZIP
+        run: |
+          sudo apt install zip unzip
+
+      - name: Create ZIP
+        run: |
+          cd dist && zip -r better-kb.zip *
+
+      - name: Release on mozilla addon store
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          # uuid is only necessary when updating an existing addon,
+          # omitting it will create a new addon
+          uuid: "98felixss@gmail.com"
+          xpi: dist/better-kb.zip
+          manifest: dist/manifest.json
+          api-key: ${{ secrets.MOZILLA_USER }}
+          api-secret: ${{ secrets.MOZILLA_SECRET }}
+
+      - name: Release on chrome web store
+        uses: mnao305/chrome-extension-upload@1.1.1
+        with:
+          file-path: dist/file.zip
+          extension-id: hogefuga(extension id)
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
