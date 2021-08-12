@@ -1,3 +1,4 @@
 node_modules/
 dist/
 price-trends.json
+deploy-secrets.json

@@ -9,13 +9,19 @@
 <table>
   <tr>
     <td>
-       <img src="screenshots/compact-layout-larger.png"  >
+       <img src="screenshots/compact-layout-small.jpg"  >
     </td>
     <td>
-       <img  src="screenshots/export-csv-larger.png">
+       <img  src="screenshots/export-csv-small.jpg">
+    </td>
+    
+  </tr>
+  <tr>
+    <td>
+       <img  src="screenshots/diable-notifications-small.jpg"  >
     </td>
     <td>
-       <img  src="screenshots/diable-notifications-larger.png"  >
+       <img  src="screenshots/price-trends-small.jpg"  >
     </td>
   </tr>
 </table>
