@@ -40,8 +40,14 @@ function parsePlayerRow(row: HTMLDivElement): void {
   const is500k: boolean = (row.querySelector('.price > strong') as HTMLDivElement).innerText === '€ 500.000';
 
   const div: HTMLDivElement = document.createElement('div');
-  div.id = 'bkb-player-row';
-  row.querySelector('.infoBox')!.appendChild(div);
+  div.classList.add('bkb-player-row');
+
+  // On /verkaufen and /kaufen each playerrow contains a Infobox where content is rendered
+  // On /kader and /scouting content is rendered within the playerrow
+  const renderInInfobox: boolean = ['transfermarkt/verkaufen', 'transfermarkt/kaufen'].includes(route);
+  const targetSelector: string = renderInInfobox ? '.infoBox' : '.playerRow';
+
+  row.querySelector(targetSelector)!.appendChild(div);
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
   render(
@@ -61,7 +67,9 @@ async function routeListener(path: string) {
   route = path;
   switch (path) {
     case 'transfermarkt/verkaufen':
-    case 'transfermarkt/kaufen': {
+    case 'transfermarkt/kaufen':
+    case 'transfermarkt/kader':
+    case 'transfermarkt/scouting': {
       await waitForSelector(Selectors.PLAYERROW);
       await sleep(100);
       const rows: HTMLDivElement[] = Array.from(selectAll(Selectors.PLAYERROW));

@@ -1,6 +1,16 @@
 /* Styles for stuff added by this extension */
-#bkb-player-row {
+.bkb-player-row {
   width: auto !important;
   display: flex;
   flex-direction: row;
+  grid-area: bkbPlayerRow;
+  align-self: center;
+  justify-self: end;
+}
+
+.TransferScout .playerGroup > .playerRow,
+.TransferSquad .playerGroup > .playerRow {
+  grid-template-areas:
+    'picture playerInfo bkbPlayerRow'
+    'picture playerInfo bkbPlayerRow' !important;
 }

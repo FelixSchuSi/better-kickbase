@@ -13,6 +13,7 @@ export enum Selectors {
   BALANCE = '.active > .leagueBudget > .content',
   LIVE_MATCHDAY_IMG = '.LiveMatchDay .playerImage img',
   PLAYERROW = '.playerGroup',
+  INNER_PLAYERROW = '.playerRow',
   BKB_ROOT = '.settings-root',
   MY_USER_ID = 'body > script',
   BODY = 'body'
