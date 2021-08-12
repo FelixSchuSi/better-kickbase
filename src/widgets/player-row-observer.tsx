@@ -73,7 +73,10 @@ async function routeListener(path: string) {
       await waitForSelector(Selectors.PLAYERROW);
       await sleep(100);
       const rows: HTMLDivElement[] = Array.from(selectAll(Selectors.PLAYERROW));
-      rows.forEach(parsePlayerRow);
+      if (rows.length > 0 && !rows[0].querySelector('.bkb-player-row')) {
+        // Dont render bkb-player-row twice
+        rows.forEach(parsePlayerRow);
+      }
       break;
     }
     default:
