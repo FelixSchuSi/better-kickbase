@@ -102,7 +102,7 @@ function getKickbaseId(priceTrend) {
 }
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, winnerUrl, loserUrl, _b, winnerHtml, loserHtml, priceTrends, priceTrendObj;
+        var _a, winnerUrl, loserUrl, _b, winnerHtml, loserHtml, priceTrendsWithoutIds, priceTrends, priceTrendObj;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
@@ -113,8 +113,8 @@ function main() {
                     return [4 /*yield*/, Promise.all([winnerUrl, loserUrl].map(function (url) { return gethtmlFromUrl(url); }))];
                 case 1:
                     _b = _c.sent(), winnerHtml = _b[0], loserHtml = _b[1];
-                    priceTrends = __spreadArray(__spreadArray([], ligainsiderHtmlToPriceTrend(winnerHtml)), ligainsiderHtmlToPriceTrend(loserHtml));
-                    return [4 /*yield*/, Promise.all(priceTrends.map(getKickbaseId))];
+                    priceTrendsWithoutIds = __spreadArray(__spreadArray([], ligainsiderHtmlToPriceTrend(winnerHtml)), ligainsiderHtmlToPriceTrend(loserHtml));
+                    return [4 /*yield*/, Promise.all(priceTrendsWithoutIds.map(getKickbaseId))];
                 case 2:
                     priceTrends = _c.sent();
                     priceTrendObj = {
