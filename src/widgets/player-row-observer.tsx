@@ -11,6 +11,8 @@ import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import { PriceTrend } from './price-trend.widget';
 import { BettingPlayers } from './betting-players.widget';
+import { OfferExpiry } from './offer-expiry.widget';
+import offerExpiryCss from './offer-expiry.widget.css';
 
 const marketPlayerData: Map<string, MarketPlayer> = new Map();
 let route: string = '';
@@ -50,11 +52,21 @@ function parsePlayerRow(row: HTMLDivElement): void {
   row.querySelector(targetSelector)!.appendChild(div);
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
+
+  const expiryDateElem: HTMLDivElement = document.createElement('div');
+  expiryDateElem.classList.add(offerExpiryCss.expiryDate);
+  const timeToExpiry = row.querySelector('.time')!;
+  timeToExpiry.classList.add(offerExpiryCss.timeToExpiry);
+  timeToExpiry.appendChild(expiryDateElem);
+
+  render(<OfferExpiry timeToExpiryInSecs={marketPlayer?.expiry}></OfferExpiry>, expiryDateElem);
   render(
     <>
       <PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>
       {route === 'transfermarkt/kaufen' ? (
-        <BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>
+        <>
+          <BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>
+        </>
       ) : (
         ''
       )}

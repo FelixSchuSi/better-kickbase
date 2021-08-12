@@ -1,5 +1,5 @@
 /* Styles for stuff added by this extension */
-.bkb-player-row {
+.playerGroup > .playerRow .bkb-player-row {
   width: auto !important;
   display: flex;
   flex-direction: row;

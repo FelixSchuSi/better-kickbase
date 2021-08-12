@@ -1,0 +1,10 @@
+.expiryDate {
+  color: rebeccapurple;
+  display: none;
+  position: absolute;
+  top: 0;
+}
+
+.timeToExpiry:hover > .expiryDate {
+  display: block;
+}

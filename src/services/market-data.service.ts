@@ -15,6 +15,7 @@ export type Player = _Player;
 class _MarketPlayer extends _Player {
   price: number = -1;
   offers: MarketPlayerOffer[] = [];
+  expiry: number = -1;
 }
 export type MarketPlayer = _MarketPlayer;
 const MARKET_PLAYER_KEYS: string[] = Object.keys(new _MarketPlayer());

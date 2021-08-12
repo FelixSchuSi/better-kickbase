@@ -57,7 +57,7 @@ const SettingsPage: FunctionComponent = () => {
       <h1>Einstellungen better-kickbase</h1>
       <div class="settings-list">
         {settings?.map((setting: Setting) => {
-          if (setting.id === '_' && !setting.enabled) return '';
+          // if (setting.id === '_' && !setting.enabled) return '';
           return (
             <div class="settings-item {setting.id}">
               <div class="icon-label-container">
