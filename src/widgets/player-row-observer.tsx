@@ -1,3 +1,4 @@
+import type { VNode } from 'preact';
 import { render } from 'preact';
 import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
@@ -53,6 +54,10 @@ function parsePlayerRow(row: HTMLDivElement): void {
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
 
+  const templates: VNode[] = [];
+
+  templates.push(<PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>);
+
   if (route === 'transfermarkt/kaufen') {
     const expiryDateElem: HTMLDivElement = document.createElement('div');
     expiryDateElem.classList.add(offerExpiryCss.expiryDate);
@@ -60,28 +65,22 @@ function parsePlayerRow(row: HTMLDivElement): void {
     const arrow: HTMLDivElement = document.createElement('div');
     arrow.classList.add(offerExpiryCss.arrow);
 
-    const timeToExpiry: HTMLDivElement = row.querySelector('.time')!;
-    timeToExpiry.classList.add(offerExpiryCss.timeToExpiry);
+    const kbTimeToExpiry: HTMLDivElement = row.querySelector('.time')!;
+    kbTimeToExpiry.style.display = 'none';
 
-    timeToExpiry.appendChild(expiryDateElem);
-    timeToExpiry.appendChild(arrow);
-
-    render(<OfferExpiry timeToExpiryInSecs={marketPlayer?.expiry}></OfferExpiry>, expiryDateElem);
+    templates.push(
+      <OfferExpiry
+        timeToExpiryString={kbTimeToExpiry.innerText}
+        timeToExpiryInSecs={marketPlayer?.expiry}
+      ></OfferExpiry>
+    );
   }
 
-  render(
-    <>
-      <PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>
-      {route === 'transfermarkt/kaufen' ? (
-        <>
-          <BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>
-        </>
-      ) : (
-        ''
-      )}
-    </>,
-    div
-  );
+  if (route === 'transfermarkt/kaufen') {
+    templates.push(<BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>);
+  }
+
+  render(templates, div);
 }
 
 async function routeListener(path: string) {
