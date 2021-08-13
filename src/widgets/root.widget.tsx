@@ -17,6 +17,7 @@ const initialTemplates: VNode[] = [];
 const RootWidget: FunctionComponent = () => {
   const [route, setRoute] = useState(routerService.getPath());
   const [templates, setTemplates] = useState(initialTemplates);
+  const [reListEnabled, setReListEnabled] = useState(false);
 
   useEffect(() => {
     registerPlayerRowObserver();
@@ -26,7 +27,7 @@ const RootWidget: FunctionComponent = () => {
       const _templates: VNode[] = [];
       for (const setting of settings) {
         if (!setting.enabled) continue;
-        if (setting.id === 're-list') _templates.push(reListWidget);
+        if (setting.id === 're-list') setReListEnabled(true);
         if (setting.id === 'csv-export') _templates.push(exportCsvWidget);
         if (setting.id === 'copy-export') _templates.push(exportCopyWidget);
         if (setting.id === 'block-notifications') blockNotifications = setting.enabled;
@@ -48,7 +49,12 @@ const RootWidget: FunctionComponent = () => {
     });
   }, []);
 
-  return <>{route === 'transfermarkt/verkaufen' ? templates : ''} </>;
+  return (
+    <>
+      {route.startsWith('transfermarkt') ? templates : ''}
+      {reListEnabled && route === 'transfermarkt/verkaufen' ? reListWidget : ''}
+    </>
+  );
 };
 
 const root: HTMLElement = document.createElement('div');
