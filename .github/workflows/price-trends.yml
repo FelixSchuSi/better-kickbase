@@ -23,10 +23,11 @@ jobs:
           cd scraper
           npm ci
 
-      - name: Generate price-trends.json.
-        run: |
-          cd scraper
-          npm start
+      - uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 20
+          command: cd scraper && npm start
 
       - name: Copy price-trends.json.
         run: |
