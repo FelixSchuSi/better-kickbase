@@ -57,6 +57,9 @@ async function getKickbaseId(priceTrend: PriceTrendWithoutId): Promise<PriceTren
   return { ...priceTrend, kickbaseId };
 }
 
+export const sleep = (duration: number): Promise<unknown> =>
+  new Promise((resolve: TimerHandler) => setTimeout(resolve, duration));
+
 async function main() {
   const [winnerUrl, loserUrl]: string[] = [
     'https://www.ligainsider.de/stats/kickbase/marktwerte/tag/gewinner/',
@@ -90,9 +93,12 @@ async function main() {
     firstPlayerGenerated.delta === firstPlayerFromGH.delta
   ) {
     console.error('The market data was not yet updated on Ligainsider');
-    process.exit(1);
+    console.error('Restarting in 15 mins');
+    await sleep(15 * 60 * 1000);
+    return main();
+  } else {
+    writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
   }
-  writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
 }
 
 main();
