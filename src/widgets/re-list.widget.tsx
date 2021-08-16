@@ -15,7 +15,7 @@ export const reListWidget: VNode = (
   ></Button>
 );
 
-function reListButtonClick() {
+async function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);
 
   const x: { removedCount: number } = { removedCount: 0 };
@@ -30,22 +30,45 @@ function reListButtonClick() {
 }
 
 function removePlayerForRelist(player: HTMLElement, x: { removedCount: number }) {
-  const selectors: string[] = [Selectors.OFFER, Selectors.MARKET_VALUE];
+  const selectors: Selectors[] = [Selectors.OFFER, Selectors.MARKET_VALUE];
 
-  const [angebot, mw]: number[] = selectors.map((selector: string) => {
-    const element: HTMLElement | null = player.querySelector(selector);
-    const value: number = element ? interpretPrice(element.innerText) : -1;
+  const [offer, marketValue]: number[] = selectors.map((selector: Selectors) => {
+    const elements: HTMLElement[] = Array.from(selectAll(selector, player));
+
+    if (selector === Selectors.OFFER) {
+      const hasOfferNotFromTransfermarket: HTMLElement | undefined = elements.find((offer: HTMLElement) => {
+        return (offer.querySelector('.playerInfo') as HTMLDivElement).innerText !== 'KICKBASE';
+      });
+
+      // When a offer from another manager is present, dont reject the offer.
+      if (hasOfferNotFromTransfermarket) return 999999999;
+    }
+
+    const value: number = elements ? interpretPrice(elements[0].innerText) : -1;
     return value;
   });
 
   const isOfferExpired: boolean = !!player.querySelector(Selectors.EXPIRED);
 
-  if (isOfferExpired || (angebot !== -1 && mw > angebot)) {
+  if (isOfferExpired || isOfferTooLow(offer, marketValue, 0)) {
     // Take a player off the market
     const removePlayerButton: HTMLElement | null = player.querySelector(Selectors.REMOVE_PLAYER);
     removePlayerButton?.click();
     x.removedCount = x.removedCount + 1;
   }
+}
+
+/**
+ * Determines wheter a offer for a player is too low.
+ * When a offer is too low the player gets relisted to get a better offer.
+ * @param offer
+ * @param marketValue
+ * @param threshold A percentage set by the user that determines how much higher (positive number) or lower (negative number) the offer has to be in comparison the market value. e. g. `0.05`
+ * @returns `true` if the offer is too low, otherwise `false`
+ */
+function isOfferTooLow(offer: number, marketValue: number, threshold: number): boolean {
+  if (offer === -1) return false;
+  return marketValue * (1 + threshold) < offer;
 }
 
 async function listAllPlayers() {

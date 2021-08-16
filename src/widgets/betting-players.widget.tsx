@@ -11,7 +11,7 @@ export const BettingPlayers: FunctionComponent<BettingPlayersProps> = ({ marketP
   if (marketPlayer && !marketPlayer.offers) length = '0';
   if (marketPlayer?.offers) length = String(marketPlayer.offers.length);
   return (
-    <Tooltip class={css.root} text={marketPlayer?.offers?.map((o: MarketPlayerOffer) => o.userName).join('') ?? ''}>
+    <Tooltip class={css.root} text={marketPlayer?.offers?.map((o: MarketPlayerOffer) => o.userName).join(' ') ?? ''}>
       <div class={css.bkbBettingPlayersNumber}>
         <div>{length}</div>
         <div class="material-icons">people</div>

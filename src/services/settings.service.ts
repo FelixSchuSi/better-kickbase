@@ -5,6 +5,13 @@ export interface Setting {
   label: string;
   enabled: boolean;
   icon: string;
+  childOptions?: ChildOption[];
+}
+
+export interface ChildOption {
+  id: string;
+  label: string;
+  value: string | number;
 }
 
 class SettingsService {
@@ -28,7 +35,14 @@ class SettingsService {
       label:
         'Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können',
       enabled: false,
-      icon: 'sync'
+      icon: 'sync',
+      childOptions: [
+        {
+          id: 're-list-threshold',
+          label: '',
+          value: 0
+        }
+      ]
     },
     {
       id: 'block-notifications',
@@ -60,6 +74,16 @@ class SettingsService {
         );
         if (match) {
           setting.enabled = match.enabled;
+        }
+        if (setting.childOptions) {
+          setting.childOptions.map((childOpt: ChildOption) => {
+            const childOptMatch: ChildOption | undefined = match?.childOptions?.find(
+              (e: ChildOption) => e.id === childOpt.id
+            );
+            if (childOptMatch) {
+              childOpt.value = childOptMatch.value ?? '';
+            }
+          });
         }
         return setting;
       });
