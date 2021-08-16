@@ -90,7 +90,7 @@ async function main() {
     firstPlayerGenerated.delta === firstPlayerFromGH.delta
   ) {
     console.error('The market data was not yet updated on Ligainsider');
-    process.exit(-1);
+    process.exit(1);
   }
   writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
 }
