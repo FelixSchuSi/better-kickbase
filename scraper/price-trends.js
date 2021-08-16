@@ -69,6 +69,19 @@ function gethtmlFromUrl(url) {
         });
     });
 }
+function getPrevPriceTrends() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios_1["default"]('https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/price-trends-data/price-trends.json')];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response.data];
+            }
+        });
+    });
+}
 function ligainsiderHtmlToPriceTrend(html) {
     var dom = new jsdom_1.JSDOM(html);
     var rows = Array.from(dom.window.document.querySelectorAll('.table-responsive tbody > tr'));
@@ -102,7 +115,7 @@ function getKickbaseId(priceTrend) {
 }
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, winnerUrl, loserUrl, _b, winnerHtml, loserHtml, priceTrendsWithoutIds, priceTrends, priceTrendObj;
+        var _a, winnerUrl, loserUrl, _b, winnerHtml, loserHtml, priceTrendsWithoutIds, priceTrends, priceTrendObj, firstPlayerFromGH, firstPlayerGenerated;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
@@ -121,6 +134,14 @@ function main() {
                         date: new Date().toISOString().split('T')[0],
                         players: priceTrends
                     };
+                    return [4 /*yield*/, getPrevPriceTrends()];
+                case 3:
+                    firstPlayerFromGH = (_c.sent()).players[0];
+                    firstPlayerGenerated = priceTrendObj.players[0];
+                    console.log('generated: ', firstPlayerGenerated);
+                    console.log('from GH: ', firstPlayerFromGH);
+                    console.log(firstPlayerGenerated.kickbaseId === firstPlayerFromGH.kickbaseId);
+                    console.log(firstPlayerGenerated.delta === firstPlayerFromGH.delta);
                     fs_1.writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
                     return [2 /*return*/];
             }

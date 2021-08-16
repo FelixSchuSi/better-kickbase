@@ -23,6 +23,13 @@ async function gethtmlFromUrl(url: string): Promise<string> {
   return response.data;
 }
 
+async function getPrevPriceTrends(): Promise<PriceTrends> {
+  const response: AxiosResponse<string> = await axios(
+    'https://raw.githubusercontent.com/FelixSchuSi/better-kickbase/price-trends-data/price-trends.json'
+  );
+  return <PriceTrends>(<unknown>response.data);
+}
+
 function ligainsiderHtmlToPriceTrend(html: string): PriceTrendWithoutId[] {
   const dom: JSDOM = new JSDOM(html);
 
@@ -71,6 +78,20 @@ async function main() {
     date: new Date().toISOString().split('T')[0],
     players: priceTrends
   };
+
+  const firstPlayerFromGH: PriceTrend = (await getPrevPriceTrends()).players[0];
+  const firstPlayerGenerated: PriceTrend = priceTrendObj.players[0];
+
+  console.log('generated: ', firstPlayerGenerated);
+  console.log('from GH: ', firstPlayerFromGH);
+
+  if (
+    firstPlayerGenerated.kickbaseId === firstPlayerFromGH.kickbaseId &&
+    firstPlayerGenerated.delta === firstPlayerFromGH.delta
+  ) {
+    console.error('The market data was not yet updated on Ligainsider');
+    process.exit(-1);
+  }
   writeFileSync(path.join(__dirname, 'price-trends.json'), JSON.stringify(priceTrendObj));
 }
 
