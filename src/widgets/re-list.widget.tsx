@@ -37,7 +37,7 @@ function removePlayerForRelist(player: HTMLElement, x: { removedCount: number })
 
     if (selector === Selectors.OFFER) {
       const hasOfferNotFromTransfermarket: HTMLElement | undefined = elements.find((offer: HTMLElement) => {
-        return (offer.querySelector('.playerInfo') as HTMLDivElement).innerText !== 'KICKBASE';
+        return (offer.parentElement!.querySelector('.playerInfo') as HTMLDivElement).innerText !== 'KICKBASE';
       });
 
       // When a offer from another manager is present, dont reject the offer.
@@ -79,7 +79,7 @@ async function listAllPlayers() {
   // A SET_LISTING_PRICE button of ONE player was found
   // Not all Buttons for all players are rendered at the same time.
   // We wait another 100ms so all buttons are rendered
-  await sleep(100);
+  await sleep(2000);
 
   const setPriceFields: NodeListOf<HTMLElement> = selectAll(Selectors.SET_LISTING_PRICE);
   setPriceFields.forEach((setPriceField: HTMLElement) => {
