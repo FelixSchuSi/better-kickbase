@@ -1,7 +1,12 @@
-import type { FunctionComponent, VNode } from 'preact';
+import type { FunctionComponent } from 'react';
 import css from './tooltip.widget.css';
+import React from 'react';
 
-export type TooltipProps = { children: VNode[] | VNode; text: string | VNode | VNode[]; class?: string };
+export type TooltipProps = {
+  children: JSX.Element[] | JSX.Element;
+  text: string | JSX.Element | JSX.Element[];
+  class?: string;
+};
 
 export const Tooltip: FunctionComponent<TooltipProps> = (props: TooltipProps) => {
   css;

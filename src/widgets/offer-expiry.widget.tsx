@@ -1,7 +1,7 @@
-import type { FunctionComponent } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 import { Tooltip } from './tooltip.widget';
 import css from './offer-expiry.widget.css';
+import type { FunctionComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export type OfferExpiryProps = { timeToExpiryInSecs?: number; timeToExpiryString: string };
 const options: Intl.DateTimeFormatOptions = { weekday: 'long', hour: 'numeric', minute: 'numeric' };
@@ -18,7 +18,7 @@ export const OfferExpiry: FunctionComponent<OfferExpiryProps> = (props: OfferExp
 
   return (
     <Tooltip class={css.root} text={displayString}>
-      <div class="time">{props.timeToExpiryString}</div>
+      <div className="time">{props.timeToExpiryString}</div>
     </Tooltip>
   );
 };

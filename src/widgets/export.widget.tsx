@@ -1,4 +1,3 @@
-import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
@@ -6,8 +5,9 @@ import { kickbaseAjaxFilesSerivce } from '../services/kickbase-ajax-files.servic
 import type { MarketPlayer, MarketPlayerOffer, Player } from '../services/market-data.service';
 import { marketDataService } from '../services/market-data.service';
 import { Button } from './button.widget';
+import React from 'react';
 
-export const exportCsvWidget: VNode = (
+export const exportCsvWidget: JSX.Element = (
   <Button
     icon="file_download"
     tooltip="Lade eine Excel-Liste der Marktwerte und Angebote deiner Spieler herunter"
@@ -15,7 +15,7 @@ export const exportCsvWidget: VNode = (
   ></Button>
 );
 
-export const exportCopyWidget: VNode = (
+export const exportCopyWidget: JSX.Element = (
   <Button
     icon="content_copy"
     tooltip="Kopiere eine Liste der Marktwerte und Angebote deiner Spieler in die Zwischenablage"

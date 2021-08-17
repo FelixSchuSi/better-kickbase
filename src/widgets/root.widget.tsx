@@ -1,6 +1,3 @@
-import type { FunctionComponent, VNode } from 'preact';
-import { render } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
 import { reListWidget } from './re-list.widget';
 import { routerService } from '../services/router.service';
@@ -11,9 +8,11 @@ import { registerPlayerRowObserver } from './player-row-observer';
 import css from './root.widget.css';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { Selectors } from '../helpers/selectors';
+import type { FunctionComponent } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 
-const initialTemplates: VNode[] = [];
-
+const initialTemplates: JSX.Element[] = [];
 const RootWidget: FunctionComponent = () => {
   const [route, setRoute] = useState(routerService.getPath());
   const [templates, setTemplates] = useState(initialTemplates);
@@ -24,7 +23,7 @@ const RootWidget: FunctionComponent = () => {
 
     settingsService.get().then((settings: Setting[]) => {
       let blockNotifications: boolean = false;
-      const _templates: VNode[] = [];
+      const _templates: JSX.Element[] = [];
       for (const setting of settings) {
         if (!setting.enabled) continue;
         if (setting.id === 're-list') setReListEnabled(true);
@@ -62,5 +61,5 @@ root.classList.add(css.root);
 
 waitForSelector(Selectors.BODY).then((e: Element | null) => {
   e!.append(root);
-  render(<RootWidget />, root);
+  ReactDOM.render(<RootWidget />, root);
 });

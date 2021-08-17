@@ -1,5 +1,3 @@
-import type { VNode } from 'preact';
-import { render } from 'preact';
 import { selectAll } from '../helpers/select-all';
 import { Selectors } from '../helpers/selectors';
 import { sleep } from '../helpers/sleep';
@@ -14,6 +12,8 @@ import { PriceTrend } from './price-trend.widget';
 import { BettingPlayers } from './betting-players.widget';
 import { OfferExpiry } from './offer-expiry.widget';
 import offerExpiryCss from './offer-expiry.widget.css';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 const marketPlayerData: Map<string, MarketPlayer> = new Map();
 let route: string = '';
@@ -54,7 +54,7 @@ function parsePlayerRow(row: HTMLDivElement): void {
 
   const marketPlayer: MarketPlayer | undefined = marketPlayerData.get(id);
 
-  const templates: VNode[] = [];
+  const templates: JSX.Element[] = [];
 
   templates.push(<PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>);
 
@@ -80,7 +80,7 @@ function parsePlayerRow(row: HTMLDivElement): void {
     templates.push(<BettingPlayers marketPlayer={marketPlayer} hide={!showBettingPlayers}></BettingPlayers>);
   }
 
-  render(templates, div);
+  ReactDOM.render(templates, div);
 }
 
 async function routeListener(path: string) {

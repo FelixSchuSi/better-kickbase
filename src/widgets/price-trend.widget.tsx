@@ -1,7 +1,8 @@
-import type { FunctionComponent } from 'preact';
 import css from './price-trend.widget.css';
 import { priceTrendService } from '../services/price-trend.service';
 import { Tooltip } from './tooltip.widget';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
 export type PriceTrendProps = { id: string; is500k: boolean; hide: boolean };
 
@@ -30,7 +31,7 @@ export const PriceTrend: FunctionComponent<PriceTrendProps> = (props: PriceTrend
 
   return (
     <Tooltip text="Marktwertveränderung beim letzten Marktwertupdate">
-      <div class={`${css[`bkbPriceTrend${trend}`]} ${css.bkbPriceTrend}`}>{deltaString}</div>
+      <div className={`${css[`bkbPriceTrend${trend}`]} ${css.bkbPriceTrend}`}>{deltaString}</div>
     </Tooltip>
   );
 };

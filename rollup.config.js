@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
-import alias from '@rollup/plugin-alias';
+import replace from '@rollup/plugin-replace';
 
 export default {
   input: 'manifest.json',
@@ -17,13 +17,8 @@ export default {
     postcss({
       modules: true
     }),
-    alias({
-      entries: [
-        { find: 'react', replacement: 'preact/compat' },
-        { find: 'react-dom/test-utils', replacement: 'preact/test-utils' },
-        { find: 'react-dom', replacement: 'preact/compat' },
-        { find: 'react/jsx-runtime', replacement: 'preact/jsx-runtime' }
-      ]
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     resolve(),
     commonjs(),

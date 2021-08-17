@@ -1,6 +1,3 @@
-import type { FunctionComponent, RefObject } from 'preact';
-import { render } from 'preact';
-import { useEffect, useState, useRef } from 'preact/hooks';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import type { Tabs } from 'webextension-polyfill-ts';
@@ -10,6 +7,10 @@ import { Toast } from '../widgets/toast.widget';
 import { Button } from '../widgets/button.widget';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
+import type { FunctionComponent, RefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
@@ -53,15 +54,15 @@ const SettingsPage: FunctionComponent = () => {
   }
 
   return (
-    <div class="container">
+    <div className="container">
       <h1>Einstellungen better-kickbase</h1>
-      <div class="settings-list">
+      <div className="settings-list">
         {settings?.map((setting: Setting) => {
           if (setting.id === '_' && !setting.enabled) return '';
           return (
-            <div class="settings-item {setting.id}">
-              <div class="icon-label-container">
-                {setting.icon ? <div class="material-icons">{setting.icon}</div> : ''}
+            <div className="settings-item {setting.id}">
+              <div className="icon-label-container">
+                {setting.icon ? <div className="material-icons">{setting.icon}</div> : ''}
                 <p>{setting.label}</p>
               </div>
               <CheckBox id={setting.id} onChange={toggleSetting} checked={setting.enabled}></CheckBox>
@@ -73,9 +74,9 @@ const SettingsPage: FunctionComponent = () => {
         <span>Einstellungen gespeichert!</span>
         <Button onClick={onSnackbarClick}> Reload </Button>
       </Toast>
-      <div class="snackbar-placeholder"></div>
+      <div className="snackbar-placeholder"></div>
     </div>
   );
 };
 
-render(<SettingsPage />, select(Selectors.BKB_ROOT)!);
+ReactDOM.render(<SettingsPage />, select(Selectors.BKB_ROOT)!);

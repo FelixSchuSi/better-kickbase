@@ -1,4 +1,3 @@
-import type { VNode } from 'preact';
 import { interpretPrice } from '../helpers/interpret-price';
 import { selectAll } from '../helpers/select-all';
 import { select } from '../helpers/select';
@@ -6,8 +5,9 @@ import { Selectors } from '../helpers/selectors';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
 import { Button } from './button.widget';
+import React from 'react';
 
-export const reListWidget: VNode = (
+export const reListWidget: JSX.Element = (
   <Button
     icon="sync"
     onClick={reListButtonClick}
