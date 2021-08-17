@@ -1,6 +1,7 @@
 import css from './toast.widget.css';
 import { sleep } from '../helpers/sleep';
 import type { FunctionComponent } from 'react';
+import { useImperativeHandle } from 'react';
 import React, { forwardRef, useState } from 'react';
 
 export type ToastProps = { children: JSX.Element[]; hideDelay?: number; ref: any };
@@ -13,8 +14,6 @@ export const Toast: FunctionComponent<ToastProps> = forwardRef((props: ToastProp
     setIsShown(false);
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   useImperativeHandle(ref, () => ({
     show
   }));
