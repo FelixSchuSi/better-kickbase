@@ -11,12 +11,34 @@ import React from 'react';
 import type { Theme } from '@material-ui/core/styles';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import '@fontsource/roboto';
-import { IconButton, Divider, CardContent, Card, List, Snackbar, Button, Typography } from '@material-ui/core';
+import {
+  CardActions,
+  IconButton,
+  Button,
+  CardContent,
+  Card,
+  List,
+  Snackbar,
+  Typography,
+  withStyles
+} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { SettingItem } from './setting-item.widget';
 
 import css from './settings.page.css';
+
+// eslint-disable-next-line @typescript-eslint/typedef
+const StyledRating = withStyles({
+  iconFilled: {
+    color: '#c2c2c2'
+  },
+  iconHover: {
+    color: '#10b27f'
+  }
+})(Rating);
+
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
 l.rel = 'stylesheet';
@@ -24,7 +46,6 @@ l.rel = 'stylesheet';
 document.head.appendChild(l);
 
 const initialSettings: Setting[] = [];
-window.resizeTo(1920, 1080);
 const SettingsPage: FunctionComponent = () => {
   const [settings, setSettings] = useState(initialSettings);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -102,23 +123,52 @@ const SettingsPage: FunctionComponent = () => {
             better-kickbase Einstellungen
           </Typography>
         </div>
-        <Card className={css.card} variant="outlined">
-          <List>
-            {settings?.map((setting: Setting, i: number) => (
-              <>
-                <SettingItem
-                  index={i}
-                  setting={setting}
-                  onChange={(enabled: boolean) => {
-                    toggleSetting(setting.id, enabled);
-                  }}
-                  onChildOptChange={(value: ChildOptionValue) => {
-                    childOptChange(setting.id, value);
-                  }}
-                />
-              </>
-            ))}
-          </List>
+        <List>
+          {settings?.map((setting: Setting, i: number) => (
+            <>
+              <SettingItem
+                index={i}
+                setting={setting}
+                onChange={(enabled: boolean) => {
+                  toggleSetting(setting.id, enabled);
+                }}
+                onChildOptChange={(value: ChildOptionValue) => {
+                  childOptChange(setting.id, value);
+                }}
+              />
+            </>
+          ))}
+        </List>
+        <Card variant="outlined" className={css.ratingCard}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              Lass' eine Bewertung da!
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Eine gute Bewertung ist der beste Weg better-kickbase zu unterstützen.
+            </Typography>
+          </CardContent>
+          <CardActions className={css.ratingCardActions}>
+            <Button href="https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews">
+              <Typography component="legend">Chrome</Typography>
+              <StyledRating
+                value={4}
+                onChange={() => {
+                  window.location.href =
+                    'https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews';
+                }}
+              />
+            </Button>
+            <Button href="https://addons.mozilla.org/de/firefox/addon/better-kickbase/">
+              <Typography component="legend">Firefox</Typography>
+              <StyledRating
+                value={4}
+                onChange={() => {
+                  window.location.href = 'https://addons.mozilla.org/de/firefox/addon/better-kickbase/';
+                }}
+              />
+            </Button>
+          </CardActions>
         </Card>
         <Snackbar
           message="Einstellungen gespeichert!"

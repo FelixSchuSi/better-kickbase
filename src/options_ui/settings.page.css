@@ -17,16 +17,16 @@
   bottom: 25%;
   background-color: rgba(16, 178, 127, 0.85);
   transition: all 0.2s ease-out 100ms;
-  /* transition: bottom 0.2s ease-out 100ms; */
 }
 
 .headerWrapper:hover > .headerGradient {
-  height: 85%;
-  bottom: 5%;
+  height: 50%;
 }
 
-.card,
-.card > ul {
-  padding-bottom: 0px !important;
-  padding-top: 0px !important;
+.ratingCard {
+  background-color: transparent !important;
+}
+
+.ratingCardActions {
+  justify-content: flex-end;
 }
