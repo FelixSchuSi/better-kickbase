@@ -6,6 +6,8 @@ import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
 import { Button } from './button.widget';
 import React from 'react';
+import type { Setting } from '../services/settings.service';
+import { settingsService } from '../services/settings.service';
 
 export const reListWidget: JSX.Element = (
   <Button
@@ -18,18 +20,25 @@ export const reListWidget: JSX.Element = (
 async function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);
 
+  const settings: Setting[] = await settingsService.get();
+  const relistSettings: Setting = settings.find((setting: Setting) => {
+    return setting.id === 're-list';
+  })!;
+  const relistThreshold: number = relistSettings.childOption?.value as number;
+
+  console.log(relistThreshold);
   const x: { removedCount: number } = { removedCount: 0 };
 
   // Take a player off the market when the offer is below
   // the market value or when the offer is expired
-  players.forEach((p: HTMLElement) => removePlayerForRelist(p, x));
+  players.forEach((p: HTMLElement) => removePlayerForRelist(p, relistThreshold, x));
 
   if (x.removedCount > 0) {
     listAllPlayers();
   }
 }
 
-function removePlayerForRelist(player: HTMLElement, x: { removedCount: number }) {
+function removePlayerForRelist(player: HTMLElement, relistThreshold: number, x: { removedCount: number }) {
   const selectors: Selectors[] = [Selectors.OFFER, Selectors.MARKET_VALUE];
 
   const [offer, marketValue]: number[] = selectors.map((selector: Selectors) => {
@@ -44,13 +53,13 @@ function removePlayerForRelist(player: HTMLElement, x: { removedCount: number })
       if (hasOfferNotFromTransfermarket) return 999999999;
     }
 
-    const value: number = elements ? interpretPrice(elements[0].innerText) : -1;
+    const value: number = elements && elements[0] ? interpretPrice(elements[0].innerText) : -1;
     return value;
   });
 
   const isOfferExpired: boolean = !!player.querySelector(Selectors.EXPIRED);
 
-  if (isOfferExpired || isOfferTooLow(offer, marketValue, 0)) {
+  if (isOfferExpired || isOfferTooLow(offer, marketValue, relistThreshold)) {
     // Take a player off the market
     const removePlayerButton: HTMLElement | null = player.querySelector(Selectors.REMOVE_PLAYER);
     removePlayerButton?.click();
@@ -68,7 +77,7 @@ function removePlayerForRelist(player: HTMLElement, x: { removedCount: number })
  */
 function isOfferTooLow(offer: number, marketValue: number, threshold: number): boolean {
   if (offer === -1) return false;
-  return marketValue * (1 + threshold) < offer;
+  return marketValue * (1 + threshold / 100) > offer;
 }
 
 async function listAllPlayers() {

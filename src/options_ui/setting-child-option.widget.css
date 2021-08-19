@@ -1,0 +1,29 @@
+.reListRoot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inVisibleIcon {
+  visibility: hidden;
+}
+
+.reListThresholdInput {
+  width: 96px;
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+  padding-top: 5px !important;
+}
+
+.reListThresholdInput > label {
+  padding-top: 8px;
+}
+
+.percentInputAdornment {
+  height: 100% !important;
+  width: 32px !important;
+}
+
+.listItem {
+  padding-top: 0px !important;
+}

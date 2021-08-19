@@ -1,43 +1,22 @@
-import type { ChildOption, Setting } from '../services/settings.service';
+import type { ChildOption, ChildOptionValue, Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 import type { Tabs } from 'webextension-polyfill-ts';
 import { browser } from 'webextension-polyfill-ts';
-import Button from '@material-ui/core/Button';
 import { select } from '../helpers/select';
 import { Selectors } from '../helpers/selectors';
-import type { FunctionComponent, RefObject } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type { FunctionComponent } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import type { IconSet } from './icon-map';
-import { iconMap } from './icon-map';
 import type { Theme } from '@material-ui/core/styles';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import '@fontsource/roboto';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Divider, CardContent, Card, List, Snackbar, Button, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import SettingsIcon from '@material-ui/icons/Settings';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Switch from '@material-ui/core/Switch';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import RestorePageIcon from '@material-ui/icons/RestorePage';
+import { SettingItem } from './setting-item.widget';
 
 import css from './settings.page.css';
-
 const l: HTMLLinkElement = document.createElement('link');
 l.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
 l.rel = 'stylesheet';
@@ -61,6 +40,9 @@ const SettingsPage: FunctionComponent = () => {
     palette: {
       type: 'dark',
       secondary: {
+        main: '#10b27f'
+      },
+      primary: {
         main: '#10b27f'
       }
     }
@@ -89,6 +71,22 @@ const SettingsPage: FunctionComponent = () => {
     setSettings(newSettings);
   }
 
+  function childOptChange(settingId: string, value: ChildOptionValue) {
+    const newSettings: Setting[] = settings.map((setting: Setting) => {
+      if (setting.id === settingId) {
+        if (setting.childOption) {
+          const newChildOpt: ChildOption = { ...setting.childOption, value };
+          return { ...setting, childOption: newChildOpt };
+        }
+      }
+      return setting;
+    });
+
+    console.log(newSettings);
+    storeSettings(newSettings);
+    setSettings(newSettings);
+  }
+
   function storeSettings(newSettings: Setting[]) {
     settingsService.set(newSettings).then(() => {
       showSnackbar();
@@ -98,50 +96,30 @@ const SettingsPage: FunctionComponent = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="container">
-        <Typography variant="h4">Einstellungen better-kickbase</Typography>
-
-        {settings?.map((setting: Setting) => {
-          if (setting.id === '_' && !setting.enabled) return '';
-          const hasChildOptions: boolean = setting.childOptions !== undefined;
-          const { Icon, CheckedIcon }: IconSet = iconMap[setting.icon]!;
-          return (
-            <>
-              <Accordion expanded={hasChildOptions ? undefined : false}>
-                <AccordionSummary
-                  className={css.accordionSummary}
-                  expandIcon={
-                    hasChildOptions ? <Checkbox icon={<SettingsIcon />} checkedIcon={<SettingsIcon />} /> : ''
-                  }
-                >
-                  <FormControlLabel
-                    className={css.fromControl}
-                    onClick={(event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => {
-                      event.stopPropagation();
-                    }}
-                    onFocus={(event: React.FocusEvent<HTMLLabelElement>) => {
-                      event.stopPropagation();
-                    }}
-                    control={
-                      <Checkbox
-                        className={css.settingIconCheckbox}
-                        onClick={() => toggleSetting(setting.id, !setting.enabled)}
-                        defaultChecked={setting.enabled}
-                        icon={<Icon />}
-                        checkedIcon={<CheckedIcon />}
-                      />
-                    }
-                    label={<Typography color="textPrimary">{setting.label}</Typography>}
-                  />
-                </AccordionSummary>
-
-                <AccordionDetails>
-                  <Typography color="textSecondary">Moin</Typography>
-                </AccordionDetails>
-              </Accordion>
-            </>
-          );
-        })}
-
+        <div className={css.headerWrapper}>
+          <div className={css.headerGradient}></div>
+          <Typography className={css.header} variant="h4">
+            better-kickbase Einstellungen
+          </Typography>
+        </div>
+        <Card className={css.card} variant="outlined">
+          <List>
+            {settings?.map((setting: Setting, i: number) => (
+              <>
+                <SettingItem
+                  index={i}
+                  setting={setting}
+                  onChange={(enabled: boolean) => {
+                    toggleSetting(setting.id, enabled);
+                  }}
+                  onChildOptChange={(value: ChildOptionValue) => {
+                    childOptChange(setting.id, value);
+                  }}
+                />
+              </>
+            ))}
+          </List>
+        </Card>
         <Snackbar
           message="Einstellungen gespeichert!"
           anchorOrigin={{
@@ -167,62 +145,4 @@ const SettingsPage: FunctionComponent = () => {
   );
 };
 
-export default function SwitchListSecondary() {
-  const [checked, setChecked] = React.useState(['wifi']);
-
-  const handleToggle = (value: string) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-  return (
-    <List subheader={<ListSubheader>Settings</ListSubheader>}>
-      <ListItem>
-        <ListItemIcon>
-          <GetAppIcon />
-        </ListItemIcon>
-        <ListItemText
-          id="switch-list-label-wifi"
-          primary="CSV Export"
-          secondary="Export Button anzeigen, womit eine Liste deiner Spieler und deren Angebote durch einen Klick als CSV Datei heruntergeladen werden kann"
-        />
-        <ListItemSecondaryAction>
-          <Switch
-            edge="end"
-            onChange={handleToggle('wifi')}
-            checked={checked.indexOf('wifi') !== -1}
-            inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
-      <ListItem>
-        <ListItemIcon>
-          <RestorePageIcon />
-        </ListItemIcon>
-        <ListItemText
-          id="switch-list-label-bluetooth"
-          primary="Re-List"
-          secondary="Re-List Button anzeigen, womit alle Spieler mit Angebot unter Marktwert durch einen Klick neu gelistet werden können"
-        />
-        <ListItemSecondaryAction>
-          <Switch
-            edge="end"
-            onChange={handleToggle('bluetooth')}
-            checked={checked.indexOf('bluetooth') !== -1}
-            inputProps={{ 'aria-labelledby': 'switch-list-label-bluetooth' }}
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
-    </List>
-  );
-}
-
-ReactDOM.render(<SwitchListSecondary />, select(Selectors.BKB_ROOT)!);
+ReactDOM.render(<SettingsPage />, select(Selectors.BKB_ROOT)!);
