@@ -14,6 +14,8 @@ export interface ChildOption {
   value: string | number;
 }
 
+import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
+
 class SettingsService {
   public static defaultSettings: Setting[] = [
     {

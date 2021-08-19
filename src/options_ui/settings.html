@@ -4,81 +4,36 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/_vars.css">
     <link rel="stylesheet" href="../styles/_fonts.css">
-
     <style>
         html {
-            width: 790px;
-            padding: 5px;
+            display: flex;
+            justify-content: center;
+            height: 1000px;
+            width: 100%;
         }
 
         body {
             font-size: 75%;
-        }
-
-        * {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        h1,
-        p,
-        div {
-            color: rgba(0, 0, 0, 0.87);
-        }
-
-        .settings-list {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .settings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #333;
+            color: white;
+            width: 780px;
+            max-width: 780px;
+            margin: 0;
         }
 
         .container {
-            max-width: 800px;
+            padding: 10px;
+            max-width: 760px;
         }
 
-        .icon-label-container {
-            display: flex;
+        * {
+            overflow: hidden;
         }
 
         .snackbar-placeholder {
             height: 60px;
-        }
-
-        wl-checkbox {
-            flex-shrink: 0;
-        }
-
-        wl-snackbar>span {
-            font-size: 14px;
-        }
-
-        .material-icons {
-            font-family: 'Material Icons Outlined';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 24px;
-            line-height: 1;
-            letter-spacing: normal;
-            text-transform: none;
-            display: inline-block;
-            white-space: nowrap;
-            word-wrap: normal;
-            direction: ltr;
-            -webkit-font-smoothing: antialiased;
-            margin-right: 1em;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
     </style>
 </head>
