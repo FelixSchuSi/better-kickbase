@@ -72,3 +72,8 @@
   left: 50%;
   transform: translate(-50%, -0.5em);
 }
+
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
