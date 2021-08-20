@@ -30,3 +30,7 @@
 .ratingCardActions {
   justify-content: flex-end;
 }
+
+.rating > * {
+  overflow: hidden;
+}

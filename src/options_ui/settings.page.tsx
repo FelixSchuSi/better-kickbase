@@ -102,8 +102,6 @@ const SettingsPage: FunctionComponent = () => {
       }
       return setting;
     });
-
-    console.log(newSettings);
     storeSettings(newSettings);
     setSettings(newSettings);
   }
@@ -152,6 +150,7 @@ const SettingsPage: FunctionComponent = () => {
             <Button href="https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews">
               <Typography component="legend">Chrome</Typography>
               <StyledRating
+                className={css.rating}
                 value={4}
                 onChange={() => {
                   window.location.href =
@@ -162,6 +161,7 @@ const SettingsPage: FunctionComponent = () => {
             <Button href="https://addons.mozilla.org/de/firefox/addon/better-kickbase/">
               <Typography component="legend">Firefox</Typography>
               <StyledRating
+                className={css.rating}
                 value={4}
                 onChange={() => {
                   window.location.href = 'https://addons.mozilla.org/de/firefox/addon/better-kickbase/';
