@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
+import autoprefixer from 'autoprefixer';
 
 export default {
   input: 'manifest.json',
@@ -15,7 +16,8 @@ export default {
     chromeExtension(),
     simpleReloader(),
     postcss({
-      modules: true
+      modules: true,
+      plugins: [autoprefixer()]
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production')

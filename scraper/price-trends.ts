@@ -60,7 +60,7 @@ async function getKickbaseId(priceTrend: PriceTrendWithoutId): Promise<PriceTren
 export const sleep = (duration: number): Promise<unknown> =>
   new Promise((resolve: TimerHandler) => setTimeout(resolve, duration));
 
-async function main() {
+async function main(): Promise<void> {
   const [winnerUrl, loserUrl]: string[] = [
     'https://www.ligainsider.de/stats/kickbase/marktwerte/tag/gewinner/',
     'https://www.ligainsider.de/stats/kickbase/marktwerte/tag/verlierer/'

@@ -189,7 +189,6 @@ const SettingsPage: FunctionComponent = () => {
             </>
           }
         />
-        <div className="snackbar-placeholder"></div>
       </div>
     </ThemeProvider>
   );
