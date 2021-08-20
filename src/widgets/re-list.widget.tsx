@@ -24,6 +24,7 @@ async function reListButtonClick() {
   const relistSettings: Setting = settings.find((setting: Setting) => {
     return setting.id === 're-list';
   })!;
+
   const relistThreshold: number = relistSettings.childOption?.value as number;
 
   console.log(relistThreshold);
