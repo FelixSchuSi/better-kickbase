@@ -5,17 +5,34 @@ import { Selectors } from '../helpers/selectors';
 import { waitForSelector } from '../helpers/wait-for-selector';
 import { sleep } from '../helpers/sleep';
 import { Button } from './button.widget';
+import type { FunctionComponent } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
 
-export const reListWidget: JSX.Element = (
-  <Button
-    icon="sync"
-    onClick={reListButtonClick}
-    tooltip="Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt"
-  ></Button>
-);
+export const ReList: FunctionComponent = () => {
+  const [tooltipText, setTooltipText] = useState(
+    'Hole neue Angebote für Spieler ein, deren Angebote unter dem Marktwert liegt'
+  );
+  useEffect(() => {
+    settingsService.get().then((settings: Setting[]) => {
+      const thesholdFromSettings: number | undefined = settings.find((setting: Setting) => setting.id === 're-list')
+        ?.childOption?.value as number | undefined;
+      if (thesholdFromSettings) {
+        const formattedPercentage: string = new Intl.NumberFormat(navigator.language, {
+          style: 'percent',
+          minimumFractionDigits: 2,
+          maximumSignificantDigits: 2
+        }).format(thesholdFromSettings / 100);
+        setTooltipText(
+          `Alle Spieler neu listen, bei denen das Angebot weniger als ${formattedPercentage} über dem Marktwert liegt.`
+        );
+      }
+    });
+  }, []);
+  return <Button icon="sync" onClick={reListButtonClick} tooltip={tooltipText}></Button>;
+};
 
 async function reListButtonClick() {
   const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);

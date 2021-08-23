@@ -58,7 +58,7 @@ function parsePlayerRow(row: HTMLDivElement): void {
 
   templates.push(<PriceTrend is500k={is500k} id={id} hide={!showPriceTrends}></PriceTrend>);
 
-  if (route === 'transfermarkt/kaufen') {
+  if (route === 'transfermarkt/kaufen' && marketPlayer) {
     const expiryDateElem: HTMLDivElement = document.createElement('div');
     expiryDateElem.classList.add(offerExpiryCss.expiryDate);
 

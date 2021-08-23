@@ -1,5 +1,5 @@
 import { exportCopyWidget, exportCsvWidget } from './export.widget';
-import { reListWidget } from './re-list.widget';
+import { ReList } from './re-list.widget';
 import { routerService } from '../services/router.service';
 import type { Setting } from '../services/settings.service';
 import { settingsService } from '../services/settings.service';
@@ -51,7 +51,7 @@ const RootWidget: FunctionComponent = () => {
   return (
     <>
       {route.startsWith('transfermarkt') ? templates : ''}
-      {reListEnabled && route === 'transfermarkt/verkaufen' ? reListWidget : ''}
+      {reListEnabled && route === 'transfermarkt/verkaufen' ? <ReList /> : ''}
     </>
   );
 };
