@@ -35,7 +35,7 @@ export const ReList: FunctionComponent = () => {
 };
 
 async function reListButtonClick() {
-  const players: NodeListOf<HTMLElement> = selectAll(Selectors.ALL_PLAYERS);
+  const players: HTMLElement[] = Array.from(selectAll(Selectors.ALL_PLAYERS));
 
   const settings: Setting[] = await settingsService.get();
   const relistSettings: Setting = settings.find((setting: Setting) => {
@@ -45,18 +45,19 @@ async function reListButtonClick() {
   const relistThreshold: number = relistSettings.childOption?.value as number;
 
   console.log(relistThreshold);
-  const x: { removedCount: number } = { removedCount: 0 };
 
   // Take a player off the market when the offer is below
   // the market value or when the offer is expired
-  players.forEach((p: HTMLElement) => removePlayerForRelist(p, relistThreshold, x));
+  const removedPlayers: Array<string | false> = players.map((p: HTMLElement) =>
+    removePlayerForRelist(p, relistThreshold)
+  );
 
-  if (x.removedCount > 0) {
-    listAllPlayers();
+  if (removedPlayers.length > 0) {
+    listRemovedPlayers(removedPlayers);
   }
 }
 
-function removePlayerForRelist(player: HTMLElement, relistThreshold: number, x: { removedCount: number }) {
+function removePlayerForRelist(player: HTMLElement, relistThreshold: number) {
   const selectors: Selectors[] = [Selectors.OFFER, Selectors.MARKET_VALUE];
 
   const [offer, marketValue]: number[] = selectors.map((selector: Selectors) => {
@@ -81,7 +82,9 @@ function removePlayerForRelist(player: HTMLElement, relistThreshold: number, x: 
     // Take a player off the market
     const removePlayerButton: HTMLElement | null = player.querySelector(Selectors.REMOVE_PLAYER);
     removePlayerButton?.click();
-    x.removedCount = x.removedCount + 1;
+    return player.id;
+  } else {
+    return false;
   }
 }
 
@@ -98,7 +101,7 @@ function isOfferTooLow(offer: number, marketValue: number, threshold: number): b
   return marketValue * (1 + threshold / 100) > offer;
 }
 
-async function listAllPlayers() {
+async function listRemovedPlayers(removedPlayers: Array<string | false>) {
   const addPlayersButton: HTMLElement | null = select(Selectors.ADD_PLAYERS);
   addPlayersButton?.click();
 
@@ -108,9 +111,13 @@ async function listAllPlayers() {
   // We wait another 100ms so all buttons are rendered
   await sleep(2000);
 
-  const setPriceFields: NodeListOf<HTMLElement> = selectAll(Selectors.SET_LISTING_PRICE);
-  setPriceFields.forEach((setPriceField: HTMLElement) => {
-    setPriceField.click();
+  const listPlayerRows: NodeListOf<HTMLElement> = selectAll(Selectors.LIST_PLAYER_ROW);
+  listPlayerRows.forEach((listPlayerRow: HTMLElement) => {
+    const isPlayerToRelist: boolean = !!removedPlayers.find((player: string | false) => player === listPlayerRow.id);
+    if (isPlayerToRelist) {
+      const setPriceField: HTMLElement = select(Selectors.SET_LISTING_PRICE, listPlayerRow)!;
+      setPriceField.click();
+    }
   });
 
   const listPlayersButton: HTMLElement | null = select(Selectors.LIST_PLAYERS);

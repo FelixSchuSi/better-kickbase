@@ -7,6 +7,7 @@ export enum Selectors {
   REMOVE_PLAYER = '.offerWidget>.cancelButton',
   ADD_PLAYERS = '#pageContentWrapper > div > div.TransferMarket.inner > div.leftContainer > div > div > div > div.statusBar > div > button',
   SET_LISTING_PRICE = '.offerWidget > .sellPlayerButton',
+  LIST_PLAYER_ROW = '.players > .playerGroup',
   LIST_PLAYERS = '.buttonContainer > .btn.highlighted',
   LASTNAME = '.playerName>.lastName',
   FIRSTNAME = '.playerName>.firstName',
