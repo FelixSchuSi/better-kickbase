@@ -44,13 +44,13 @@ async function reListButtonClick() {
 
   const relistThreshold: number = relistSettings.childOption?.value as number;
 
-  console.log(relistThreshold);
-
   // Take a player off the market when the offer is below
   // the market value or when the offer is expired
-  const removedPlayers: Array<string | false> = players.map((p: HTMLElement) =>
+  let removedPlayers: Array<string | false> = players.map((p: HTMLElement) =>
     removePlayerForRelist(p, relistThreshold)
   );
+
+  removedPlayers = removedPlayers.filter((p: string | false) => p !== false);
 
   if (removedPlayers.length > 0) {
     listRemovedPlayers(removedPlayers);
