@@ -147,25 +147,28 @@ const SettingsPage: FunctionComponent = () => {
             </Typography>
           </CardContent>
           <CardActions className={css.ratingCardActions}>
-            <Button href="https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews">
+            <Button
+              target="_blank"
+              href="https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews"
+            >
               <Typography component="legend">Chrome</Typography>
               <StyledRating
                 className={css.rating}
                 value={4}
-                onChange={() => {
-                  window.location.href =
-                    'https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews';
-                }}
+                onChange={() =>
+                  window.open(
+                    'https://chrome.google.com/webstore/detail/better-kickbase/jdkehjokegcepbmbmcbaojnpkmnolgkg/reviews',
+                    '_blank'
+                  )
+                }
               />
             </Button>
-            <Button href="https://addons.mozilla.org/de/firefox/addon/better-kickbase/">
+            <Button target="_blank" href="https://addons.mozilla.org/de/firefox/addon/better-kickbase/">
               <Typography component="legend">Firefox</Typography>
               <StyledRating
                 className={css.rating}
                 value={4}
-                onChange={() => {
-                  window.location.href = 'https://addons.mozilla.org/de/firefox/addon/better-kickbase/';
-                }}
+                onChange={() => window.open('https://addons.mozilla.org/de/firefox/addon/better-kickbase/', '_blank')}
               />
             </Button>
           </CardActions>
@@ -185,7 +188,6 @@ const SettingsPage: FunctionComponent = () => {
               <IconButton size="small" aria-label="close" color="inherit" onClick={hideSnackbar}>
                 <CloseIcon fontSize="small" />
               </IconButton>
-              ;
             </>
           }
         />

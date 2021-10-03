@@ -1,6 +1,6 @@
 {
   "name": "better-kickbase",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Sei ein effizienterer Manager mit 'better-kickbase'",
   "main": "index.js",
   "scripts": {
