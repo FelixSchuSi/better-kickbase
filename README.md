@@ -1,3 +1,4 @@
+### ⚠️play.kickbase.com wurde offline genommen, daher kann die Erweiterung nicht mehr genutzt werden⚠️
 <img align="right" src="favicon/favicon-128.png">
 
 # better-kickbase
